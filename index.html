@@ -69,6 +69,7 @@
     <div class="empty" id="plays-nfl"><b>Publishing not connected.</b> The NFL lane
     isn't live on this board yet — plays will appear here once it's connected. An empty
     section does not mean no plays qualified.</div>
+    <div class="plays" id="plays-nfl-cards" style="display:none"></div>
   </section>
 
   <section>
@@ -77,6 +78,7 @@
     <div class="empty" id="plays-wnba"><b>Publishing not connected.</b> The WNBA lane
     isn't live on this board yet — plays will appear here once it's connected. An empty
     section does not mean no plays qualified.</div>
+    <div class="plays" id="plays-wnba-cards" style="display:none"></div>
   </section>
 
   <div class="disclaimer">Picks are informational only — not betting advice.</div>
@@ -97,6 +99,44 @@ function fmtTime(iso) {
     return d.toLocaleString('en-US', { month:'short', day:'numeric',
       hour:'numeric', minute:'2-digit', hour12:true }) + ' ET';
   } catch (e) { return iso; }
+}
+
+function playCard(p, startLabel) {
+  var sideCls = p.side === 'OVER' ? 'over' : 'under';
+  return '<div class="play"><div class="p">'+p.player+
+    ' <span style="color:var(--dim);font-weight:400;font-size:12px">'+p.team+' vs '+p.opp+'</span></div>'+
+    '<div class="m">'+p.market+' · FanDuel</div>'+
+    '<div class="ln"><span class="'+sideCls+'">'+p.side+'</span> '+p.line+'</div>'+
+    '<div class="pr">Model P: '+(p.prob*100).toFixed(1)+'% · Edge: +'+(p.edge*100).toFixed(1)+'%'+
+    (p.price_note ? ' · '+p.price_note : '')+'</div>'+
+    '<div class="gt">'+(startLabel || 'Start')+': '+fmtTime(p.game_start)+'</div></div>';
+}
+
+// Per-sport lane rendering, driven by run.lanes. A lane that is not
+// "live" keeps its "Publishing not connected" notice; a live lane with no
+// plays shows an explicit connected-but-empty state (never the notice).
+function renderLane(run, sport, noticeId, cardsId, startLabel) {
+  var lanes = run.lanes || {};
+  var lane = lanes[sport] || (sport === 'mlb' ? 'live' : 'not_connected');
+  var notice = document.getElementById(noticeId);
+  var cards = document.getElementById(cardsId);
+  if (lane !== 'live') {
+    notice.style.display = '';
+    cards.style.display = 'none';
+    cards.innerHTML = '';
+    return;
+  }
+  notice.style.display = 'none';
+  cards.style.display = '';
+  var plays = (((run.clusters || {})[sport] || {}).plays || []).slice().sort(function(a,b){
+    return new Date(a.game_start) - new Date(b.game_start);
+  });
+  if (!plays.length) {
+    cards.innerHTML = '<div class="empty"><b>No qualifying plays.</b> '+
+      'This lane is connected — nothing cleared the bar on this slate.</div>';
+    return;
+  }
+  cards.innerHTML = plays.map(function(p){ return playCard(p, startLabel); }).join('');
 }
 
 function render(run) {
@@ -133,15 +173,12 @@ function render(run) {
     return new Date(a.game_start) - new Date(b.game_start);
   });
   document.getElementById('plays-mlb').innerHTML = plays.map(function(p){
-    var sideCls = p.side === 'OVER' ? 'over' : 'under';
-    return '<div class="play"><div class="p">'+p.player+
-      ' <span style="color:var(--dim);font-weight:400;font-size:12px">'+p.team+' vs '+p.opp+'</span></div>'+
-      '<div class="m">'+p.market+' · FanDuel</div>'+
-      '<div class="ln"><span class="'+sideCls+'">'+p.side+'</span> '+p.line+'</div>'+
-      '<div class="pr">Model P: '+(p.prob*100).toFixed(1)+'% · Edge: +'+(p.edge*100).toFixed(1)+'%'+
-      (p.price_note ? ' · '+p.price_note : '')+'</div>'+
-      '<div class="gt">First pitch: '+fmtTime(p.game_start)+'</div></div>';
+    return playCard(p, 'First pitch');
   }).join('');
+
+  // --- NFL / WNBA lanes (notice vs plays driven by run.lanes) ---
+  renderLane(run, 'nfl', 'plays-nfl', 'plays-nfl-cards', 'Kickoff');
+  renderLane(run, 'wnba', 'plays-wnba', 'plays-wnba-cards', 'Tipoff');
 
   // --- footer: exact-run public verification ---
   document.getElementById('footer').innerHTML =
