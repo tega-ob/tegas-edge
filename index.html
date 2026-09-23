@@ -13,20 +13,29 @@
   .wrap { max-width:960px; margin:0 auto; }
   h1 { font-size:28px; margin:0 0 4px; letter-spacing:.5px; }
   .sub { color:var(--dim); font-size:13px; margin-bottom:20px; }
-  .status { background:#1a2332; border:1px solid var(--gold); border-radius:8px;
+  .status { background:#1a2332; border:1px solid var(--line); border-radius:8px;
             padding:12px 14px; font-size:13px; margin-bottom:20px; line-height:1.5; }
   .status b { color:var(--txt); }
   .status .warn { color:var(--gold); font-weight:700; }
+  .status .bad { color:var(--red); font-weight:700; }
   .records { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:24px; }
   .rec { background:var(--panel); border:1px solid var(--line); border-radius:8px;
          padding:10px 14px; min-width:130px; }
   .rec .k { font-size:11px; color:var(--dim); text-transform:uppercase; letter-spacing:.6px; }
   .rec .v { font-size:20px; font-weight:700; margin-top:2px; }
   .rec .n { font-size:11px; color:var(--dim); margin-top:2px; }
+  table.perf { width:100%; border-collapse:collapse; font-size:12px; margin-bottom:24px;
+               background:var(--panel); border:1px solid var(--line); border-radius:8px; overflow:hidden; }
+  table.perf th, table.perf td { padding:8px 10px; text-align:left; border-bottom:1px solid var(--line); }
+  table.perf th { color:var(--dim); text-transform:uppercase; font-size:10px; letter-spacing:.6px; }
+  table.perf tr:last-child td { border-bottom:none; }
+  .perf-cap { font-size:11px; color:var(--dim); margin:-16px 0 24px; }
   section { margin-bottom:28px; }
   h2 { font-size:18px; border-bottom:1px solid var(--line); padding-bottom:8px; margin:0 0 4px; }
-  .fresh { font-size:12px; color:var(--dim); margin-bottom:12px; }
+  .fresh { font-size:12px; color:var(--dim); margin-bottom:8px; }
   .fresh b { color:var(--txt); }
+  .state { font-size:12px; margin-bottom:8px; }
+  .state:empty { display:none; }
   .plays { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:10px; }
   .play { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:12px 14px; }
   .play .p { font-weight:700; font-size:15px; }
@@ -35,96 +44,91 @@
   .over { color:var(--green); } .under { color:var(--gold); }
   .play .pr { font-size:12px; color:var(--dim); margin-top:6px; }
   .play .gt { font-size:12px; color:var(--dim); margin-top:2px; }
+  .play .why, .play .risk { font-size:12px; margin-top:6px; line-height:1.45; }
+  .play .why { color:var(--txt); }
+  .play .risk { color:var(--gold); }
+  .play .mv { font-size:11px; color:var(--dim); margin-top:6px; }
+  .badge { display:inline-block; font-size:10px; font-weight:700; padding:2px 6px;
+           border-radius:4px; margin-left:6px; vertical-align:middle; letter-spacing:.4px; }
+  .b-new { background:#1a3a24; color:var(--green); border:1px solid var(--green); }
+  .b-chg { background:#3a2f14; color:var(--gold); border:1px solid var(--gold); }
+  .withdrawn { font-size:12px; color:var(--dim); margin-top:10px;
+               background:var(--panel); border:1px dashed var(--line);
+               border-radius:8px; padding:10px 12px; }
+  .withdrawn b { color:var(--txt); }
   .empty { background:var(--panel); border:1px dashed var(--line); border-radius:8px;
            padding:18px; color:var(--dim); font-size:14px; }
+  .method { font-size:13px; color:var(--dim); line-height:1.6;
+            background:var(--panel); border:1px solid var(--line);
+            border-radius:8px; padding:14px 16px; }
+  .method b { color:var(--txt); }
   footer { margin-top:36px; padding-top:16px; border-top:1px solid var(--line);
            font-size:12px; color:var(--dim); word-break:break-all; }
   footer code { color:var(--txt); }
   #err { display:none; background:#3d1115; border:1px solid var(--red); border-radius:8px;
          padding:16px; margin-bottom:20px; font-size:14px; }
   .disclaimer { font-size:12px; color:var(--dim); margin-top:24px; font-style:italic; }
-  .wr { font-size:11.5px; color:var(--dim); margin-top:8px; line-height:1.5; }
-  .wr b { color:var(--txt); font-weight:600; }
-  .bdg { font-size:10px; font-weight:700; letter-spacing:.5px; padding:2px 6px;
-         border-radius:4px; margin-left:8px; vertical-align:middle; white-space:nowrap; }
-  .bnew { background:#123d24; color:var(--green); border:1px solid var(--green); }
-  .bchg { background:#3a2b10; color:var(--gold); border:1px solid var(--gold); }
-  .wd { font-size:12px; color:var(--dim); margin-top:10px; line-height:1.6; }
-  .wd b { color:var(--txt); }
-  .stale { color:var(--gold); }
-  #login-ind { display:none; background:#3d1115; border:1px solid var(--red);
-               border-radius:8px; padding:10px 14px; font-size:13px; margin-bottom:20px; }
-  #perf-sec table { width:100%; border-collapse:collapse; font-size:13px; }
-  #perf-sec th, #perf-sec td { padding:6px 8px; border-bottom:1px solid var(--line); text-align:left; }
-  #perf-sec th { color:var(--dim); font-size:11px; text-transform:uppercase; letter-spacing:.5px; }
-  .meth { font-size:12px; color:var(--dim); margin-top:24px; line-height:1.7; }
-  html { scroll-behavior:smooth; }
-  section { scroll-margin-top:12px; }
-  a.rec { display:block; text-decoration:none; color:inherit; cursor:pointer; }
-  a.rec:hover { border-color:var(--gold); }
-  .sortctl { font-size:12px; color:var(--dim); margin-bottom:10px; }
-  .sortctl select { background:var(--panel); color:var(--txt); border:1px solid var(--line);
-           border-radius:6px; padding:4px 8px; font-size:12px; }
 </style>
 </head>
 <body>
-<div class="wrap" id="top">
+<div class="wrap">
   <h1>TEGA'S EDGE</h1>
   <div class="sub">Model picks board — player props only. Lines via FanDuel.</div>
-  <div class="status"><b>Authoritative board.</b> Unattended publishing demonstrated
-  2026-09-23; publishes via the signed-in <b>@tega-ob</b> browser session.
-  If that login lapses, publishing fails.
-  Last verified public update: <b id="last-pub">—</b>.</div>
-  <div id="login-ind"></div>
+  <div class="status"><b>Authoritative board.</b> Updates publish on a schedule through a
+  browser signed in as <b>@tega-ob</b> — if that login lapses, publishing fails.
+  <div id="login-line">GitHub session: checking…</div>
+  <div>Last verified public update: <b id="last-pub">—</b>.</div>
+  <div id="stale-line" style="display:none"></div>
+  <div id="verify-fail-line" style="display:none"></div>
+  </div>
   <div id="err"></div>
 
   <div class="records" id="records"></div>
 
-  <section id="sec-mlb">
+  <section>
     <h2>⚾ MLB — Pitcher Strikeouts</h2>
     <div class="fresh" id="fresh-mlb"></div>
-    <div class="sortctl" id="sort-mlb">Sort: <select data-sport="mlb" onchange="setSort(this)"><option value="time">Earliest game first</option><option value="prob">Highest probability</option></select></div>
+    <div class="state" id="state-mlb"></div>
     <div class="plays" id="plays-mlb"></div>
-    <div class="wd" id="wd-mlb"></div>
+    <div class="withdrawn" id="wd-mlb" style="display:none"></div>
   </section>
 
-  <section id="sec-nfl">
+  <section>
     <h2>🏈 NFL Props</h2>
     <div class="fresh" id="fresh-nfl"></div>
-    <div class="sortctl" id="sort-nfl">Sort: <select data-sport="nfl" onchange="setSort(this)"><option value="time">Earliest game first</option><option value="prob">Highest probability</option></select></div>
+    <div class="state" id="state-nfl"></div>
     <div class="empty" id="plays-nfl"><b>Publishing not connected.</b> The NFL lane
     isn't live on this board yet — plays will appear here once it's connected. An empty
     section does not mean no plays qualified.</div>
     <div class="plays" id="plays-nfl-cards" style="display:none"></div>
-    <div class="wd" id="wd-nfl"></div>
+    <div class="withdrawn" id="wd-nfl" style="display:none"></div>
   </section>
 
-  <section id="sec-wnba">
+  <section>
     <h2>🏀 WNBA Props</h2>
     <div class="fresh" id="fresh-wnba"></div>
-    <div class="sortctl" id="sort-wnba">Sort: <select data-sport="wnba" onchange="setSort(this)"><option value="time">Earliest game first</option><option value="prob">Highest probability</option></select></div>
+    <div class="state" id="state-wnba"></div>
     <div class="empty" id="plays-wnba"><b>Publishing not connected.</b> The WNBA lane
     isn't live on this board yet — plays will appear here once it's connected. An empty
     section does not mean no plays qualified.</div>
     <div class="plays" id="plays-wnba-cards" style="display:none"></div>
-    <div class="wd" id="wd-wnba"></div>
+    <div class="withdrawn" id="wd-wnba" style="display:none"></div>
   </section>
 
-  <section id="perf-sec" style="display:none">
-    <h2>Performance</h2>
-    <table>
-      <thead><tr><th>Sport</th><th>Market</th><th>Model</th><th>N</th><th>W-L-P</th></tr></thead>
-      <tbody id="perf-rows"></tbody>
-    </table>
+  <section>
+    <h2>Methodology</h2>
+    <div class="method">
+    <b>Lines:</b> FanDuel is the primary line source — every published play carries a
+    genuine FanDuel line captured at scan time. <b>Edge</b> is model probability minus
+    breakeven probability: a probability difference, not an expected return.
+    <b>WNBA</b> cards are overs only. WNBA and MLB have no historical prop-lines
+    endpoint, so validation is mechanics checks plus live paper trading against genuine
+    lines; genuine-line archival has been automatic since 2026-09-23.
+    Recommendations are not wagers.
+    </div>
   </section>
 
   <div class="disclaimer">Picks are informational only — not betting advice.</div>
-
-  <div class="meth">Methodology note: no historical WNBA/MLB prop lines exist from the
-  book, so validation uses synthetic-line mechanics plus live paper trading; genuine
-  FanDuel lines have been auto-archived since 2026-09-23. Closing-line movement is
-  diagnostic, not proof of profitability. "Edge" shown is probability difference vs the
-  qualifying bar, not expected return. WNBA: overs only.</div>
 
   <footer id="footer">Loading…</footer>
 </div>
@@ -144,238 +148,279 @@ function fmtTime(iso) {
   } catch (e) { return iso; }
 }
 
-function esc(s) {
-  return String(s).replace(/[&<>"']/g, function(c){
-    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
-  });
+function fmtShort(iso) {
+  try {
+    var d = new Date(iso);
+    return d.toLocaleString('en-US', { hour:'numeric', minute:'2-digit',
+      hour12:true }) + ' ET';
+  } catch (e) { return ''; }
 }
 
-// Source label: only claim what the payload carries. With line_src present,
-// "FanDuel · lines captured <time>"; otherwise the legacy "· FanDuel".
+// Line-source label, driven by the payload. The converter only publishes
+// plays with genuine FanDuel lines, so a missing line_src still means
+// FanDuel — shown plain, without a capture time.
 function srcLabel(p) {
-  if (!p.line_src) return 'FanDuel';
-  var s = (p.line_src === 'fanduel') ? 'FanDuel' : p.line_src;
-  if (p.line_captured_at) s += ' · lines captured ' + fmtTime(p.line_captured_at);
-  return s;
+  var s = (p.line_src || '').toLowerCase();
+  var name = s === 'fanduel' ? 'FanDuel' : (p.line_src || 'FanDuel');
+  var cap = p.line_captured_at ? ' · lines ' + fmtShort(p.line_captured_at) : '';
+  return name + cap;
 }
 
 function changeBadge(p) {
-  if (p.change === 'new') return '<span class="bdg bnew">NEW</span>';
-  if (p.change === 'changed') return '<span class="bdg bchg">CHANGED</span>';
+  if (p.change === 'new') return '<span class="badge b-new">NEW</span>';
+  if (p.change === 'changed') return '<span class="badge b-chg">LINE MOVED</span>';
   return '';
 }
 
+// why/risk lines render only when the payload carries real content;
+// absent (or the "—" placeholder) hides the line entirely.
 function whyRisk(p) {
-  if (!p.why && !p.risk) return '';
-  return '<div class="wr">' +
-    (p.why ? '<div><b>Why:</b> '+esc(p.why)+'</div>' : '') +
-    (p.risk ? '<div><b>Risk:</b> '+esc(p.risk)+'</div>' : '') + '</div>';
+  var h = '';
+  if (p.why && p.why !== '—' && p.why !== '-') h += '<div class="why"><b>Why:</b> ' + p.why + '</div>';
+  if (p.risk && p.risk !== '—' && p.risk !== '-') h += '<div class="risk"><b>Risk:</b> ' + p.risk + '</div>';
+  return h;
 }
 
 function playCard(p, startLabel) {
   var sideCls = p.side === 'OVER' ? 'over' : 'under';
-  return '<div class="play"><div class="p">'+esc(p.player)+changeBadge(p)+
-    ' <span style="color:var(--dim);font-weight:400;font-size:12px">'+esc(p.team)+' vs '+esc(p.opp)+'</span></div>'+
-    '<div class="m">'+esc(p.market)+' · '+esc(srcLabel(p))+'</div>'+
-    '<div class="ln"><span class="'+sideCls+'">'+esc(p.side)+'</span> '+p.line+'</div>'+
+  var mv = p.model_version ? '<div class="mv">model v' + p.model_version + '</div>' : '';
+  return '<div class="play"><div class="p">'+p.player+changeBadge(p)+
+    ' <span style="color:var(--dim);font-weight:400;font-size:12px">'+p.team+' vs '+p.opp+'</span></div>'+
+    '<div class="m">'+p.market+' · '+srcLabel(p)+'</div>'+
+    '<div class="ln"><span class="'+sideCls+'">'+p.side+'</span> '+p.line+'</div>'+
     '<div class="pr">Model P: '+(p.prob*100).toFixed(1)+'% · Edge: +'+(p.edge*100).toFixed(1)+'%'+
-    (p.price_note ? ' · '+esc(p.price_note) : '')+'</div>'+
-    '<div class="gt">'+esc(startLabel || 'Start')+': '+fmtTime(p.game_start)+'</div>'+
-    whyRisk(p)+'</div>';
+    (p.price_note ? ' · '+p.price_note : '')+'</div>'+
+    whyRisk(p)+mv+
+    '<div class="gt">'+(startLabel || 'Start')+': '+fmtTime(p.game_start)+'</div></div>';
 }
 
-// "Withdrawn since last run: X — line Y (side)" per sport; hidden when empty/absent.
-function renderWithdrawn(run, sport, id) {
-  var el = document.getElementById(id);
+function byStart(a, b) {
+  return new Date(a.game_start) - new Date(b.game_start);
+}
+
+function latestLineCapture(plays) {
+  var best = '';
+  (plays || []).forEach(function(p){
+    if (p.line_captured_at && p.line_captured_at > best) best = p.line_captured_at;
+  });
+  return best;
+}
+
+function renderWithdrawn(run, sport) {
+  var el = document.getElementById('wd-' + sport);
   if (!el) return;
-  var w = ((run.withdrawn || {})[sport]) || [];
-  if (!w.length) { el.innerHTML = ''; return; }
-  el.innerHTML = '<b>Withdrawn since last run:</b> ' + w.map(function(p){
-    return esc(p.player || '?') +
-      (p.market ? ' — ' + esc(p.market) : '') +
-      ' line ' + p.line + ' (' + (p.side || '—') + ')';
+  var wd = ((run.withdrawn || []).filter(function(w){ return w.sport === sport; }));
+  if (!wd.length) { el.innerHTML = ''; el.style.display = 'none'; return; }
+  el.style.display = '';
+  el.innerHTML = '<b>Withdrawn since the last run:</b> ' + wd.map(function(w){
+    return w.player + ' ' + w.side + ' ' + w.line + ' (' + w.market + ')';
   }).join('; ');
 }
 
-// Per-lane sort: 'time' (earliest game first — the standing default) or
-// 'prob' (highest model probability first; ties break by earliest game).
-var sortMode = {mlb:'time', nfl:'time', wnba:'time'};
-var currentRun = null;
-
-function sortPlays(arr, mode) {
-  return (arr || []).slice().sort(function(a,b){
-    if (mode === 'prob') {
-      var d = (b.prob || 0) - (a.prob || 0);
-      if (d) return d;
-    }
-    return new Date(a.game_start) - new Date(b.game_start);
-  });
-}
-
-// Called by each lane's sort <select>. Re-renders that lane only.
-function setSort(sel) {
-  var sport = sel.getAttribute('data-sport');
-  sortMode[sport] = sel.value;
-  renderSport(sport);
-}
-
-function renderSport(sport) {
-  if (!currentRun) return;
-  if (sport === 'mlb') {
-    var plays = sortPlays(currentRun.plays, sortMode.mlb);
-    document.getElementById('plays-mlb').innerHTML = plays.map(function(p){
-      return playCard(p, 'First pitch');
-    }).join('');
-    renderWithdrawn(currentRun, 'mlb', 'wd-mlb');
-  } else if (sport === 'nfl') {
-    renderLane(currentRun, 'nfl', 'plays-nfl', 'plays-nfl-cards', 'Kickoff');
-  } else if (sport === 'wnba') {
-    renderLane(currentRun, 'wnba', 'plays-wnba', 'plays-wnba-cards', 'Tipoff');
-  }
-}
-
-// Per-sport lane rendering, driven by run.lanes. A lane that is not
-// "live" keeps its "Publishing not connected" notice; a live lane with no
-// plays shows an explicit connected-but-empty state (never the notice).
-function renderLane(run, sport, noticeId, cardsId, startLabel) {
+// Per-sport section. Every field is guarded: old payloads missing the new
+// keys render exactly the pre-existing states, never blank cards.
+function renderSport(run, manifest, cfg) {
+  var sport = cfg.key;
   var lanes = run.lanes || {};
   var lane = lanes[sport] || (sport === 'mlb' ? 'live' : 'not_connected');
-  var notice = document.getElementById(noticeId);
-  var cards = document.getElementById(cardsId);
-  var sortCtl = document.getElementById('sort-'+sport);
-  if (lane !== 'live') {
+  var notice = cfg.noticeId ? document.getElementById(cfg.noticeId) : null;
+  var cards = document.getElementById(cfg.cardsId);
+  var state = document.getElementById(cfg.stateId);
+  var fresh = document.getElementById(cfg.freshId);
+  var cl = (run.clusters || {})[sport] || {};
+  var avail = ((run.availability_status || {})[sport]) || 'unknown';
+  var sstat = ((run.sports_status || {})[sport]) || 'ok';
+  var mver = ((run.model_versions || {})[sport]) || '';
+  var vstat = ((run.validation_status || {})[sport]) || 'unknown';
+  var mc = ((manifest || {}).per_cluster || {})[sport] || {};
+
+  // --- freshness line: last scan, line freshness, model version ---
+  var fparts = [];
+  if (cl.last_checked_et) fparts.push('Last scan <b>' + cl.last_checked_et + '</b>');
+  var lc = latestLineCapture(cl.plays);
+  if (lc) fparts.push('lines captured <b>' + fmtShort(lc) + '</b>');
+  if (mc.verified_at_utc) fparts.push('verified <b>' + fmtTime(mc.verified_at_utc) + '</b>');
+  if (mver && mver !== 'unknown') fparts.push('model v' + mver);
+  if (vstat === 'approved') fparts.push('model validated');
+  else if (vstat === 'unvalidated') fparts.push('<span class="warn">model unvalidated</span>');
+  fresh.innerHTML = fparts.join(' · ') || '—';
+
+  // --- state line: scan-failed / awaiting-lineup warnings ---
+  var st = [];
+  if (sstat === 'scan_failed')
+    st.push('<span class="warn">Last scan failed — showing carried-forward plays.</span>');
+  if (avail === 'degraded' || avail === 'stale')
+    st.push('<span class="warn">Awaiting lineup — scan data ' + avail + '.</span>');
+  state.innerHTML = st.join(' ');
+
+  // --- lane gate (NFL/WNBA keep their "not connected" notices) ---
+  if (notice && lane !== 'live') {
     notice.style.display = '';
     cards.style.display = 'none';
     cards.innerHTML = '';
-    if (sortCtl) sortCtl.style.display = 'none';
-    var wdn = document.getElementById('wd-'+sport);
-    if (wdn) wdn.innerHTML = '';
+    renderWithdrawn(run, sport);
     return;
   }
-  notice.style.display = 'none';
-  cards.style.display = '';
-  if (sortCtl) sortCtl.style.display = '';
-  var plays = sortPlays(((run.clusters || {})[sport] || {}).plays, sortMode[sport]);
-  renderWithdrawn(run, sport, 'wd-'+sport);
+  if (notice) { notice.style.display = 'none'; cards.style.display = ''; }
+
+  var plays = (cl.plays || []).slice().sort(byStart);
   if (!plays.length) {
-    cards.innerHTML = '<div class="empty"><b>No qualifying plays.</b> '+
-      'This lane is connected — nothing cleared the bar on this slate.</div>';
-    return;
+    cards.innerHTML = '<div class="empty"><b>No qualifying plays.</b> ' +
+      (notice ? 'This lane is connected — ' : '') + 'Nothing cleared the bar on this slate.</div>';
+  } else {
+    cards.innerHTML = plays.map(function(p){ return playCard(p, cfg.start); }).join('');
   }
-  cards.innerHTML = plays.map(function(p){ return playCard(p, startLabel); }).join('');
+  renderWithdrawn(run, sport);
 }
 
-var manifestCache = null;
-
-// Verified-at: prefer run.verified_at_utc, then manifest.verified_at_utc;
-// absent everywhere -> caller falls back to generated_at_et, labeled honestly.
-function verifiedAt(run) {
-  return run.verified_at_utc ||
-    (manifestCache && manifestCache.verified_at_utc) || null;
-}
-
-function freshnessHtml(run, c) {
-  var cl = run.clusters[c] || {};
-  var basis = cl.changed_basis === 'verified' ? 'fingerprint-verified change'
-            : 'tracking baseline (not fingerprint-verified)';
-  var bits = [
-    'Last checked <b>'+(cl.last_checked_et || '—')+'</b> · Last changed <b>'+
-    (cl.last_changed_et || '—')+'</b> · <span title="How the last-changed time was established">'+basis+'</span>'
-  ];
-  var v = verifiedAt(run);
-  if (v) bits.push('Last verified public update <b>'+fmtTime(v)+'</b>');
-  else if (run.generated_at_et) bits.push('generated '+run.generated_at_et+' (not yet verified)');
-  var mv = (run.model_versions || {})[c];
-  if (mv) bits.push('model <code>'+esc(mv)+'</code>');
-  var av = (run.availability_status || {})[c];
-  var sf = !!(run.scan_failed && run.scan_failed[c]);
-  if (sf) bits.push('<span class="stale">scan failed — showing last good data</span>');
-  else if (av === 'degraded') bits.push('<span class="stale">awaiting lineup / degraded inputs</span>');
-  var vms = v ? Date.parse(v) : NaN;
-  if (vms && !isNaN(vms) && (Date.now() - vms) > 21600000)
-    bits.push('<span class="stale">may be stale</span>');
-  return bits.join('<br>');
-}
-
-function render(run) {
-  currentRun = run;
-  // --- board status: last verified public update ---
+// Board status: "Last verified public update" prefers the manifest's rich
+// verification record (run_id/status/t_visible_utc) when it matches this run,
+// then falls back to the legacy top-level verified_at_utc/verified_run_id
+// written by stamp_verified.py. With neither, it falls back to the run's
+// generated time, labeled honestly as generated time.
+function renderStatus(run, manifest) {
+  manifest = manifest || {};
+  var v = manifest.verification || null;
   var lp = document.getElementById('last-pub');
-  var v = verifiedAt(run);
-  if (lp) lp.textContent = v ? fmtTime(v)
-    : (run.generated_at_et ? run.generated_at_et + ' — generated (not yet verified)' : '—');
+  var verifiedAt = (v && v.run_id === run.run_id && v.t_visible_utc) ? v.t_visible_utc : null;
+  var verifiedPass = !!(v && v.status === 'pass' && verifiedAt);
+  if (!verifiedPass && manifest.verified_run_id === run.run_id && manifest.verified_at_utc) {
+    verifiedAt = manifest.verified_at_utc;
+    verifiedPass = true;
+  }
+  if (verifiedPass) {
+    lp.textContent = fmtTime(verifiedAt) + ' (verified)';
+  } else {
+    lp.textContent = run.generated_at_et + ' (generated time — verification not yet recorded)';
+  }
+  var base = verifiedAt || run.generated_at_utc;
+  var staleEl = document.getElementById('stale-line');
+  try {
+    var ageH = (Date.now() - new Date(base).getTime()) / 3600000;
+    if (ageH > 6) {
+      staleEl.style.display = '';
+      staleEl.innerHTML = '<span class="warn">Stale — awaiting next scheduled run.</span> ' +
+        'Last update ' + (verifiedAt ? fmtTime(verifiedAt) : run.generated_at_et) + '.';
+    } else {
+      staleEl.style.display = 'none';
+    }
+  } catch (e) { staleEl.style.display = 'none'; }
+  var failEl = document.getElementById('verify-fail-line');
+  if (v && v.status === 'fail') {
+    failEl.style.display = '';
+    failEl.innerHTML = '<span class="bad">Last publish verification FAILED</span> — the board ' +
+      'may be behind. Recorded ' + fmtTime(v.checked_at_utc || v.t_visible_utc || '') + '.';
+  } else {
+    failEl.style.display = 'none';
+  }
+}
 
-  // --- records strip (each box is a jump link to its sport section) ---
-  var R = run.records;
-  var cards = [
-    ['Combined', R.combined.label, (R.combined.win_pct*100).toFixed(1)+'%', '#top'],
-    ['NFL', R.nfl.label, '', '#sec-nfl'],
-    ['WNBA', R.wnba.label, '', '#sec-wnba'],
-    ['MLB live', R.mlb_live.label, R.mlb_live.units || '', '#sec-mlb'],
-    ['MLB validation', R.mlb_validation.label, '', '#sec-mlb']
-  ];
-  document.getElementById('records').innerHTML = cards.map(function(c){
-    return '<a class="rec" href="'+c[3]+'"><div class="k">'+c[0]+'</div><div class="v">'+c[1]+
-           '</div><div class="n">'+c[2]+'</div></a>';
-  }).join('');
-
-  // --- freshness lines ---
-  ['mlb','nfl','wnba'].forEach(function(c){
-    document.getElementById('fresh-'+c).innerHTML = freshnessHtml(run, c);
+// GitHub session status, from the hourly login monitor's login_status.json.
+// Absent file = first check pending; fetch failure never blanks the board.
+function renderLogin() {
+  var el = document.getElementById('login-line');
+  fetch('login_status.json', {cache:'no-store'}).then(function(r){
+    if (!r.ok) throw 0;
+    return r.json();
+  }).then(function(s){
+    if (s && s.status === 'ok') {
+      el.textContent = 'GitHub session: OK as of ' + fmtTime(s.checked_at) + '.';
+    } else if (s && s.status) {
+      el.innerHTML = 'GitHub session: <span class="warn">' + s.status +
+        ' (as of ' + fmtTime(s.checked_at) + ')</span> — publishing may fail.';
+    } else {
+      el.innerHTML = 'GitHub session: <span class="warn">status unknown</span> (first check pending).';
+    }
+  }).catch(function(){
+    el.innerHTML = 'GitHub session: <span class="warn">status unknown</span> (first check pending).';
   });
+}
 
-  // --- plays per lane (sort per each lane's sort control; earliest game first is default) ---
-  renderSport('mlb');
-  renderSport('nfl');
-  renderSport('wnba');
+// Records strip (legacy fallback): the pre-existing hardcoded cards,
+// rendered from the run payload exactly as before.
+function renderRecordsStrip(run) {
+  var R = run.records || {};
+  function card(k, rec) {
+    rec = rec || {};
+    return '<div class="rec"><div class="k">' + k + '</div><div class="v">' +
+      (rec.label || '—') + '</div><div class="n">' +
+      (rec.win_pct != null ? (rec.win_pct*100).toFixed(1)+'%' : (rec.units || '')) +
+      '</div></div>';
+  }
+  document.getElementById('records').innerHTML =
+    card('Combined', R.combined) + card('NFL', R.nfl) + card('WNBA', R.wnba) +
+    card('MLB live', R.mlb_live) + card('MLB validation', R.mlb_validation);
+}
 
-  // --- footer: exact-run public verification ---
+// Performance view: sport x market x version (n, W-L-P) from records.json
+// (published plays only). Defensive walk — any unrecognized shape falls
+// back to the legacy records strip.
+function renderPerf(run) {
+  fetch('records.json', {cache:'no-store'}).then(function(r){
+    if (!r.ok) throw 0;
+    return r.json();
+  }).then(function(rec){
+    var html = perfTable(rec);
+    if (html) {
+      document.getElementById('records').innerHTML = html;
+    } else {
+      renderRecordsStrip(run);
+    }
+  }).catch(function(){ renderRecordsStrip(run); });
+}
+
+function perfTable(rec) {
+  try {
+    // Real shape: {generated_at_utc, rows: [{sport, market, model_version,
+    // n, wins, losses, pushes, voids}]} — published plays only.
+    var rows = ((rec && rec.rows) || []).filter(function(r){
+      return r && r.sport && (r.wins != null) && (r.losses != null);
+    });
+    if (!rows.length) return '';
+    var tr = rows.map(function(r){
+      return '<tr><td>'+r.sport+'</td><td>'+(r.market||'')+'</td><td>'+(r.model_version||'')+
+        '</td><td>'+(r.n != null ? r.n : ((r.wins||0)+(r.losses||0)+(r.pushes||0)))+
+        '</td><td>'+r.wins+'-'+r.losses+'-'+(r.pushes||0)+'</td></tr>';
+    }).join('');
+    var cap = rec.generated_at_utc
+      ? '<div class="perf-cap">Published plays only · updated ' + fmtTime(rec.generated_at_utc) + '.</div>'
+      : '';
+    return '<table class="perf"><tr><th>sport</th><th>market</th><th>model</th>' +
+      '<th>n</th><th>W-L-P</th></tr>' + tr + '</table>' + cap;
+  } catch (e) { return ''; }
+}
+
+var SPORT_CFGS = [
+  {key:'mlb',  start:'First pitch', noticeId:null,         cardsId:'plays-mlb',       freshId:'fresh-mlb',  stateId:'state-mlb'},
+  {key:'nfl',  start:'Kickoff',     noticeId:'plays-nfl',  cardsId:'plays-nfl-cards', freshId:'fresh-nfl',  stateId:'state-nfl'},
+  {key:'wnba', start:'Tipoff',      noticeId:'plays-wnba', cardsId:'plays-wnba-cards',freshId:'fresh-wnba', stateId:'state-wnba'}
+];
+
+function render(manifest, run) {
+  renderStatus(run, manifest);
+  SPORT_CFGS.forEach(function(cfg){ renderSport(run, manifest, cfg); });
   document.getElementById('footer').innerHTML =
     'Run <code>'+run.run_id+'</code> (seq '+run.seq+') · generated '+run.generated_at_et+
+    (run.model_versions ? '<br>Models: ' + ['mlb','nfl','wnba'].map(function(s){
+      return s.toUpperCase()+' v'+run.model_versions[s];
+    }).join(' · ') : '')+
     '<br>Content hash <code>'+run.content_hash+'</code>'+
     '<br>Verify: recompute sha256 over the canonical JSON of '+run.run_id+
     '.json (sorted keys, compact separators, excluding content_hash).';
 }
 
-// records.json -> Performance section. May 404 -> section stays hidden.
-function renderPerf(arr) {
-  if (!Array.isArray(arr) || !arr.length) return;
-  var rows = arr.map(function(r){
-    return '<tr><td>'+esc(r.sport || '')+'</td><td>'+esc(r.market || '')+'</td>'+
-      '<td>'+esc(r.model_version || '')+'</td><td>'+r.n+'</td>'+
-      '<td>'+r.wins+'-'+r.losses+'-'+(r.pushes || 0)+'</td></tr>';
-  }).join('');
-  document.getElementById('perf-rows').innerHTML = rows;
-  document.getElementById('perf-sec').style.display = '';
-}
-
-// login_status.json -> publishing-blocked indicator. May 404 -> stays hidden.
-function renderLogin(ls) {
-  if (!ls || ls.status !== 'failed') return;
-  var el = document.getElementById('login-ind');
-  if (!el) return;
-  el.style.display = 'block';
-  el.innerHTML = 'Publishing blocked: GitHub session needs attention' +
-    (ls.checked_at ? ' (checked '+fmtTime(ls.checked_at)+')' : '') + '.';
-}
-
-function loadSideFiles() {
-  fetch('records.json', {cache:'no-store'})
-    .then(function(r){ if(!r.ok) throw new Error('records HTTP '+r.status); return r.json(); })
-    .then(renderPerf).catch(function(){});
-  fetch('login_status.json', {cache:'no-store'})
-    .then(function(r){ if(!r.ok) throw new Error('login HTTP '+r.status); return r.json(); })
-    .then(renderLogin).catch(function(){});
-}
-
 fetch('manifest.json', {cache:'no-store'})
   .then(function(r){ if(!r.ok) throw new Error('manifest HTTP '+r.status); return r.json(); })
   .then(function(m){
-    manifestCache = m;
     return fetch(m.latest_run_id+'.json', {cache:'no-store'})
-      .then(function(r){ if(!r.ok) throw new Error('run payload HTTP '+r.status); return r.json(); });
+      .then(function(r){ if(!r.ok) throw new Error('run payload HTTP '+r.status); return r.json(); })
+      .then(function(run){ return {manifest:m, run:run}; });
   })
-  .then(function(run){ render(run); loadSideFiles(); })
+  .then(function(both){
+    render(both.manifest, both.run);
+    renderLogin();
+    renderPerf(both.run);
+  })
   .catch(function(e){ showErr(e.message); document.getElementById('footer').textContent='Load failed.'; });
 </script>
 </body>
