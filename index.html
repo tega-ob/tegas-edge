@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TEGA'S EDGE — Model Picks Board</title>
+<style>
+  :root { --bg:#0d1117; --panel:#161b22; --line:#30363d; --txt:#e6edf3;
+          --dim:#8b949e; --green:#3fb950; --red:#f85149; --gold:#d29922; }
+  * { box-sizing:border-box; }
+  body { background:var(--bg); color:var(--txt); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+         margin:0; padding:24px 16px 64px; }
+  .wrap { max-width:960px; margin:0 auto; }
+  h1 { font-size:28px; margin:0 0 4px; letter-spacing:.5px; }
+  .sub { color:var(--dim); font-size:13px; margin-bottom:20px; }
+  .records { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:24px; }
+  .rec { background:var(--panel); border:1px solid var(--line); border-radius:8px;
+         padding:10px 14px; min-width:130px; }
+  .rec .k { font-size:11px; color:var(--dim); text-transform:uppercase; letter-spacing:.6px; }
+  .rec .v { font-size:20px; font-weight:700; margin-top:2px; }
+  .rec .n { font-size:11px; color:var(--dim); margin-top:2px; }
+  section { margin-bottom:28px; }
+  h2 { font-size:18px; border-bottom:1px solid var(--line); padding-bottom:8px; margin:0 0 4px; }
+  .fresh { font-size:12px; color:var(--dim); margin-bottom:12px; }
+  .fresh b { color:var(--txt); }
+  .plays { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:10px; }
+  .play { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:12px 14px; }
+  .play .p { font-weight:700; font-size:15px; }
+  .play .m { color:var(--dim); font-size:12px; margin:2px 0 6px; }
+  .play .ln { font-size:16px; font-weight:700; }
+  .over { color:var(--green); } .under { color:var(--gold); }
+  .play .pr { font-size:12px; color:var(--dim); margin-top:6px; }
+  .play .gt { font-size:12px; color:var(--dim); margin-top:2px; }
+  .empty { background:var(--panel); border:1px dashed var(--line); border-radius:8px;
+           padding:18px; color:var(--dim); font-size:14px; }
+  footer { margin-top:36px; padding-top:16px; border-top:1px solid var(--line);
+           font-size:12px; color:var(--dim); word-break:break-all; }
+  footer code { color:var(--txt); }
+  #err { display:none; background:#3d1115; border:1px solid var(--red); border-radius:8px;
+         padding:16px; margin-bottom:20px; font-size:14px; }
+  .disclaimer { font-size:12px; color:var(--dim); margin-top:24px; font-style:italic; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>TEGA'S EDGE</h1>
+  <div class="sub">Model picks board — player props only. Lines via FanDuel.</div>
+  <div id="err"></div>
+
+  <div class="records" id="records"></div>
+
+  <section>
+    <h2>⚾ MLB — Pitcher Strikeouts</h2>
+    <div class="fresh" id="fresh-mlb"></div>
+    <div class="plays" id="plays-mlb"></div>
+  </section>
+
+  <section>
+    <h2>🏈 NFL Props</h2>
+    <div class="fresh" id="fresh-nfl"></div>
+    <div class="empty" id="plays-nfl">No active plays. Record below reflects graded history.</div>
+  </section>
+
+  <section>
+    <h2>🏀 WNBA Props</h2>
+    <div class="fresh" id="fresh-wnba"></div>
+    <div class="empty" id="plays-wnba">No active plays. Record below reflects graded history.</div>
+  </section>
+
+  <div class="disclaimer">Picks are informational only — not betting advice.</div>
+
+  <footer id="footer">Loading…</footer>
+</div>
+
+<script>
+function showErr(msg) {
+  var e = document.getElementById('err');
+  e.style.display = 'block';
+  e.textContent = 'Could not load board data: ' + msg;
+}
+
+function fmtTime(iso) {
+  try {
+    var d = new Date(iso);
+    return d.toLocaleString('en-US', { month:'short', day:'numeric',
+      hour:'numeric', minute:'2-digit', hour12:true }) + ' ET';
+  } catch (e) { return iso; }
+}
+
+function render(run) {
+  // --- records strip ---
+  var R = run.records;
+  var cards = [
+    ['Combined', R.combined.label, (R.combined.win_pct*100).toFixed(1)+'%'],
+    ['NFL', R.nfl.label, ''],
+    ['WNBA', R.wnba.label, ''],
+    ['MLB live', R.mlb_live.label, R.mlb_live.units || ''],
+    ['MLB validation', R.mlb_validation.label, '']
+  ];
+  document.getElementById('records').innerHTML = cards.map(function(c){
+    return '<div class="rec"><div class="k">'+c[0]+'</div><div class="v">'+c[1]+
+           '</div><div class="n">'+c[2]+'</div></div>';
+  }).join('');
+
+  // --- freshness lines ---
+  ['mlb','nfl','wnba'].forEach(function(c){
+    var cl = run.clusters[c] || {};
+    var basis = cl.changed_basis === 'verified' ? 'fingerprint-verified change'
+              : 'tracking baseline (not fingerprint-verified)';
+    document.getElementById('fresh-'+c).innerHTML =
+      'Last checked <b>'+cl.last_checked_et+'</b> · Last changed <b>'+
+      cl.last_changed_et+'</b> · <span title="How the last-changed time was established">'+basis+'</span>';
+  });
+
+  // --- MLB plays, earliest game first ---
+  var plays = (run.plays || []).slice().sort(function(a,b){
+    return new Date(a.game_start) - new Date(b.game_start);
+  });
+  document.getElementById('plays-mlb').innerHTML = plays.map(function(p){
+    var sideCls = p.side === 'OVER' ? 'over' : 'under';
+    return '<div class="play"><div class="p">'+p.player+
+      ' <span style="color:var(--dim);font-weight:400;font-size:12px">'+p.team+' vs '+p.opp+'</span></div>'+
+      '<div class="m">'+p.market+' · FanDuel</div>'+
+      '<div class="ln"><span class="'+sideCls+'">'+p.side+'</span> '+p.line+'</div>'+
+      '<div class="pr">Model P: '+(p.prob*100).toFixed(1)+'% · Edge: +'+(p.edge*100).toFixed(1)+'%'+
+      (p.price_note ? ' · '+p.price_note : '')+'</div>'+
+      '<div class="gt">First pitch: '+fmtTime(p.game_start)+'</div></div>';
+  }).join('');
+
+  // --- footer: exact-run public verification ---
+  document.getElementById('footer').innerHTML =
+    'Run <code>'+run.run_id+'</code> (seq '+run.seq+') · generated '+run.generated_at_et+
+    '<br>Content hash <code>'+run.content_hash+'</code>'+
+    '<br>Verify: recompute sha256 over the canonical JSON of '+run.run_id+
+    '.json (sorted keys, compact separators, excluding content_hash).';
+}
+
+fetch('manifest.json', {cache:'no-store'})
+  .then(function(r){ if(!r.ok) throw new Error('manifest HTTP '+r.status); return r.json(); })
+  .then(function(m){
+    return fetch(m.latest_run_id+'.json', {cache:'no-store'})
+      .then(function(r){ if(!r.ok) throw new Error('run payload HTTP '+r.status); return r.json(); });
+  })
+  .then(render)
+  .catch(function(e){ showErr(e.message); document.getElementById('footer').textContent='Load failed.'; });
+</script>
+</body>
+</html>
