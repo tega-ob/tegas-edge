@@ -209,7 +209,10 @@ function latestLineCapture(plays) {
 function renderWithdrawn(run, sport) {
   var el = document.getElementById('wd-' + sport);
   if (!el) return;
-  var wd = ((run.withdrawn || []).filter(function(w){ return w.sport === sport; }));
+  var raw = run.withdrawn;
+  var wd = Array.isArray(raw)
+    ? raw.filter(function(w){ return w.sport === sport; })
+    : ((raw || {})[sport] || []);
   if (!wd.length) { el.innerHTML = ''; el.style.display = 'none'; return; }
   el.style.display = '';
   el.innerHTML = '<b>Withdrawn since the last run:</b> ' + wd.map(function(w){
