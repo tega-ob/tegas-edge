@@ -13,6 +13,10 @@
   .wrap { max-width:960px; margin:0 auto; }
   h1 { font-size:28px; margin:0 0 4px; letter-spacing:.5px; }
   .sub { color:var(--dim); font-size:13px; margin-bottom:20px; }
+  .status { background:#1a2332; border:1px solid var(--gold); border-radius:8px;
+            padding:12px 14px; font-size:13px; margin-bottom:20px; line-height:1.5; }
+  .status b { color:var(--txt); }
+  .status .warn { color:var(--gold); font-weight:700; }
   .records { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:24px; }
   .rec { background:var(--panel); border:1px solid var(--line); border-radius:8px;
          padding:10px 14px; min-width:130px; }
@@ -45,6 +49,10 @@
 <div class="wrap">
   <h1>TEGA'S EDGE</h1>
   <div class="sub">Model picks board — player props only. Lines via FanDuel.</div>
+  <div class="status"><b>Authoritative board.</b> Updates publish on a schedule through a
+  browser signed in as <b>@tega-ob</b> — this route is <span class="warn">UNVERIFIED</span>:
+  no unattended run has completed without intervention yet. If that login lapses, publishing fails.
+  Last verified public update: <b id="last-pub">—</b>.</div>
   <div id="err"></div>
 
   <div class="records" id="records"></div>
@@ -58,13 +66,17 @@
   <section>
     <h2>🏈 NFL Props</h2>
     <div class="fresh" id="fresh-nfl"></div>
-    <div class="empty" id="plays-nfl">No active plays. Record below reflects graded history.</div>
+    <div class="empty" id="plays-nfl"><b>Publishing not connected.</b> The NFL lane
+    isn't live on this board yet — plays will appear here once it's connected. An empty
+    section does not mean no plays qualified.</div>
   </section>
 
   <section>
     <h2>🏀 WNBA Props</h2>
     <div class="fresh" id="fresh-wnba"></div>
-    <div class="empty" id="plays-wnba">No active plays. Record below reflects graded history.</div>
+    <div class="empty" id="plays-wnba"><b>Publishing not connected.</b> The WNBA lane
+    isn't live on this board yet — plays will appear here once it's connected. An empty
+    section does not mean no plays qualified.</div>
   </section>
 
   <div class="disclaimer">Picks are informational only — not betting advice.</div>
@@ -88,6 +100,10 @@ function fmtTime(iso) {
 }
 
 function render(run) {
+  // --- board status: last verified public update ---
+  var lp = document.getElementById('last-pub');
+  if (lp) lp.textContent = run.generated_at_et + ' (' + run.run_id + ')';
+
   // --- records strip ---
   var R = run.records;
   var cards = [
