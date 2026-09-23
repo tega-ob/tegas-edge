@@ -1,0 +1,82 @@
+[
+  {
+    "sport": "wnba",
+    "market": "assists",
+    "model_version": "1.0.0",
+    "n": 1,
+    "wins": 0,
+    "losses": 0,
+    "pushes": 0,
+    "voids": 0
+  },
+  {
+    "sport": "wnba",
+    "market": "points",
+    "model_version": "1.0.0",
+    "n": 2,
+    "wins": 0,
+    "losses": 0,
+    "pushes": 0,
+    "voids": 0
+  },
+  {
+    "sport": "wnba",
+    "market": "pts_reb",
+    "model_version": "1.0.0",
+    "n": 1,
+    "wins": 0,
+    "losses": 0,
+    "pushes": 0,
+    "voids": 0
+  },
+  {
+    "sport": "wnba",
+    "market": "pts_reb_ast",
+    "model_version": "1.0.0",
+    "n": 1,
+    "wins": 0,
+    "losses": 0,
+    "pushes": 0,
+    "voids": 0
+  },
+  {
+    "sport": "wnba",
+    "market": "rebounds",
+    "model_version": "1.0.0",
+    "n": 1,
+    "wins": 0,
+    "losses": 0,
+    "pushes": 0,
+    "voids": 0
+  },
+  {
+    "sport": "wnba",
+    "market": "threes",
+    "model_version": "1.0.0",
+    "n": 1,
+    "wins": 0,
+    "losses": 0,
+    "pushes": 0,
+    "voids": 0
+  },
+  {
+    "sport": "nfl",
+    "market": "receiving_yards",
+    "model_version": "1.0.0",
+    "n": 1,
+    "wins": 0,
+    "losses": 0,
+    "pushes": 0,
+    "voids": 0
+  },
+  {
+    "sport": "nfl",
+    "market": "rushing_yards",
+    "model_version": "1.0.0",
+    "n": 1,
+    "wins": 0,
+    "losses": 0,
+    "pushes": 0,
+    "voids": 0
+  }
+]
