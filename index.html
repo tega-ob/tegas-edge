@@ -58,10 +58,17 @@
   #perf-sec th, #perf-sec td { padding:6px 8px; border-bottom:1px solid var(--line); text-align:left; }
   #perf-sec th { color:var(--dim); font-size:11px; text-transform:uppercase; letter-spacing:.5px; }
   .meth { font-size:12px; color:var(--dim); margin-top:24px; line-height:1.7; }
+  html { scroll-behavior:smooth; }
+  section { scroll-margin-top:12px; }
+  a.rec { display:block; text-decoration:none; color:inherit; cursor:pointer; }
+  a.rec:hover { border-color:var(--gold); }
+  .sortctl { font-size:12px; color:var(--dim); margin-bottom:10px; }
+  .sortctl select { background:var(--panel); color:var(--txt); border:1px solid var(--line);
+           border-radius:6px; padding:4px 8px; font-size:12px; }
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="wrap" id="top">
   <h1>TEGA'S EDGE</h1>
   <div class="sub">Model picks board — player props only. Lines via FanDuel.</div>
   <div class="status"><b>Authoritative board.</b> Unattended publishing demonstrated
@@ -73,16 +80,18 @@
 
   <div class="records" id="records"></div>
 
-  <section>
+  <section id="sec-mlb">
     <h2>⚾ MLB — Pitcher Strikeouts</h2>
     <div class="fresh" id="fresh-mlb"></div>
+    <div class="sortctl" id="sort-mlb">Sort: <select data-sport="mlb" onchange="setSort(this)"><option value="time">Earliest game first</option><option value="prob">Highest probability</option></select></div>
     <div class="plays" id="plays-mlb"></div>
     <div class="wd" id="wd-mlb"></div>
   </section>
 
-  <section>
+  <section id="sec-nfl">
     <h2>🏈 NFL Props</h2>
     <div class="fresh" id="fresh-nfl"></div>
+    <div class="sortctl" id="sort-nfl">Sort: <select data-sport="nfl" onchange="setSort(this)"><option value="time">Earliest game first</option><option value="prob">Highest probability</option></select></div>
     <div class="empty" id="plays-nfl"><b>Publishing not connected.</b> The NFL lane
     isn't live on this board yet — plays will appear here once it's connected. An empty
     section does not mean no plays qualified.</div>
@@ -90,9 +99,10 @@
     <div class="wd" id="wd-nfl"></div>
   </section>
 
-  <section>
+  <section id="sec-wnba">
     <h2>🏀 WNBA Props</h2>
     <div class="fresh" id="fresh-wnba"></div>
+    <div class="sortctl" id="sort-wnba">Sort: <select data-sport="wnba" onchange="setSort(this)"><option value="time">Earliest game first</option><option value="prob">Highest probability</option></select></div>
     <div class="empty" id="plays-wnba"><b>Publishing not connected.</b> The WNBA lane
     isn't live on this board yet — plays will appear here once it's connected. An empty
     section does not mean no plays qualified.</div>
@@ -187,6 +197,43 @@ function renderWithdrawn(run, sport, id) {
   }).join('; ');
 }
 
+// Per-lane sort: 'time' (earliest game first — the standing default) or
+// 'prob' (highest model probability first; ties break by earliest game).
+var sortMode = {mlb:'time', nfl:'time', wnba:'time'};
+var currentRun = null;
+
+function sortPlays(arr, mode) {
+  return (arr || []).slice().sort(function(a,b){
+    if (mode === 'prob') {
+      var d = (b.prob || 0) - (a.prob || 0);
+      if (d) return d;
+    }
+    return new Date(a.game_start) - new Date(b.game_start);
+  });
+}
+
+// Called by each lane's sort <select>. Re-renders that lane only.
+function setSort(sel) {
+  var sport = sel.getAttribute('data-sport');
+  sortMode[sport] = sel.value;
+  renderSport(sport);
+}
+
+function renderSport(sport) {
+  if (!currentRun) return;
+  if (sport === 'mlb') {
+    var plays = sortPlays(currentRun.plays, sortMode.mlb);
+    document.getElementById('plays-mlb').innerHTML = plays.map(function(p){
+      return playCard(p, 'First pitch');
+    }).join('');
+    renderWithdrawn(currentRun, 'mlb', 'wd-mlb');
+  } else if (sport === 'nfl') {
+    renderLane(currentRun, 'nfl', 'plays-nfl', 'plays-nfl-cards', 'Kickoff');
+  } else if (sport === 'wnba') {
+    renderLane(currentRun, 'wnba', 'plays-wnba', 'plays-wnba-cards', 'Tipoff');
+  }
+}
+
 // Per-sport lane rendering, driven by run.lanes. A lane that is not
 // "live" keeps its "Publishing not connected" notice; a live lane with no
 // plays shows an explicit connected-but-empty state (never the notice).
@@ -195,19 +242,20 @@ function renderLane(run, sport, noticeId, cardsId, startLabel) {
   var lane = lanes[sport] || (sport === 'mlb' ? 'live' : 'not_connected');
   var notice = document.getElementById(noticeId);
   var cards = document.getElementById(cardsId);
+  var sortCtl = document.getElementById('sort-'+sport);
   if (lane !== 'live') {
     notice.style.display = '';
     cards.style.display = 'none';
     cards.innerHTML = '';
+    if (sortCtl) sortCtl.style.display = 'none';
     var wdn = document.getElementById('wd-'+sport);
     if (wdn) wdn.innerHTML = '';
     return;
   }
   notice.style.display = 'none';
   cards.style.display = '';
-  var plays = (((run.clusters || {})[sport] || {}).plays || []).slice().sort(function(a,b){
-    return new Date(a.game_start) - new Date(b.game_start);
-  });
+  if (sortCtl) sortCtl.style.display = '';
+  var plays = sortPlays(((run.clusters || {})[sport] || {}).plays, sortMode[sport]);
   renderWithdrawn(run, sport, 'wd-'+sport);
   if (!plays.length) {
     cards.innerHTML = '<div class="empty"><b>No qualifying plays.</b> '+
@@ -250,24 +298,25 @@ function freshnessHtml(run, c) {
 }
 
 function render(run) {
+  currentRun = run;
   // --- board status: last verified public update ---
   var lp = document.getElementById('last-pub');
   var v = verifiedAt(run);
   if (lp) lp.textContent = v ? fmtTime(v)
     : (run.generated_at_et ? run.generated_at_et + ' — generated (not yet verified)' : '—');
 
-  // --- records strip ---
+  // --- records strip (each box is a jump link to its sport section) ---
   var R = run.records;
   var cards = [
-    ['Combined', R.combined.label, (R.combined.win_pct*100).toFixed(1)+'%'],
-    ['NFL', R.nfl.label, ''],
-    ['WNBA', R.wnba.label, ''],
-    ['MLB live', R.mlb_live.label, R.mlb_live.units || ''],
-    ['MLB validation', R.mlb_validation.label, '']
+    ['Combined', R.combined.label, (R.combined.win_pct*100).toFixed(1)+'%', '#top'],
+    ['NFL', R.nfl.label, '', '#sec-nfl'],
+    ['WNBA', R.wnba.label, '', '#sec-wnba'],
+    ['MLB live', R.mlb_live.label, R.mlb_live.units || '', '#sec-mlb'],
+    ['MLB validation', R.mlb_validation.label, '', '#sec-mlb']
   ];
   document.getElementById('records').innerHTML = cards.map(function(c){
-    return '<div class="rec"><div class="k">'+c[0]+'</div><div class="v">'+c[1]+
-           '</div><div class="n">'+c[2]+'</div></div>';
+    return '<a class="rec" href="'+c[3]+'"><div class="k">'+c[0]+'</div><div class="v">'+c[1]+
+           '</div><div class="n">'+c[2]+'</div></a>';
   }).join('');
 
   // --- freshness lines ---
@@ -275,18 +324,10 @@ function render(run) {
     document.getElementById('fresh-'+c).innerHTML = freshnessHtml(run, c);
   });
 
-  // --- MLB plays, earliest game first ---
-  var plays = (run.plays || []).slice().sort(function(a,b){
-    return new Date(a.game_start) - new Date(b.game_start);
-  });
-  document.getElementById('plays-mlb').innerHTML = plays.map(function(p){
-    return playCard(p, 'First pitch');
-  }).join('');
-  renderWithdrawn(run, 'mlb', 'wd-mlb');
-
-  // --- NFL / WNBA lanes (notice vs plays driven by run.lanes) ---
-  renderLane(run, 'nfl', 'plays-nfl', 'plays-nfl-cards', 'Kickoff');
-  renderLane(run, 'wnba', 'plays-wnba', 'plays-wnba-cards', 'Tipoff');
+  // --- plays per lane (sort per each lane's sort control; earliest game first is default) ---
+  renderSport('mlb');
+  renderSport('nfl');
+  renderSport('wnba');
 
   // --- footer: exact-run public verification ---
   document.getElementById('footer').innerHTML =
