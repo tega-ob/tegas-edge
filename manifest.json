@@ -1,26 +1,26 @@
 {
-  "latest_run_id": "20260923-unattended-008",
-  "latest_seq": 8,
+  "latest_run_id": "20260923-unattended-009",
+  "latest_seq": 9,
   "per_cluster": {
     "mlb": {
       "last_checked_et": "Sep 23, 2026 \u00b7 03:35 PM ET",
       "last_checked_utc": "2026-09-23T19:35:57.422211+00:00",
-      "run_id": "20260923-unattended-008",
-      "seq": 8
+      "run_id": "20260923-unattended-009",
+      "seq": 9
     },
     "nfl": {
       "last_checked_et": "Sep 23, 2026 \u00b7 03:19 PM ET",
       "last_checked_utc": "2026-09-23T19:19:19.861266+00:00",
-      "run_id": "20260923-unattended-008",
-      "seq": 8
+      "run_id": "20260923-unattended-009",
+      "seq": 9
     },
     "wnba": {
       "last_checked_et": "Sep 23, 2026 \u00b7 03:35 PM ET",
       "last_checked_utc": "2026-09-23T19:35:57.422211+00:00",
-      "run_id": "20260923-unattended-008",
-      "seq": 8
+      "run_id": "20260923-unattended-009",
+      "seq": 9
     }
   },
-  "updated_at_et": "Sep 23, 2026 \u00b7 03:35 PM ET",
-  "updated_at_utc": "2026-09-23T19:35:57.425083+00:00"
+  "updated_at_et": "Sep 23, 2026 \u00b7 03:45 PM ET",
+  "updated_at_utc": "2026-09-23T19:45:27.110059+00:00"
 }
