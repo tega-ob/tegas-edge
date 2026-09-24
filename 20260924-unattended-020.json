@@ -678,5 +678,5 @@
   ]
  },
  "note": "scan_to_run.py [mlb]: mlb: 14 plays (0 dropped by lane rules); mlb cluster changed (verified); untouched clusters carried forward unchanged. Data-quality flag (2026-09-24): 6 of these 14 plays were published with a workload input later found inflated by relief appearances (season pitches / gamesStarted instead of starts-only). Affected: David Sandlin, Randy Dobnak, Tyler Phillips, Kumar Rocker, Tanner Gordon, Ian Seymour. The plays and their grades stand exactly as delivered. The input is corrected for all future scans.",
- "content_hash": "8166e403927ea2f0cb15250d413d6b2025bf523c443207fd3fd4197f3ef7c48e"
+ "content_hash": "57fa9ab66f3d04329b3301c936ab2ffeb3a9a0895c4e2c141fc1eb800f04ce98"
 }
