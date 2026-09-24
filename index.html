@@ -102,6 +102,7 @@ nav.tabbar button .nbadge.show{display:inline-flex}
 }
 .fchip[aria-pressed="true"]{background:linear-gradient(180deg,#ffd97a,#f5b942);border-color:var(--gold);color:#1a1206}
 .countline{font-size:14px;color:var(--dim);margin:8px 0}
+.clab{font-size:13px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;margin-right:2px}
 /* ---------- pick cards ---------- */
 .card{
   background:linear-gradient(135deg,#161d2a,#0e1420);
@@ -827,6 +828,7 @@ function renderPicks() {
     statusChip('all', 'All') + statusChip('upcoming', 'Upcoming') + statusChip('inprogress', 'In progress') +
     statusChip('finished', 'Finished') + statusChip('live', 'Live') + '</div>';
   h += '<div class="controls" role="group" aria-label="Sort order">' +
+    '<span class="clab">Sort by:</span>' +
     sortChip('start', 'Earliest first') + sortChip('prob', 'Highest probability') + '</div>';
   h += '<div class="countline">' + picks.length + ' pick' + (picks.length === 1 ? '' : 's') +
     ' &middot; ' + counts.upcoming + ' upcoming &middot; ' + counts.inprogress + ' in progress</div>';

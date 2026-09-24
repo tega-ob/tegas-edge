@@ -1,8 +1,12 @@
-/* TEGA'S EDGE service worker — app shell caching only.
- * Shell assets (HTML, icons, webmanifest) are cache-first so the app opens
- * offline. ALL *.json data files are network-only and never cached:
- * the dashboard must never show a cached run as if it were fresh. */
-var CACHE = 'edge-shell-v2';
+/* TEGA'S EDGE service worker — app shell caching.
+ * v3 (2026-09-24): the HTML shell document is NETWORK-FIRST so UI fixes reach
+ * users on their next visit. v2 was cache-first for the shell, which served a
+ * stale index.html indefinitely after the sort controls were restored — the
+ * root cause of the "missing sort button" report. Icons/webmanifest stay
+ * cache-first (immutable assets). ALL *.json data files are network-only and
+ * never cached: the dashboard must never show a cached run as if it were
+ * fresh. */
+var CACHE = 'edge-shell-v3';
 var SHELL = [
   './',
   './index.html',
@@ -28,11 +32,30 @@ self.addEventListener('activate', function (e) {
   );
 });
 
+function isShellDocument(url) {
+  return /(^|\/)index\.html$/.test(url.pathname) || /\/$/.test(url.pathname);
+}
+
 self.addEventListener('fetch', function (e) {
   if (e.request.method !== 'GET') return;
   var url = new URL(e.request.url);
   // Data files: network-only, never cached, never served from cache.
   if (/\.json(\?|$)/.test(url.pathname)) return;
+  if (e.request.mode === 'navigate' || isShellDocument(url)) {
+    // Shell document: network-first so UI updates land on the next visit;
+    // cache fallback keeps the app working offline.
+    e.respondWith(
+      fetch(e.request).then(function (res) {
+        var copy = res.clone();
+        caches.open(CACHE).then(function (c) { c.put(e.request, copy); });
+        return res;
+      }).catch(function () {
+        return caches.match(e.request, { ignoreSearch: true });
+      })
+    );
+    return;
+  }
+  // Immutable assets: cache-first.
   e.respondWith(
     caches.match(e.request, { ignoreSearch: true }).then(function (hit) {
       if (hit) return hit;
