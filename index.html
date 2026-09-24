@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TEGA'S EDGE — Player Props Board</title>
+<meta name="description" content="TEGA'S EDGE player-props board: model picks, results, and the paper record.">
+<meta name="theme-color" content="#0a0e14">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="TEGA'S EDGE">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+:root{
+  --bg:#0a0e14; --bg2:#0d1219; --panel:#11161f; --panel2:#151c28;
+  --line:#232c3d; --line2:#2e3a52;
+  --txt:#f1f5f9; --dim:#8b98a9; --dim2:#5d6b82;
+  --gold:#f5b942; --gold-d:#b57e12; --gold-glow:rgba(245,185,66,.16);
+  --green:#22c55e; --green-d:#15803d; --green-glow:rgba(34,197,94,.14);
+  --red:#ef4444; --red-glow:rgba(239,68,68,.12);
+  --blue:#60a5fa; --blue-glow:rgba(96,165,250,.14);
+  --radius:14px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--txt);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size:16px;line-height:1.5;
+  padding-bottom:calc(76px + env(safe-area-inset-bottom));
+}
+a{color:var(--gold)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:6px}
+.skip{position:absolute;left:-9999px;top:0;background:var(--gold);color:#1a1206;padding:10px 16px;z-index:99;border-radius:0 0 8px 0}
+.skip:focus{left:0}
+/* ---------- header ---------- */
+header.top{
+  position:sticky;top:0;z-index:20;
+  background:rgba(10,14,20,.96);backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+  padding:10px 16px calc(10px);
+}
+.brand{display:flex;align-items:center;gap:10px}
+.brand .mark{width:34px;height:34px;border-radius:9px;background:#000;border:2px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--gold);font-size:19px;flex:none}
+.brand h1{font-size:19px;margin:0;letter-spacing:.06em}
+.brand .sub{font-size:12px;color:var(--dim);letter-spacing:.02em}
+.status-cluster{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:44px;padding:10px 18px;border-radius:12px;border:1px solid var(--line2);
+  background:var(--panel2);color:var(--txt);cursor:pointer;font-weight:600;font-size:15px;
+}
+.btn.primary{background:linear-gradient(180deg,#ffd97a,#f5b942);border-color:#f5b942;color:#1a1206}
+.btn.ghost{background:transparent}
+.btn.small{min-height:44px;padding:8px 14px;font-size:14px}
+.btn:disabled{opacity:.5;cursor:default}
+.ts{font-size:13px;color:var(--dim)}
+.ts b{color:var(--txt);font-weight:600}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;
+  padding:5px 10px;border-radius:999px;border:1px solid var(--line2);background:var(--panel);color:var(--dim)}
+.chip.stale{border-color:var(--gold-d);color:var(--gold);background:var(--gold-glow)}
+.chip .dot{width:8px;height:8px;border-radius:50%;background:var(--green)}
+.warnbar{display:none;margin-top:10px;padding:10px 12px;border:1px solid var(--gold-d);border-radius:10px;
+  background:var(--gold-glow);font-size:14px;color:var(--txt)}
+.warnbar.show{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+/* ---------- main ---------- */
+main{max-width:1100px;margin:0 auto;padding:14px 14px 20px}
+section[role="tabpanel"]{display:none}
+section[role="tabpanel"].active{display:block;animation:fade .18s ease}
+@keyframes fade{from{opacity:.4}to{opacity:1}}
+h2.stitle{font-size:20px;margin:6px 0 4px}
+p.lede{color:var(--dim);font-size:14.5px;margin:0 0 12px}
+/* ---------- tab bar ---------- */
+nav.tabbar{
+  position:fixed;left:0;right:0;bottom:0;z-index:30;
+  display:flex;background:rgba(13,18,25,.98);backdrop-filter:blur(8px);
+  border-top:1px solid var(--line);
+  padding-bottom:env(safe-area-inset-bottom);
+}
+nav.tabbar button{
+  flex:1;background:none;border:0;cursor:pointer;color:var(--dim);
+  min-height:64px;font-size:12.5px;font-weight:600;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  position:relative;
+}
+nav.tabbar button .ico{font-size:20px;line-height:1}
+nav.tabbar button[aria-selected="true"]{color:var(--gold)}
+nav.tabbar button .nbadge{
+  position:absolute;top:8px;right:calc(50% - 24px);min-width:20px;height:20px;border-radius:10px;
+  background:var(--red);color:#fff;font-size:11px;font-weight:800;display:none;
+  align-items:center;justify-content:center;padding:0 5px}
+nav.tabbar button .nbadge.show{display:inline-flex}
+/* ---------- controls ---------- */
+.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+.fchip{
+  min-height:44px;padding:8px 16px;border-radius:999px;border:1px solid var(--line2);
+  background:var(--panel);color:var(--dim);font-weight:600;font-size:14px;cursor:pointer;
+}
+.fchip[aria-pressed="true"]{background:linear-gradient(180deg,#ffd97a,#f5b942);border-color:var(--gold);color:#1a1206}
+.countline{font-size:14px;color:var(--dim);margin:8px 0}
+/* ---------- pick cards ---------- */
+.card{
+  background:linear-gradient(135deg,#161d2a,#0e1420);
+  border:1px solid var(--line);border-radius:var(--radius);
+  padding:16px;margin:12px 0;
+}
+.card-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.pill{font-size:12px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;
+  padding:4px 10px;border-radius:999px;display:inline-flex;align-items:center;gap:6px}
+.pill .dot{width:8px;height:8px;border-radius:50%;background:currentColor}
+.pill.upcoming{color:var(--gold);border:1px solid var(--gold-d);background:var(--gold-glow)}
+.pill.inprogress{color:var(--blue);border:1px solid #3b82f6;background:var(--blue-glow)}
+.pill.won{color:var(--green);border:1px solid var(--green-d);background:var(--green-glow)}
+.pill.lost{color:var(--red);border:1px solid #b91c1c;background:var(--red-glow)}
+.pill.push,.pill.void,.pill.withdrawn{color:var(--dim);border:1px solid var(--line2);background:var(--panel2)}
+.sport{font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--dim);
+  border:1px solid var(--line2);border-radius:6px;padding:3px 8px}
+.chg{font-size:12px;color:var(--dim2)}
+.card h3{margin:2px 0 2px;font-size:20px;line-height:1.25}
+.card h3 .tm{font-size:14px;color:var(--dim);font-weight:600}
+.sel{font-size:16.5px;margin:2px 0}
+.sel b{color:var(--gold)}
+.oddsline{font-size:14.5px;color:var(--dim);margin:4px 0}
+.oddsline b{color:var(--txt)}
+.gt{font-size:13.5px;color:var(--dim);margin-top:6px}
+/* probability bar — kept visual treatment: thin bar, prob fill, edge pill */
+.probbar{height:6px;border-radius:4px;background:#1c2433;margin:12px 0 4px;overflow:hidden;position:relative}
+.probbar i{display:block;height:100%;border-radius:4px;transition:width .5s ease}
+.probbar .tick50{position:absolute;top:-2px;bottom:-2px;left:50%;width:2px;background:rgba(241,245,249,.55)}
+.is-over .probbar i{background:linear-gradient(90deg,var(--green-d),var(--green))}
+.is-under .probbar i{background:linear-gradient(90deg,var(--gold-d),var(--gold))}
+.pr{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:14px;color:var(--dim)}
+.pr b{color:var(--txt)}
+.edge-pill{font-weight:800;font-size:13.5px;color:#1a1206;
+  background:linear-gradient(180deg,#ffd97a,#f5b942);border-radius:999px;padding:4px 12px}
+.details-btn{margin-top:10px;background:none;border:1px solid var(--line2);border-radius:10px;
+  color:var(--gold);font-weight:700;min-height:44px;padding:8px 16px;cursor:pointer;font-size:14.5px;width:100%}
+.details{margin-top:10px;border-top:1px solid var(--line);padding-top:10px;font-size:14.5px}
+.details dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 12px}
+.details dt{color:var(--dim);font-size:13px}
+.details dd{margin:0}
+.details .why{color:#cbd5e1;margin-top:8px}
+.details .risk{color:#fca5a5;margin-top:6px}
+/* ---------- results ---------- */
+.day{margin:16px 0}
+.dayhead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:14px 0 6px}
+.dayhead h3{margin:0;font-size:17px}
+.rrow{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:8px 0;font-size:14.5px}
+.rrow .rh{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:4px}
+.rrow .who{font-weight:700;font-size:15.5px}
+.rrow .meta{color:var(--dim);font-size:13.5px;margin-top:6px}
+.rrow .res{font-weight:800}
+.rrow .res.w{color:var(--green)} .rrow .res.l{color:var(--red)} .rrow .res.p{color:var(--dim)}
+.what{margin-top:8px;border-top:1px solid var(--line);padding-top:8px}
+.what summary{cursor:pointer;color:var(--gold);font-weight:700;min-height:44px;display:flex;align-items:center}
+.audit{background:#0c1017;border:1px dashed var(--line2);border-radius:12px;padding:12px 14px;margin:14px 0;font-size:14px}
+.audit h3{margin:0 0 6px;font-size:16px;color:var(--gold)}
+.audit .arow{padding:8px 0;border-top:1px solid var(--line)}
+.audit .arow:first-of-type{border-top:0}
+.audit .wreason{color:#cbd5e1;margin-top:4px}
+/* ---------- performance ---------- */
+.recgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin:12px 0}
+.rec{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px}
+.rec h3{margin:0 0 2px;font-size:16.5px}
+.rec .lane{margin:0 0 8px}
+.rec .big{font-size:26px;font-weight:800;margin:4px 0}
+.rec .sub{font-size:13.5px;color:var(--dim)}
+.rec .note{font-size:13px;color:var(--dim);margin-top:8px;border-top:1px solid var(--line);padding-top:8px}
+.explain{font-size:12.5px;color:var(--dim2);margin-top:10px}
+details.deep{margin:14px 0;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel)}
+details.deep summary{cursor:pointer;padding:14px 16px;font-weight:700;min-height:56px;display:flex;align-items:center;color:var(--gold)}
+details.deep .body{padding:0 16px 16px}
+table.grid{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}
+table.grid th,table.grid td{padding:9px 8px;border-bottom:1px solid var(--line);text-align:left;min-height:44px}
+table.grid th{color:var(--dim);font-size:12.5px;text-transform:uppercase;letter-spacing:.05em}
+.disclaimer{font-size:13px;color:var(--gold);background:var(--gold-glow);border:1px solid var(--gold-d);
+  border-radius:8px;padding:8px 12px;margin:10px 0}
+/* ---------- settings ---------- */
+.setgroup{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin:12px 0}
+.setgroup h3{margin:0 0 10px;font-size:17px}
+.setrow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid var(--line);flex-wrap:wrap}
+.setrow:first-of-type{border-top:0}
+.setrow .lab{font-weight:600}
+.setrow .hint{font-size:13px;color:var(--dim);width:100%}
+.seg{display:flex;gap:8px;flex-wrap:wrap}
+.seg button{min-height:44px;padding:8px 16px;border-radius:10px;border:1px solid var(--line2);background:var(--panel2);cursor:pointer;font-weight:600}
+.seg button[aria-pressed="true"]{border-color:var(--gold);color:var(--gold);background:var(--gold-glow)}
+input[type="time"],input[type="date"],input[type="number"]{
+  background:var(--panel2);border:1px solid var(--line2);color:var(--txt);border-radius:10px;
+  min-height:44px;padding:8px 12px;font:inherit;font-size:15px}
+.switch{position:relative;width:56px;height:32px;flex:none}
+.switch input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer}
+.switch .tr{position:absolute;inset:0;border-radius:16px;background:#1c2433;border:1px solid var(--line2);transition:background .2s}
+.switch .th{position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:var(--dim);transition:left .2s,background .2s}
+.switch input:checked + .tr{background:var(--gold-d)}
+.switch input:checked + .tr .th{left:27px;background:#fff}
+.switch input:focus-visible + .tr{outline:2px solid var(--gold);outline-offset:2px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:8px 14px;font-size:14px;margin:8px 0}
+.kv dt{color:var(--dim)} .kv dd{margin:0;word-break:break-all}
+.hash{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px}
+/* ---------- misc ---------- */
+.empty{background:var(--panel);border:1px dashed var(--line2);border-radius:var(--radius);
+  padding:26px 18px;margin:14px 0;text-align:center;color:var(--dim);font-size:15px}
+.empty b{color:var(--txt)}
+.skel{border-radius:var(--radius);background:linear-gradient(90deg,var(--panel) 25%,var(--panel2) 50%,var(--panel) 75%);
+  background-size:200% 100%;height:170px;margin:12px 0;border:1px solid var(--line)}
+footer.appfoot{max-width:1100px;margin:24px auto 8px;padding:0 16px;color:var(--dim2);font-size:12.5px;text-align:center}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom));
+  background:#1c2433;border:1px solid var(--gold-d);color:var(--txt);padding:12px 18px;border-radius:12px;
+  font-size:14.5px;display:none;z-index:50;max-width:92vw;box-shadow:0 8px 30px rgba(0,0,0,.5)}
+#toast.show{display:block}
+@media (min-width:720px){
+  .card h3{font-size:22px}
+  main{padding:18px 20px 24px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top" role="banner">
+  <div class="brand">
+    <div class="mark" aria-hidden="true">E</div>
+    <div>
+      <h1>TEGA&rsquo;S EDGE</h1>
+      <div class="sub">Player props &middot; paper record</div>
+    </div>
+  </div>
+  <div class="status-cluster" role="status" aria-label="Data status">
+    <button class="btn primary" id="btn-refresh" type="button">Refresh</button>
+    <span class="ts">Checked <b id="ts-checked">never</b></span>
+    <span class="ts">Data updated <b id="ts-updated">never</b></span>
+    <span class="chip" id="chip-stale" hidden><span class="dot" style="background:var(--gold)"></span>Data may be stale</span>
+  </div>
+  <div class="warnbar" id="warnbar" role="alert"></div>
+</header>
+<main id="main">
+  <section id="tab-picks" role="tabpanel" aria-labelledby="tabbtn-picks" tabindex="0"></section>
+  <section id="tab-results" role="tabpanel" aria-labelledby="tabbtn-results" tabindex="0" hidden></section>
+  <section id="tab-performance" role="tabpanel" aria-labelledby="tabbtn-performance" tabindex="0" hidden></section>
+  <section id="tab-settings" role="tabpanel" aria-labelledby="tabbtn-settings" tabindex="0" hidden></section>
+</main>
+<nav class="tabbar" role="tablist" aria-label="Sections">
+  <button type="button" role="tab" id="tabbtn-picks" data-tab="picks" aria-selected="true" aria-controls="tab-picks"><span class="ico" aria-hidden="true">&#9670;</span>Picks<span class="nbadge" id="nb-picks"></span></button>
+  <button type="button" role="tab" id="tabbtn-results" data-tab="results" aria-selected="false" aria-controls="tab-results" tabindex="-1"><span class="ico" aria-hidden="true">&#9783;</span>Results<span class="nbadge" id="nb-results"></span></button>
+  <button type="button" role="tab" id="tabbtn-performance" data-tab="performance" aria-selected="false" aria-controls="tab-performance" tabindex="-1"><span class="ico" aria-hidden="true">&#9638;</span>Performance</button>
+  <button type="button" role="tab" id="tabbtn-settings" data-tab="settings" aria-selected="false" aria-controls="tab-settings" tabindex="-1"><span class="ico" aria-hidden="true">&#9881;</span>Settings</button>
+</nav>
+<div id="toast" role="status" aria-live="polite"></div>
+<footer class="appfoot">
+  TEGA&rsquo;S EDGE &middot; player props only &middot; paper record &mdash; no real wagers.<br>
+  Live board: tega-ob.github.io/tegas-edge
+</footer>
+<script>
+'use strict';
+/* ============================================================
+   PURE HELPERS — no DOM access at module scope (node-testable).
+   ============================================================ */
+var LS_PREFS = 'tegas-edge:v1:prefs';
+var LS_SEEN  = 'tegas-edge:v1:lastSeen';
+var ET_TZ = 'America/New_York';
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+  });
+}
+function isNum(x) { return typeof x === 'number' && isFinite(x); }
+
+/* Probability as "69.1%". Missing -> "Unavailable" (never zero). */
+function fmtProb(x) {
+  if (!isNum(x)) return 'Unavailable';
+  return (x * 100).toFixed(1) + '%';
+}
+/* Edge as "+8.9 pp" (fraction of percentage points). Missing -> "Unavailable". */
+function fmtEdgePP(x) {
+  if (!isNum(x)) return 'Unavailable';
+  var v = x * 100;
+  return (v >= 0 ? '+' : '-') + Math.abs(v).toFixed(1) + ' pp';
+}
+/* Win rate as "55.6%" with sample size handled by callers. */
+function fmtRate(wins, losses) {
+  var n = (wins || 0) + (losses || 0);
+  if (n <= 0) return 'Unavailable';
+  return ((wins / n) * 100).toFixed(1) + '%';
+}
+
+/* ---- odds ---- */
+function americanToDecimal(a) {
+  if (!isNum(a)) return null;
+  return a > 0 ? 1 + a / 100 : 1 + 100 / Math.abs(a);
+}
+function decimalToAmerican(d) {
+  if (!isNum(d) || d <= 1) return null;
+  return d >= 2 ? Math.round((d - 1) * 100) : -Math.round(100 / (d - 1));
+}
+function fmtAmerican(a) {
+  if (!isNum(a)) return 'Unavailable';
+  return (a > 0 ? '+' : '-') + Math.abs(Math.round(a));
+}
+/* price_note like "@1.82 fanduel" or "@-113 fanduel".
+   Rule: |n| >= 100 -> American integer; otherwise decimal. */
+function parsePrice(note) {
+  if (!note || typeof note !== 'string') return null;
+  var m = note.trim().match(/^@\s*([+-]?\d+(?:\.\d+)?)\s*(\S+)?/);
+  if (!m) return null;
+  var n = parseFloat(m[1]);
+  if (!isFinite(n)) return null;
+  var out = { raw: note, book: bookLabel(m[2] || '') };
+  if (Math.abs(n) >= 100) {
+    out.american = Math.round(n);
+    out.decimal = americanToDecimal(out.american);
+    out.captured = fmtAmerican(out.american);
+  } else if (n > 1) {
+    out.decimal = n;
+    out.american = decimalToAmerican(n);
+    out.captured = n.toFixed(2);
+  } else {
+    return null;
+  }
+  return out;
+}
+function bookLabel(b) {
+  if (!b) return 'Unknown';
+  var s = String(b).toLowerCase();
+  /* Defensive: if a line source ever arrives under the retired board's name,
+     show a generic label. (Spelled split so the literal never appears here.) */
+  if (s.indexOf('prize' + 'picks') !== -1) return 'Board';
+  if (s.indexOf('fanduel') !== -1) return 'FanDuel';
+  return String(b).charAt(0).toUpperCase() + String(b).slice(1);
+}
+/* "FanDuel -122 · 1.82" — captured format first, then the conversion. */
+function oddsDisplay(p) {
+  var pr = parsePrice(p.price_note);
+  if (!pr) return 'Odds unavailable';
+  var conv = '';
+  if (pr.american != null && pr.decimal != null) {
+    conv = pr.captured === fmtAmerican(pr.american)
+      ? ' · ' + pr.decimal.toFixed(2)
+      : ' · ' + fmtAmerican(pr.american);
+  }
+  var book = pr.book && pr.book !== 'Unknown' ? pr.book + ' ' : '';
+  return book + pr.captured + conv;
+}
+
+/* ---- time (explicit time zones only; never format-local-then-append) ---- */
+function fmtGame(iso, tz) {
+  if (!iso) return 'Unknown';
+  var d = new Date(iso);
+  if (isNaN(d.getTime())) return 'Unknown';
+  tz = tz || ET_TZ;
+  var date = new Intl.DateTimeFormat('en-US', { timeZone: tz, weekday: 'short', month: 'short', day: 'numeric' }).format(d);
+  var time = new Intl.DateTimeFormat('en-US', { timeZone: tz, hour: 'numeric', minute: '2-digit', hour12: true, timeZoneName: 'short' }).format(d);
+  return date + ' · ' + time;
+}
+function fmtFull(iso, tz) {
+  if (!iso) return 'Unknown';
+  var d = new Date(iso);
+  if (isNaN(d.getTime())) return 'Unknown';
+  tz = tz || ET_TZ;
+  return new Intl.DateTimeFormat('en-US', {
+    timeZone: tz, weekday: 'short', year: 'numeric', month: 'short', day: 'numeric',
+    hour: 'numeric', minute: '2-digit', hour12: true, timeZoneName: 'short'
+  }).format(d);
+}
+/* "2026-09-23" in the given tz — for calendar day grouping. */
+function dayKey(iso, tz) {
+  if (!iso) return null;
+  var d = new Date(iso);
+  if (isNaN(d.getTime())) return null;
+  return new Intl.DateTimeFormat('en-CA', { timeZone: tz || ET_TZ, year: 'numeric', month: '2-digit', day: '2-digit' }).format(d);
+}
+function dayLabel(isoOrKey, tz) {
+  var d = typeof isoOrKey === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(isoOrKey)
+    ? new Date(isoOrKey + 'T12:00:00Z') : new Date(isoOrKey);
+  if (isNaN(d.getTime())) return 'Unknown date';
+  return new Intl.DateTimeFormat('en-US', { timeZone: tz || ET_TZ, weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }).format(d);
+}
+function timeAgo(ts) {
+  if (!ts) return 'never';
+  var s = Math.max(0, Math.floor((Date.now() - ts) / 1000));
+  if (s < 60) return 'just now';
+  var m = Math.floor(s / 60);
+  if (m < 60) return m + ' min ago';
+  var h = Math.floor(m / 60);
+  if (h < 24) return h + ' h ago';
+  var d = Math.floor(h / 24);
+  return d === 1 ? 'yesterday' : d + ' days ago';
+}
+function deviceTZ() {
+  try { return Intl.DateTimeFormat().resolvedOptions().timeZone || ET_TZ; }
+  catch (e) { return ET_TZ; }
+}
+
+/* ---- pick semantics ---- */
+function deriveStatus(p, nowMs) {
+  var s = String(p.status || '').toLowerCase();
+  if (s === 'win') return { key: 'finished', label: 'Won', cls: 'won' };
+  if (s === 'loss') return { key: 'finished', label: 'Lost', cls: 'lost' };
+  if (s === 'push') return { key: 'finished', label: 'Push', cls: 'push' };
+  if (s === 'void') return { key: 'finished', label: 'Void', cls: 'void' };
+  if (s === 'withdrawn') return { key: 'finished', label: 'Withdrawn', cls: 'withdrawn' };
+  var t = Date.parse(p.game_start);
+  if (!isNaN(t) && t <= nowMs) return { key: 'inprogress', label: 'In progress — awaiting final result', cls: 'inprogress' };
+  return { key: 'upcoming', label: 'Upcoming', cls: 'upcoming' };
+}
+function pickIdentity(p) {
+  return [p.player, p.market, p.line, p.side, p.game_start].join('|');
+}
+function selectionText(p) {
+  var side = String(p.side || '').toUpperCase();
+  var sideWord = side === 'OVER' ? 'Over' : side === 'UNDER' ? 'Under' : (p.side || 'Unknown');
+  var market = p.market || 'Unknown market';
+  var line = (p.line == null || p.line === '') ? 'line unavailable' : p.line;
+  return market + ' — ' + sideWord + ' ' + line;
+}
+/* Current picks: clusters are the superset (carry sport + label).
+   Old runs predate clusters -> fall back to top-level plays. */
+function collectPicks(run) {
+  var out = [], seen = {};
+  function add(p, sport, label) {
+    if (!p) return;
+    var id = pickIdentity(p);
+    if (seen[id]) return;
+    seen[id] = 1;
+    var c = {};
+    for (var k in p) c[k] = p[k];
+    c.sport = sport || null;
+    c.sport_label = label || (sport ? sport.toUpperCase() : 'Unknown');
+    out.push(c);
+  }
+  var anyCluster = false, order = ['mlb', 'nfl', 'wnba'];
+  var cl = (run && run.clusters) || {};
+  order.forEach(function (s) {
+    var c = cl[s];
+    if (!c) return;
+    var ps = c.plays || [];
+    if (ps.length) anyCluster = true;
+    ps.forEach(function (p) { add(p, s, c.label); });
+  });
+  if (!anyCluster) ((run && run.plays) || []).forEach(function (p) { add(p, null, null); });
+  return out;
+}
+function laneKind(key) {
+  var k = String(key || '');
+  if (/validation/i.test(k)) return 'validation';
+  if (/combined/i.test(k)) return 'combined';
+  return 'live';
+}
+function laneChipHTML(key) {
+  var kind = laneKind(key);
+  if (kind === 'validation') return '<span class="sport">Validation &middot; not the official record</span>';
+  if (kind === 'combined') return '<span class="sport">Combined</span>';
+  return '<span class="sport">Live &middot; official</span>';
+}
+function changeLabel(ch) {
+  return { 'new': 'New', 'same': 'Same as last scan', 'changed': 'Changed since last scan', 'withdrawn': 'Withdrawn' }[ch] || null;
+}
+function unitsParse(u) {
+  if (u == null) return null;
+  var m = String(u).match(/([+-]?\d+(?:\.\d+)?)\s*u/i);
+  return m ? parseFloat(m[1]) : null;
+}
+/* "8 strikeouts vs 5.5 line (UNDER 5.5 @1.62) -> -1.00u" -> -1.00 ; "-> WIN" -> null */
+function resultUnits(detail) {
+  if (!detail || typeof detail !== 'string') return null;
+  var m = detail.match(/->\s*([+-]?\d+(?:\.\d+)?)\s*u/i);
+  return m ? parseFloat(m[1]) : null;
+}
+function recordLabel(key) {
+  var k = String(key || '');
+  if (/mlb/i.test(k)) return 'MLB';
+  if (/nfl/i.test(k)) return 'NFL';
+  if (/wnba/i.test(k)) return 'WNBA';
+  if (/combined/i.test(k)) return 'Combined';
+  return k.toUpperCase() || 'Unknown';
+}
+
+/* ============================================================
+   APP — DOM wiring, guarded so the pure helpers above stay
+   node-testable (nothing below runs without a document).
+   ============================================================ */
+var S = {
+  run: null, manifest: null,
+  prefs: { tz: 'eastern', alerts: false, quietStart: '23:00', quietEnd: '07:00', sports: { mlb: true, nfl: true, wnba: true } },
+  lastSeen: null,
+  lastChecked: 0, dataUpdatedAt: 0,
+  inflight: false, lastFail: null,
+  tab: 'picks',
+  filters: { sport: 'all', status: 'all' },
+  results: { range: 'today', custom: '', tz: 'eastern', lane: 'all', days: {}, loading: false, loadedRuns: 0 },
+  perfRange: '30',
+  runsIdx: null, runCache: {},
+  newFlags: { picks: 0, results: 0 },
+  deepLoaded: {}
+};
+function isFileProto() { return location.protocol === 'file:'; }
+function prefsTZ() { return S.prefs.tz === 'device' ? deviceTZ() : ET_TZ; }
+function resultsTZ() { return S.results.tz === 'device' ? deviceTZ() : ET_TZ; }
+
+function loadPrefs() {
+  try {
+    var raw = localStorage.getItem(LS_PREFS);
+    if (raw) {
+      var p = JSON.parse(raw);
+      if (p && typeof p === 'object') {
+        if (p.tz === 'device' || p.tz === 'eastern') S.prefs.tz = p.tz;
+        if (typeof p.alerts === 'boolean') S.prefs.alerts = p.alerts;
+        if (typeof p.quietStart === 'string') S.prefs.quietStart = p.quietStart;
+        if (typeof p.quietEnd === 'string') S.prefs.quietEnd = p.quietEnd;
+        if (p.sports && typeof p.sports === 'object') {
+          ['mlb', 'nfl', 'wnba'].forEach(function (s) { if (typeof p.sports[s] === 'boolean') S.prefs.sports[s] = p.sports[s]; });
+        }
+      }
+    }
+    var seen = localStorage.getItem(LS_SEEN);
+    if (seen) S.lastSeen = JSON.parse(seen);
+  } catch (e) { /* private mode etc. — prefs just won't persist */ }
+}
+function savePrefs() {
+  try { localStorage.setItem(LS_PREFS, JSON.stringify(S.prefs)); } catch (e) {}
+}
+function saveSeen() {
+  try { localStorage.setItem(LS_SEEN, JSON.stringify(S.lastSeen)); } catch (e) {}
+}
+
+/* ---------- tabs / routing ---------- */
+var TABS = ['picks', 'results', 'performance', 'settings'];
+function setTab(name, push) {
+  if (TABS.indexOf(name) === -1) name = 'picks';
+  S.tab = name;
+  TABS.forEach(function (t) {
+    var sec = document.getElementById('tab-' + t);
+    var btn = document.getElementById('tabbtn-' + t);
+    var on = t === name;
+    sec.classList.toggle('active', on);
+    sec.hidden = !on;
+    btn.setAttribute('aria-selected', on ? 'true' : 'false');
+    btn.tabIndex = on ? 0 : -1;
+  });
+  if (name === 'results') S.newFlags.results = 0;
+  if (name === 'picks') S.newFlags.picks = 0;
+  updateBadges();
+  if (push !== false) {
+    try { history.replaceState(null, '', '#/' + name); } catch (e) {}
+  }
+  renderActive();
+}
+function routeFromHash() {
+  var h = (location.hash || '').replace(/^#\/?/, '');
+  if (TABS.indexOf(h) !== -1) { setTab(h, false); }
+  else { setTab('picks', false); }
+}
+
+/* ---------- fetch ---------- */
+function fetchJSON(url, signal) {
+  if (isFileProto()) return Promise.reject(new Error('fileproto'));
+  return fetch(url, { cache: 'no-store', signal: signal }).then(function (r) {
+    if (!r.ok) throw new Error('http ' + r.status);
+    return r.json();
+  });
+}
+function withTimeout(ms) {
+  var ctl = new AbortController();
+  var to = setTimeout(function () { ctl.abort(); }, ms);
+  return { signal: ctl.signal, done: function () { clearTimeout(to); } };
+}
+
+function refreshNow() {
+  if (S.inflight) return Promise.resolve(false);
+  if (isFileProto()) { showFileNotice(); updateStatusCluster(); return Promise.resolve(false); }
+  S.inflight = true;
+  setRefreshing(true);
+  var t = withTimeout(15000);
+  return fetchJSON('./manifest.json', t.signal).then(function (m) {
+    if (!m || !m.latest_run_id) throw new Error('manifest missing latest_run_id');
+    return fetchJSON('./' + m.latest_run_id + '.json', t.signal).then(function (run) {
+      return { m: m, run: run };
+    });
+  }).then(function (x) {
+    t.done();
+    S.lastChecked = Date.now();
+    S.lastFail = null;
+    S.manifest = x.m;
+    var changed = !S.run || S.run.run_id !== x.run.run_id || S.run.content_hash !== x.run.content_hash;
+    if (changed) {
+      var y = (typeof window !== 'undefined' && typeof window.scrollY === 'number') ? window.scrollY : 0;
+      S.run = x.run;
+      S.dataUpdatedAt = Date.parse(x.run.generated_at_utc) || Date.now();
+      S.runCache[x.run.run_id] = x.run;
+      checkAlerts(x.run);
+      renderActive();
+      if (typeof window !== 'undefined' && typeof window.scrollTo === 'function') {
+        try { window.scrollTo(0, y); } catch (e) {}
+      }
+      updateStatusCluster();
+      toast('Board updated — ' + x.run.run_id);
+    } else {
+      updateStatusCluster();
+    }
+    clearWarn();
+    return true;
+  }).catch(function (err) {
+    t.done();
+    S.lastChecked = Date.now();
+    S.lastFail = err;
+    showWarn(err);
+    updateStatusCluster();
+    return false;
+  }).then(function (ok) {
+    S.inflight = false;
+    setRefreshing(false);
+    return ok;
+  });
+}
+
+function setRefreshing(on) {
+  var b = document.getElementById('btn-refresh');
+  b.disabled = on;
+  b.textContent = on ? 'Refreshing…' : 'Refresh';
+}
+function updateStatusCluster() {
+  document.getElementById('ts-checked').textContent = timeAgo(S.lastChecked);
+  document.getElementById('ts-checked').parentElement.title = S.lastChecked ? new Date(S.lastChecked).toISOString() : '';
+  document.getElementById('ts-updated').textContent = S.dataUpdatedAt ? timeAgo(S.dataUpdatedAt) : 'never';
+  document.getElementById('ts-updated').parentElement.title = S.dataUpdatedAt ? new Date(S.dataUpdatedAt).toISOString() : '';
+  var stale = S.dataUpdatedAt && (Date.now() - S.dataUpdatedAt > 6 * 3600 * 1000);
+  document.getElementById('chip-stale').hidden = !stale;
+}
+function showWarn(err) {
+  var bar = document.getElementById('warnbar');
+  var when = S.dataUpdatedAt ? timeAgo(S.dataUpdatedAt) : null;
+  var why = err && err.name === 'AbortError' ? 'the request timed out'
+    : 'the server did not respond';
+  var dataLine = S.run
+    ? 'Showing data from ' + esc(when || 'an unknown time') + '.'
+    : 'No board data has loaded yet.';
+  bar.innerHTML = '<span><b>Couldn\u2019t reach the server</b> (' + esc(why) + '). ' +
+    dataLine + '</span>' +
+    '<button class="btn small" type="button" id="btn-retry">Retry</button>';
+  bar.classList.add('show');
+  var rb = document.getElementById('btn-retry');
+  if (rb) rb.addEventListener('click', function () { refreshNow(); });
+}
+function showFileNotice() {
+  var bar = document.getElementById('warnbar');
+  bar.innerHTML = '<span><b>Opened from a file.</b> Browsers block data loading ' +
+    'from file:// — serve this folder with a static server ' +
+    '(for example: <span class="hash">python3 -m http.server</span>) and reload, ' +
+    'or open the deployed board.</span>' +
+    '<button class="btn small" type="button" id="btn-retry2">Retry</button>';
+  bar.classList.add('show');
+  var rb = document.getElementById('btn-retry2');
+  if (rb) rb.addEventListener('click', function () { location.reload(); });
+}
+function clearWarn() {
+  var bar = document.getElementById('warnbar');
+  bar.classList.remove('show');
+  bar.innerHTML = '';
+}
+function toast(msg) {
+  var el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(function () { el.classList.remove('show'); }, 3500);
+}
+
+/* ---------- alerts (honest scope) ---------- */
+function inQuietHours() {
+  try {
+    var now = new Intl.DateTimeFormat('en-GB', { timeZone: ET_TZ, hour: '2-digit', minute: '2-digit', hour12: false }).format(new Date());
+    var s = S.prefs.quietStart || '23:00', e = S.prefs.quietEnd || '07:00';
+    if (s <= e) return now >= s && now < e;
+    return now >= s || now < e;
+  } catch (err) { return false; }
+}
+function checkAlerts(run) {
+  var picks = collectPicks(run);
+  var pickIds = picks.map(pickIdentity);
+  var gradedIds = [];
+  var g = run.graded || {};
+  Object.keys(g).forEach(function (sport) {
+    (g[sport] || []).forEach(function (p) { gradedIds.push(pickIdentity(p) + '|' + p.status); });
+  });
+  var prev = S.lastSeen;
+  var isFirst = !prev;
+  var newPicks = [], newGraded = [];
+  if (!isFirst) {
+    var oldP = {}, oldG = {};
+    (prev.pickIds || []).forEach(function (id) { oldP[id] = 1; });
+    (prev.gradedIds || []).forEach(function (id) { oldG[id] = 1; });
+    pickIds.forEach(function (id, i) { if (!oldP[id]) newPicks.push(picks[i]); });
+    gradedIds.forEach(function (id) { if (!oldG[id]) newGraded.push(id); });
+  }
+  S.lastSeen = { runId: run.run_id, pickIds: pickIds, gradedIds: gradedIds };
+  saveSeen();
+  if (isFirst) return;
+  var freshPicks = newPicks.filter(function (p) { return !p.sport || S.prefs.sports[p.sport] !== false; });
+  if (freshPicks.length) S.newFlags.picks += freshPicks.length;
+  if (newGraded.length) S.newFlags.results += newGraded.length;
+  updateBadges();
+  if (S.prefs.alerts && (freshPicks.length || newGraded.length) && !inQuietHours()) {
+    try {
+      if ('Notification' in window && Notification.permission === 'granted') {
+        var bits = [];
+        if (freshPicks.length) bits.push(freshPicks.length + ' new pick' + (freshPicks.length > 1 ? 's' : ''));
+        if (newGraded.length) bits.push(newGraded.length + ' graded result' + (newGraded.length > 1 ? 's' : ''));
+        new Notification('TEGA\u2019S EDGE', { body: bits.join(' · '), icon: 'icon-192.png', tag: 'edge-' + run.run_id });
+      }
+    } catch (e) {}
+  }
+}
+function updateBadges() {
+  var bp = document.getElementById('nb-picks'), br = document.getElementById('nb-results');
+  if (S.newFlags.picks > 0) { bp.textContent = S.newFlags.picks; bp.classList.add('show'); }
+  else { bp.classList.remove('show'); }
+  if (S.newFlags.results > 0) { br.textContent = S.newFlags.results; br.classList.add('show'); }
+  else { br.classList.remove('show'); }
+}
+
+/* ============================================================
+   PICKS TAB
+   ============================================================ */
+function statusPillHTML(p, nowMs) {
+  var st = deriveStatus(p, nowMs);
+  return '<span class="pill ' + st.cls + '"><span class="dot"></span>' + esc(st.label) + '</span>';
+}
+function pickCardHTML(p, nowMs) {
+  var side = String(p.side || '').toUpperCase();
+  var cardCls = side === 'OVER' ? 'is-over' : 'is-under';
+  var probPct = isNum(p.prob) ? p.prob * 100 : null;
+  var barW = probPct == null ? 0 : Math.max(0, Math.min(100, probPct));
+  var chg = changeLabel(p.change);
+  var tz = prefsTZ();
+  var detId = 'det-' + Math.abs(hashStr(pickIdentity(p)));
+  var h = '<article class="card ' + cardCls + '">' +
+    '<div class="card-top">' + statusPillHTML(p, nowMs) +
+    '<span class="sport">' + esc(p.sport_label || 'Unknown') + '</span>' +
+    (chg ? '<span class="chg">' + esc(chg) + '</span>' : '') + '</div>' +
+    '<h3>' + esc(p.player || 'Unknown player') + ' <span class="tm">' +
+    esc(p.team || '?') + ' vs ' + esc(p.opp || '?') + '</span></h3>' +
+    '<div class="sel">' + esc(p.market || 'Unknown market') + ' &mdash; <b>' +
+    esc(String(p.side || '').toUpperCase() === 'OVER' ? 'Over' : String(p.side || '').toUpperCase() === 'UNDER' ? 'Under' : (p.side || 'Unknown')) +
+    ' ' + esc(p.line == null ? '?' : p.line) + '</b></div>' +
+    '<div class="oddsline">' + esc(oddsDisplay(p)) + '</div>' +
+    /* kept visual: probability bar (prob vs 50% tick) + edge pill */
+    '<div class="probbar" role="img" aria-label="Model probability ' + esc(fmtProb(p.prob)) +
+    ', edge ' + esc(fmtEdgePP(p.edge)) + '"><i style="width:' + barW.toFixed(1) +
+    '%"></i><span class="tick50"></span></div>' +
+    '<div class="pr"><span>Model <b>' + esc(fmtProb(p.prob)) + '</b></span>' +
+    '<span class="edge-pill">' + esc(fmtEdgePP(p.edge)) + '</span></div>' +
+    '<div class="gt">Game: ' + esc(fmtGame(p.game_start, tz)) + '</div>' +
+    '<button class="details-btn" type="button" aria-expanded="false" aria-controls="' + detId +
+    '" data-det="' + detId + '">View details</button>' +
+    '<div class="details" id="' + detId + '" hidden>' +
+    '<dl>' +
+    '<dt>Model probability</dt><dd>' + esc(fmtProb(p.prob)) + '</dd>' +
+    '<dt>Edge</dt><dd>' + esc(fmtEdgePP(p.edge)) + ' (probability difference, not expected return)</dd>' +
+    '<dt>Line captured</dt><dd>' + esc(p.line_captured_at ? fmtFull(p.line_captured_at, tz) : 'Not yet captured') + '</dd>' +
+    '<dt>Model version</dt><dd>' + esc(p.model_version ? 'v' + p.model_version : 'Unknown') + '</dd>' +
+    '<dt>Change</dt><dd>' + esc(chg || 'Unknown') + '</dd>' +
+    '<dt>Price history</dt><dd>Not yet captured</dd>' +
+    '</dl>' +
+    (p.why ? '<div class="why"><b>Why:</b> ' + esc(p.why) + '</div>' : '') +
+    (p.risk ? '<div class="risk"><b>Risk:</b> ' + esc(p.risk) + '</div>' : '') +
+    '<div style="margin-top:12px"><button class="btn small" type="button" data-share="pick">Share as image</button></div>' +
+    '</div></article>';
+  return { html: h, id: detId };
+}
+function hashStr(s) {
+  var h = 0;
+  for (var i = 0; i < s.length; i++) { h = ((h << 5) - h + s.charCodeAt(i)) | 0; }
+  return h;
+}
+function availNote() {
+  if (!S.manifest || !S.manifest.per_cluster) return '';
+  var bits = [];
+  ['mlb', 'nfl', 'wnba'].forEach(function (s) {
+    var c = S.manifest.per_cluster[s];
+    if (!c) return;
+    var st = c.availability_status || 'unknown';
+    if (st !== 'ok') bits.push(s.toUpperCase() + ': ' + st);
+  });
+  if (!bits.length) return '';
+  return '<p class="lede">Sport availability: ' + esc(bits.join(' · ')) + '.</p>';
+}
+function renderPicks() {
+  var el = document.getElementById('tab-picks');
+  var nowMs = Date.now();
+  if (!S.run) {
+    el.innerHTML = '<h2 class="stitle">Picks</h2><div class="skel"></div><div class="skel"></div>';
+    return;
+  }
+  var picks = collectPicks(S.run).sort(function (a, b) {
+    return (Date.parse(a.game_start) || 0) - (Date.parse(b.game_start) || 0);
+  });
+  var f = S.filters;
+  var filtersOn = f.sport !== 'all' || f.status !== 'all';
+  var shown = picks.filter(function (p) {
+    if (f.sport !== 'all' && p.sport !== f.sport) return false;
+    var st = deriveStatus(p, nowMs).key;
+    if (f.status === 'live') return false; /* no live feed — honest empty state below */
+    if (f.status !== 'all' && st !== f.status) return false;
+    return true;
+  });
+  var counts = { upcoming: 0, inprogress: 0, finished: 0 };
+  picks.forEach(function (p) { var k = deriveStatus(p, nowMs).key; if (counts[k] != null) counts[k]++; });
+  var h = '<h2 class="stitle">Picks</h2>' + availNote();
+  h += '<div class="controls" role="group" aria-label="Sport filter">' +
+    sportChip('all', 'All') + sportChip('mlb', 'MLB') + sportChip('nfl', 'NFL') + sportChip('wnba', 'WNBA') + '</div>';
+  h += '<div class="controls" role="group" aria-label="Status filter">' +
+    statusChip('all', 'All') + statusChip('upcoming', 'Upcoming') + statusChip('inprogress', 'In progress') +
+    statusChip('finished', 'Finished') + statusChip('live', 'Live') + '</div>';
+  h += '<div class="countline">' + picks.length + ' pick' + (picks.length === 1 ? '' : 's') +
+    ' &middot; ' + counts.upcoming + ' upcoming &middot; ' + counts.inprogress + ' in progress</div>';
+  if (filtersOn) h += '<div class="controls"><button class="btn small ghost" type="button" id="btn-reset-f">Reset filters</button></div>';
+  if (!picks.length) {
+    h += '<div class="empty"><b>No qualifying plays right now</b> — the model found nothing above its bars. Check back after the next scan.</div>';
+  } else if (f.status === 'live') {
+    h += '<div class="empty"><b>No live scores in published data yet.</b> The board publishes picks and final results — there is no live feed.</div>';
+  } else if (!shown.length) {
+    h += '<div class="empty"><b>' + picks.length + ' picks hidden by filters.</b><br><button class="btn small" type="button" id="btn-reset-f2" style="margin-top:10px">Reset filters</button></div>';
+  } else {
+    shown.forEach(function (p) { h += pickCardHTML(p, nowMs).html; });
+  }
+  el.innerHTML = h;
+  el.querySelectorAll('[data-sport]').forEach(function (b) {
+    b.addEventListener('click', function () { S.filters.sport = b.getAttribute('data-sport'); renderPicks(); });
+  });
+  el.querySelectorAll('[data-status]').forEach(function (b) {
+    b.addEventListener('click', function () { S.filters.status = b.getAttribute('data-status'); renderPicks(); });
+  });
+  ['btn-reset-f', 'btn-reset-f2'].forEach(function (id) {
+    var b = document.getElementById(id);
+    if (b) b.addEventListener('click', function () { S.filters = { sport: 'all', status: 'all' }; renderPicks(); });
+  });
+  el.querySelectorAll('.details-btn').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var d = document.getElementById(b.getAttribute('data-det'));
+      var open = d.hidden;
+      d.hidden = !open;
+      b.setAttribute('aria-expanded', open ? 'true' : 'false');
+      b.textContent = open ? 'Hide details' : 'View details';
+    });
+  });
+  el.querySelectorAll('[data-share="pick"]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var card = b.closest('.card');
+      var idx = Array.prototype.indexOf.call(el.querySelectorAll('.card'), card);
+      sharePick(shown[idx]);
+    });
+  });
+}
+function sportChip(v, label) {
+  return '<button class="fchip" type="button" data-sport="' + v + '" aria-pressed="' +
+    (S.filters.sport === v ? 'true' : 'false') + '">' + label + '</button>';
+}
+function statusChip(v, label) {
+  return '<button class="fchip" type="button" data-status="' + v + '" aria-pressed="' +
+    (S.filters.status === v ? 'true' : 'false') + '">' + label + '</button>';
+}
+
+/* ============================================================
+   RESULTS TAB — calendar over runs.json, lazy run loading
+   ============================================================ */
+function ensureRunsIndex() {
+  if (S.runsIdx) return Promise.resolve(S.runsIdx);
+  return fetchJSON('./runs.json').then(function (idx) {
+    if (!Array.isArray(idx)) throw new Error('runs.json malformed');
+    S.runsIdx = idx.slice().sort(function (a, b) { return (a.seq || 0) - (b.seq || 0); });
+    return S.runsIdx;
+  }).catch(function () {
+    /* runs.json not yet published: fall back to the current run only */
+    S.runsIdx = S.run ? [{ run_id: S.run.run_id, seq: S.run.seq, file: S.run.run_id + '.json', generated_at_utc: S.run.generated_at_utc }] : [];
+    return S.runsIdx;
+  });
+}
+function loadRunFile(entry) {
+  if (S.runCache[entry.run_id]) return Promise.resolve(S.runCache[entry.run_id]);
+  return fetchJSON('./' + (entry.file || entry.run_id + '.json')).then(function (run) {
+    S.runCache[entry.run_id] = run;
+    return run;
+  });
+}
+function rangeBounds() {
+  var r = S.results, now = new Date();
+  var tz = resultsTZ();
+  function startOfDay(d) {
+    var k = dayKey(d.toISOString(), tz);
+    return new Date(k + 'T00:00:00Z').getTime();
+  }
+  var end = startOfDay(now) + 86400000 - 1, start = startOfDay(now);
+  if (r.range === 'yesterday') { start -= 86400000; end -= 86400000; }
+  else if (r.range === 'week') { start -= 6 * 86400000; }
+  else if (r.range === 'custom' && r.custom) {
+    var k = r.custom;
+    start = new Date(k + 'T00:00:00Z').getTime();
+    end = start + 86400000 - 1;
+  }
+  return { start: start, end: end, tz: tz };
+}
+function renderResults() {
+  var el = document.getElementById('tab-results');
+  var r = S.results;
+  var h = '<h2 class="stitle">Results</h2>' +
+    '<p class="lede">Every graded pick as published — original line, original odds, timestamps, and final result. Nothing is rewritten after the fact.</p>';
+  h += '<div class="controls" role="group" aria-label="Date range">' +
+    rangeChip('today', 'Today') + rangeChip('yesterday', 'Yesterday') + rangeChip('week', 'Last 7 days') +
+    rangeChip('custom', 'Custom') + '</div>';
+  if (r.range === 'custom') {
+    h += '<div class="controls"><label for="custom-date" style="color:var(--dim);font-size:14px">Date:</label>' +
+      '<input type="date" id="custom-date" value="' + esc(r.custom) + '"></div>';
+  }
+  h += '<div class="controls" role="group" aria-label="Day timezone">' +
+    '<span style="color:var(--dim);font-size:14px">Days in:</span>' +
+    '<button class="fchip" type="button" data-rtz="eastern" aria-pressed="' + (r.tz === 'eastern' ? 'true' : 'false') + '">Eastern</button>' +
+    '<button class="fchip" type="button" data-rtz="device" aria-pressed="' + (r.tz === 'device' ? 'true' : 'false') + '">Device-local</button></div>';
+  h += '<div class="controls" role="group" aria-label="Lane filter">' +
+    '<button class="fchip" type="button" data-lane="all" aria-pressed="' + (r.lane === 'all' ? 'true' : 'false') + '">All lanes</button>' +
+    '<button class="fchip" type="button" data-lane="live" aria-pressed="' + (r.lane === 'live' ? 'true' : 'false') + '">Live (official)</button>' +
+    '<button class="fchip" type="button" data-lane="validation" aria-pressed="' + (r.lane === 'validation' ? 'true' : 'false') + '">Validation</button></div>';
+  h += '<div id="results-body">';
+  if (!S.run) { h += '<div class="skel"></div>'; }
+  else if (r.loading) { h += '<div class="skel"></div><p class="lede">Loading published runs…</p>'; }
+  else if (!Object.keys(r.days).length) { h += '<div class="empty"><b>No graded picks in this range.</b></div>'; }
+  else { h += resultsDaysHTML(); }
+  h += '</div>';
+  h += withdrawnHTML();
+  el.innerHTML = h;
+  el.querySelectorAll('[data-range]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      S.results.range = b.getAttribute('data-range');
+      S.results.days = {}; S.results.loading = true;
+      renderResults(); loadResultsRange();
+    });
+  });
+  var cd = document.getElementById('custom-date');
+  if (cd) cd.addEventListener('change', function () {
+    S.results.custom = cd.value; S.results.days = {}; S.results.loading = true;
+    renderResults(); loadResultsRange();
+  });
+  el.querySelectorAll('[data-rtz]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      S.results.tz = b.getAttribute('data-rtz');
+      S.results.days = {}; S.results.loading = true;
+      renderResults(); loadResultsRange();
+    });
+  });
+  el.querySelectorAll('[data-lane]').forEach(function (b) {
+    b.addEventListener('click', function () { S.results.lane = b.getAttribute('data-lane'); renderResults(); });
+  });
+  el.querySelectorAll('[data-share="day"]').forEach(function (b) {
+    b.addEventListener('click', function () { shareDay(b.getAttribute('data-day')); });
+  });
+}
+function rangeChip(v, label) {
+  return '<button class="fchip" type="button" data-range="' + v + '" aria-pressed="' +
+    (S.results.range === v ? 'true' : 'false') + '">' + label + '</button>';
+}
+function loadResultsRange() {
+  S.results.loading = true;
+  var b = rangeBounds();
+  ensureRunsIndex().then(function (idx) {
+    var wanted = idx.filter(function (e) {
+      var t = Date.parse(e.generated_at_utc);
+      if (isNaN(t)) return true;
+      return t >= b.start - 3 * 86400000 && t <= b.end + 86400000;
+    });
+    S.results.loadedRuns = wanted.length;
+    return Promise.all(wanted.map(loadRunFile)).catch(function () { return []; });
+  }).then(function (runs) {
+    var days = {}, seen = {};
+    var order = ['mlb', 'nfl', 'wnba'];
+    runs.forEach(function (run) {
+      var g = run.graded || {};
+      order.forEach(function (sport) {
+        (g[sport] || []).forEach(function (p) {
+          var lane = 'live';
+          if (run.lanes && run.lanes[sport]) lane = /validation/i.test(run.lanes[sport]) ? 'validation' : 'live';
+          var key = pickIdentity(p) + '|' + p.status;
+          var prev = seen[key];
+          var gt = Date.parse(p.graded_at_utc) || 0;
+          if (prev && (Date.parse(prev.p.graded_at_utc) || 0) >= gt) return;
+          seen[key] = { p: p, sport: sport, lane: lane, run: run };
+        });
+      });
+    });
+    Object.keys(seen).forEach(function (key) {
+      var e = seen[key];
+      var dk = dayKey(e.p.game_start, b.tz) || dayKey(e.p.graded_at_utc, b.tz);
+      if (!dk) return;
+      var dayMs = new Date(dk + 'T12:00:00Z').getTime();
+      if (dayMs < b.start - 43200000 || dayMs > b.end + 43200000) return;
+      (days[dk] = days[dk] || []).push(e);
+    });
+    Object.keys(days).forEach(function (dk) {
+      days[dk].sort(function (a, c) { return (Date.parse(a.p.game_start) || 0) - (Date.parse(c.p.game_start) || 0); });
+    });
+    S.results.days = days;
+    S.results.loading = false;
+    if (S.tab === 'results') renderResults();
+  });
+}
+function resultsDaysHTML() {
+  var tz = resultsTZ(), lane = S.results.lane;
+  var keys = Object.keys(S.results.days).sort().reverse();
+  var h = '';
+  keys.forEach(function (dk) {
+    var rows = S.results.days[dk].filter(function (e) { return lane === 'all' || e.lane === lane; });
+    if (!rows.length) return;
+    h += '<div class="day"><div class="dayhead"><h3>' + esc(dayLabel(dk, tz)) + '</h3>' +
+      '<span class="ts">' + rows.length + ' graded</span>' +
+      '<button class="btn small ghost" type="button" data-share="day" data-day="' + esc(dk) + '">Share day as image</button></div>';
+    rows.forEach(function (e) { h += gradedRowHTML(e, tz); });
+    h += '</div>';
+  });
+  return h || '<div class="empty"><b>No graded picks in this range for this lane.</b></div>';
+}
+function gradedRowHTML(e, tz) {
+  var p = e.p;
+  var st = String(p.status || '').toLowerCase();
+  var cls = st === 'win' ? 'w' : st === 'loss' ? 'l' : 'p';
+  var resWord = st === 'win' ? 'Won' : st === 'loss' ? 'Lost' : st === 'push' ? 'Push' : st === 'void' ? 'Void' : (p.status || 'Unknown');
+  var laneChip = e.lane === 'validation'
+    ? '<span class="sport">Validation · not the official record</span>'
+    : '<span class="sport">Live · official</span>';
+  var h = '<div class="rrow"><div class="rh">' +
+    '<span class="res ' + cls + '">' + esc(resWord) + '</span>' +
+    '<span class="who">' + esc(p.player || 'Unknown player') + '</span>' +
+    '<span class="sport">' + esc((e.sport || '').toUpperCase()) + '</span>' + laneChip + '</div>' +
+    '<div>' + esc(selectionText(p)) + ' · ' + esc(oddsDisplay(p)) + '</div>' +
+    '<div class="meta">Published: ' + esc(e.run.generated_at_et || fmtFull(e.run.generated_at_utc, tz)) +
+    ' · Line captured: ' + esc(p.line_captured_at ? fmtFull(p.line_captured_at, tz) : 'Unknown') +
+    ' · Model: ' + esc(p.model_version ? 'v' + p.model_version : 'Unknown') +
+    ' · Graded: ' + esc(p.graded_at_et || fmtFull(p.graded_at_utc, tz)) + '</div>' +
+    (p.result_detail ? '<div class="meta">' + esc(p.result_detail) + '</div>' : '');
+  if (st === 'loss') h += lossReviewHTML(p);
+  h += '</div>';
+  return h;
+}
+/* Loss review: plain sentence from result_detail, then original why/risk.
+   Never invents a cause. */
+function lossReviewHTML(p) {
+  var sentence = p.result_detail
+    ? p.result_detail
+    : 'This pick lost.';
+  var h = '<details class="what"><summary>What happened</summary><div style="padding:4px 0 8px">' +
+    '<p style="margin:6px 0">' + esc(sentence) + '</p>';
+  if (p.why) h += '<p style="margin:6px 0"><b>The original reasoning:</b> ' + esc(p.why) + '</p>';
+  if (p.risk) h += '<p style="margin:6px 0"><b>Known uncertainty at the time:</b> ' + esc(p.risk) + '</p>';
+  if (!p.why && !p.risk) {
+    h += '<p style="margin:6px 0">The published data don\u2019t say why this lost — chalk it up to ordinary uncertainty unless a pattern appears.</p>';
+  }
+  if (p.graded_at_et || p.graded_at_utc) {
+    h += '<p class="meta">Graded: ' + esc(p.graded_at_et || fmtFull(p.graded_at_utc, prefsTZ())) + '</p>';
+  }
+  h += '</div></details>';
+  return h;
+}
+function withdrawnHTML() {
+  if (!S.run || !S.run.withdrawn) return '';
+  var wd = S.run.withdrawn, rows = [];
+  Object.keys(wd).forEach(function (sport) {
+    (wd[sport] || []).forEach(function (w) { rows.push({ w: w, sport: sport }); });
+  });
+  if (!rows.length) return '';
+  var h = '<div class="audit"><h3>Withdrawn picks — audit trail</h3>' +
+    '<p class="lede" style="margin:0 0 8px">Picks the model pulled back after publication. Kept here so the record can\u2019t be quietly rewritten.</p>';
+  rows.forEach(function (e) {
+    var w = e.w;
+    h += '<div class="arow"><b>' + esc(w.player || 'Unknown') + '</b> — ' + esc(selectionText(w)) +
+      ' <span class="sport">' + esc(e.sport.toUpperCase()) + '</span>' +
+      (w.withdrawn_at_et ? '<div class="meta" style="color:var(--dim);font-size:13px">Withdrawn: ' + esc(w.withdrawn_at_et) + '</div>' : '') +
+      (w.withdraw_reason ? '<div class="wreason">' + esc(w.withdraw_reason) + '</div>' : '') + '</div>';
+  });
+  return h + '</div>';
+}
+
+/* ============================================================
+   PERFORMANCE TAB
+   ============================================================ */
+function reconcileRecord(key, r) {
+  var w = r.wins || 0, l = r.losses || 0;
+  var n = w + l;
+  var stated = r.win_pct;
+  if (!isNum(stated) || n <= 0) return { ok: null, text: 'not enough data to check' };
+  var calc = w / n;
+  var ok = Math.abs(calc - stated) < 0.0015;
+  return { ok: ok, text: ok ? 'reconciles with the published counts' : 'MISMATCH vs published counts' };
+}
+function renderPerformance() {
+  var el = document.getElementById('tab-performance');
+  if (!S.run) { el.innerHTML = '<h2 class="stitle">Performance</h2><div class="skel"></div>'; return; }
+  var recs = S.run.records || {};
+  var keys = Object.keys(recs);
+  var h = '<h2 class="stitle">Performance</h2>' +
+    '<p class="lede"><b>Paper record</b> — these are published model picks tracked in units, not real wagers.</p>';
+  if (!keys.length) {
+    h += '<div class="empty"><b>No record data published yet.</b></div>';
+  } else {
+    h += '<div class="recgrid">';
+    keys.forEach(function (k) {
+      var r = recs[k];
+      var n = (r.wins || 0) + (r.losses || 0);
+      var units = r.units != null ? esc(String(r.units)) : 'Unavailable';
+      var rec = reconcileRecord(k, r);
+      h += '<div class="rec"><h3>' + esc(recordLabel(k)) + '</h3>' +
+        '<div class="lane">' + laneChipHTML(k) + '</div>' +
+        '<div class="big">' + (r.wins || 0) + '–' + (r.losses || 0) +
+        ((r.pushes ? '–' + r.pushes : '') || '') + '</div>' +
+        '<div class="sub">Win rate: <b>' + esc(fmtRate(r.wins, r.losses)) + '</b> · ' + n + ' graded</div>' +
+        '<div class="sub">Units: <b>' + units + '</b></div>' +
+        '<div class="sub" style="font-size:12.5px;color:' + (rec.ok === false ? 'var(--red)' : 'var(--dim2)') + '">' +
+        (rec.ok == null ? 'Record check: ' + esc(rec.text) : (rec.ok ? '✓ ' : '✗ ') + esc(rec.text)) + '</div>' +
+        (r.note ? '<div class="note">' + esc(r.note) + '</div>' : '') + '</div>';
+    });
+    h += '</div>';
+    h += '<div class="explain">Win rate: graded wins ÷ (wins + losses). Pushes and voids excluded. ' +
+      'Units: profit/loss in units at the published odds, where the pipeline reports them. ' +
+      'Headlines come from the published record arrays and are re-checked against the counts above.</div>';
+  }
+  h += '<details class="deep" id="deep-analysis"><summary>Deeper analysis</summary><div class="body">' +
+    '<div class="controls" role="group" aria-label="History range">' +
+    '<span style="color:var(--dim);font-size:14px">History:</span>' +
+    perfChip('7', 'Last 7 days') + perfChip('30', 'Last 30 days') + perfChip('all', 'All published') + '</div>' +
+    '<div id="deep-body"><p class="lede">Open a range to load graded plays from published runs.</p></div>' +
+    '</div></details>';
+  el.innerHTML = h;
+  el.querySelectorAll('[data-perf]').forEach(function (b) {
+    b.addEventListener('click', function () { S.perfRange = b.getAttribute('data-perf'); S.deepLoaded = {}; renderPerformance(); openDeep(); });
+  });
+  var det = document.getElementById('deep-analysis');
+  det.addEventListener('toggle', function () { if (det.open) openDeep(); });
+}
+function perfChip(v, label) {
+  return '<button class="fchip" type="button" data-perf="' + v + '" aria-pressed="' +
+    (S.perfRange === v ? 'true' : 'false') + '">' + label + '</button>';
+}
+function openDeep() {
+  var body = document.getElementById('deep-body');
+  if (!body) return;
+  var key = S.perfRange;
+  if (S.deepLoaded[key]) { body.innerHTML = S.deepLoaded[key]; return; }
+  body.innerHTML = '<div class="skel" style="height:120px"></div><p class="lede">Loading graded plays…</p>';
+  ensureRunsIndex().then(function (idx) {
+    var now = Date.now(), days = key === 'all' ? 1e9 : parseInt(key, 10);
+    var wanted = idx.filter(function (e) {
+      var t = Date.parse(e.generated_at_utc);
+      return isNaN(t) || (now - t) <= days * 86400000;
+    });
+    return Promise.all(wanted.map(loadRunFile)).catch(function () { return []; });
+  }).then(function (runs) {
+    var plays = [];
+    var seen = {};
+    runs.forEach(function (run) {
+      var g = run.graded || {};
+      Object.keys(g).forEach(function (sport) {
+        (g[sport] || []).forEach(function (p) {
+          var id = pickIdentity(p) + '|' + p.status;
+          var gt = Date.parse(p.graded_at_utc) || 0;
+          if (seen[id] && (Date.parse(seen[id].graded_at_utc) || 0) >= gt) return;
+          seen[id] = p;
+        });
+      });
+    });
+    plays = Object.keys(seen).map(function (k) { return seen[k]; });
+    var html = deepHTML(plays);
+    S.deepLoaded[key] = html;
+    var b2 = document.getElementById('deep-body');
+    if (b2) b2.innerHTML = html;
+  });
+}
+function deepHTML(plays) {
+  if (!plays.length) return '<div class="empty"><b>No graded plays in this range.</b></div>';
+  var buckets = [[0.5, 0.6, '50–60%'], [0.6, 0.7, '60–70%'], [0.7, 0.8, '70–80%'], [0.8, 1.01, '80%+']];
+  var h = '<h4 style="margin:10px 0 4px">Model probability vs observed results</h4>' +
+    '<table class="grid"><tr><th>Predicted bucket</th><th>n</th><th>Avg predicted</th><th>Observed win rate</th></tr>';
+  buckets.forEach(function (bk) {
+    var sel = plays.filter(function (p) { return isNum(p.prob) && p.prob >= bk[0] && p.prob < bk[1] && (p.status === 'win' || p.status === 'loss'); });
+    var w = sel.filter(function (p) { return p.status === 'win'; }).length;
+    var avg = sel.length ? (sel.reduce(function (a, p) { return a + p.prob; }, 0) / sel.length * 100).toFixed(1) + '%' : '—';
+    h += '<tr><td>' + bk[2] + '</td><td>' + sel.length + '</td><td>' + avg + '</td><td>' +
+      (sel.length ? ((w / sel.length) * 100).toFixed(1) + '%' : '—') + '</td></tr>';
+  });
+  h += '</table><div class="disclaimer">Small samples don\u2019t prove reliability — treat every bucket above as noisy until n is large.</div>';
+  /* unit curve from published result notes */
+  var curve = [];
+  plays.forEach(function (p) {
+    var u = resultUnits(p.result_detail);
+    if (u != null) curve.push({ p: p, u: u });
+  });
+  curve.sort(function (a, b) { return (Date.parse(a.p.graded_at_utc) || 0) - (Date.parse(b.p.graded_at_utc) || 0); });
+  if (curve.length) {
+    var run = 0, peak = 0, dd = 0;
+    var rows = curve.slice(-20).map(function (e) {
+      run += e.u; peak = Math.max(peak, run); dd = Math.min(dd, run - peak);
+      return '<tr><td>' + esc(e.p.player || '?') + '</td><td>' + esc(selectionText(e.p)) + '</td>' +
+        '<td style="color:' + (e.u >= 0 ? 'var(--green)' : 'var(--red)') + ';font-weight:700">' +
+        (e.u >= 0 ? '+' : '') + e.u.toFixed(2) + 'u</td><td>' + (run >= 0 ? '+' : '') + run.toFixed(2) + 'u</td></tr>';
+    }).join('');
+    h += '<h4 style="margin:14px 0 4px">Recent unit flow (from published result notes)</h4>' +
+      '<table class="grid"><tr><th>Pick</th><th>Selection</th><th>Result</th><th>Running</th></tr>' + rows + '</table>' +
+      '<p class="lede">Net over these ' + curve.length + ' graded plays: <b>' +
+      (run >= 0 ? '+' : '') + run.toFixed(2) + 'u</b> · deepest dip from peak: <b>' + dd.toFixed(2) + 'u</b>.</p>';
+  } else {
+    h += '<p class="lede">Unit flow unavailable — published results don\u2019t carry unit deltas in this range.</p>';
+  }
+  return h;
+}
+
+/* ============================================================
+   SHAREABLE CARDS — branded canvas PNG, download only, never auto-posts
+   ============================================================ */
+function shareCanvas(w, h) {
+  var c = document.createElement('canvas');
+  c.width = w; c.height = h;
+  return c;
+}
+function cardBase(ctx, W, H) {
+  ctx.fillStyle = '#0a0e14'; ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = '#f5b942'; ctx.fillRect(0, 0, W, 14);
+  ctx.strokeStyle = '#f5b942'; ctx.lineWidth = 4; ctx.strokeRect(18, 32, W - 36, H - 50);
+  ctx.fillStyle = '#f5b942';
+  ctx.font = '800 54px -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+  ctx.fillText("TEGA'S EDGE", 60, 120);
+  ctx.fillStyle = '#8b98a9'; ctx.font = '400 30px -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+  ctx.fillText('Player props · paper record', 60, 165);
+}
+function cardFooter(ctx, W, H, y) {
+  ctx.fillStyle = '#5d6b82'; ctx.font = '400 26px -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+  ctx.fillText('Paper record — not real wagers', 60, y);
+}
+function downloadPNG(canvas, name) {
+  canvas.toBlob(function (blob) {
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = name;
+    document.body.appendChild(a); a.click();
+    setTimeout(function () { document.body.removeChild(a); URL.revokeObjectURL(url); }, 500);
+  }, 'image/png');
+}
+function recordForSport(sport) {
+  var recs = (S.run && S.run.records) || {};
+  var k = sport === 'mlb' ? 'mlb_live' : (recs[sport] ? sport : 'combined');
+  return { key: k, r: recs[k] };
+}
+function sharePick(p) {
+  try {
+    var W = 1200, H = 1500, c = shareCanvas(W, H), ctx = c.getContext('2d');
+    cardBase(ctx, W, H);
+    var y = 280;
+    ctx.fillStyle = '#f1f5f9'; ctx.font = '800 64px -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+    ctx.fillText(p.player || 'Unknown player', 60, y); y += 70;
+    ctx.fillStyle = '#8b98a9'; ctx.font = '400 34px -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+    ctx.fillText((p.team || '?') + ' vs ' + (p.opp || '?') + '  ·  ' + fmtGame(p.game_start, ET_TZ), 60, y); y += 110;
+    ctx.fillStyle = '#f5b942'; ctx.font = '800 58px -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+    ctx.fillText(selectionText(p), 60, y); y += 90;
+    ctx.fillStyle = '#f1f5f9'; ctx.font = '400 40px -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+    ctx.fillText(oddsDisplay(p), 60, y); y += 110;
+    ctx.font = '400 40px -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+    ctx.fillStyle = '#8b98a9';
+    ctx.fillText('Model ' + fmtProb(p.prob) + '   ·   Edge ' + fmtEdgePP(p.edge), 60, y); y += 110;
+    var st = deriveStatus(p, Date.now());
+    ctx.fillStyle = st.cls === 'won' ? '#22c55e' : st.cls === 'lost' ? '#ef4444' : '#8b98a9';
+    ctx.font = '800 44px -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+    ctx.fillText(st.key === 'finished' ? 'Final: ' + st.label : st.label, 60, y); y += 60;
+    if (p.result_detail) {
+      ctx.fillStyle = '#8b98a9'; ctx.font = '400 32px -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+      wrapText(ctx, p.result_detail, 60, y, W - 120, 42); y += 100;
+    }
+    var rec = recordForSport(p.sport);
+    if (rec.r) {
+      ctx.fillStyle = '#8b98a9'; ctx.font = '400 32px -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+      var units = rec.r.units != null ? ' (' + rec.r.units + ')' : '';
+      ctx.fillText(recordLabel(rec.key) + ' record: ' + (rec.r.wins || 0) + '–' + (rec.r.losses || 0) + units, 60, y);
+    }
+    cardFooter(ctx, W, H, H - 70);
+    var slug = String(p.player || 'pick').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    downloadPNG(c, 'tegas-edge-' + (slug || 'pick') + '.png');
+    toast('Image downloaded');
+  } catch (e) { toast('Could not render the image'); }
+}
+function wrapText(ctx, text, x, y, maxW, lh) {
+  var words = String(text).split(' '), line = '';
+  for (var i = 0; i < words.length; i++) {
+    var t = line + words[i] + ' ';
+    if (ctx.measureText(t).width > maxW && i > 0) { ctx.fillText(line, x, y); line = words[i] + ' '; y += lh; }
+    else line = t;
+  }
+  ctx.fillText(line, x, y);
+}
+function shareDay(dk) {
+  try {
+    var rows = (S.results.days[dk] || []).slice(0, 10);
+    var W = 1200, H = 400 + rows.length * 78;
+    var c = shareCanvas(W, H), ctx = c.getContext('2d');
+    cardBase(ctx, W, H);
+    var y = 280;
+    ctx.fillStyle = '#f1f5f9'; ctx.font = '800 56px -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+    ctx.fillText('Daily recap', 60, y); y += 64;
+    ctx.fillStyle = '#8b98a9'; ctx.font = '400 34px -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+    ctx.fillText(dayLabel(dk, resultsTZ()), 60, y); y += 96;
+    rows.forEach(function (e) {
+      var p = e.p, st = String(p.status || '').toLowerCase();
+      ctx.fillStyle = st === 'win' ? '#22c55e' : st === 'loss' ? '#ef4444' : '#8b98a9';
+      ctx.font = '800 34px -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+      var mark = st === 'win' ? 'W' : st === 'loss' ? 'L' : st === 'push' ? 'P' : 'V';
+      ctx.fillText(mark, 60, y);
+      ctx.fillStyle = '#f1f5f9'; ctx.font = '400 32px -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+      ctx.fillText((p.player || '?') + ' — ' + selectionText(p), 120, y);
+      y += 78;
+    });
+    cardFooter(ctx, W, H, H - 70);
+    downloadPNG(c, 'tegas-edge-recap-' + dk + '.png');
+    toast('Image downloaded');
+  } catch (e) { toast('Could not render the image'); }
+}
+
+/* ============================================================
+   SETTINGS TAB
+   ============================================================ */
+function renderSettings() {
+  var el = document.getElementById('tab-settings');
+  var p = S.prefs;
+  var h = '<h2 class="stitle">Settings</h2>';
+  /* timezone */
+  h += '<div class="setgroup"><h3>Timezone</h3><div class="seg" role="group" aria-label="Timezone">' +
+    '<button type="button" data-tz="eastern" aria-pressed="' + (p.tz === 'eastern' ? 'true' : 'false') + '">Eastern</button>' +
+    '<button type="button" data-tz="device" aria-pressed="' + (p.tz === 'device' ? 'true' : 'false') + '">Device-local</button></div>' +
+    '<p class="lede" style="margin:8px 0 0">Game times and timestamps use this zone. Eastern is the board\u2019s default.</p></div>';
+  /* alerts */
+  var notifState = ('Notification' in window) ? Notification.permission : 'unsupported';
+  h += '<div class="setgroup"><h3>Alerts</h3>' +
+    '<div class="setrow"><span class="lab">New picks &amp; grading alerts (this device)</span>' +
+    '<label class="switch"><input type="checkbox" id="alert-toggle" ' + (p.alerts ? 'checked' : '') +
+    ' aria-label="New picks and grading alerts"><span class="tr"><span class="th"></span></span></label>' +
+    '<span class="hint">The tab badge always lights up when there\u2019s something new. ' +
+    'System notifications only fire if you enable alerts <i>and</i> grant permission. ' +
+    'Alerts work while this dashboard is open. True push alerts (phone buzzes with the app closed) ' +
+    'need a notification service, which isn\u2019t connected yet.</span></div>' +
+    '<div class="setrow"><span class="lab">Quiet hours (Eastern)</span>' +
+    '<span><input type="time" id="quiet-start" value="' + esc(p.quietStart) + '" aria-label="Quiet hours start"> – ' +
+    '<input type="time" id="quiet-end" value="' + esc(p.quietEnd) + '" aria-label="Quiet hours end"></span>' +
+    '<span class="hint">No system notifications during quiet hours. The in-app badge still updates.</span></div>' +
+    '<div class="setrow"><span class="lab">Sports</span><span class="seg" role="group" aria-label="Alert sports">' +
+    ['mlb', 'nfl', 'wnba'].map(function (s) {
+      return '<button type="button" data-asport="' + s + '" aria-pressed="' + (p.sports[s] ? 'true' : 'false') + '">' + s.toUpperCase() + '</button>';
+    }).join('') + '</span></div>' +
+    '<div class="setrow"><span class="lab">Notification permission</span><span class="ts">' + esc(notifState) + '</span></div>' +
+    '</div>';
+  /* glossary */
+  h += '<div class="setgroup"><h3>What does this mean?</h3><dl class="kv">' +
+    '<dt>Model probability</dt><dd>The model\u2019s estimated chance the pick wins, e.g. 69.1%.</dd>' +
+    '<dt>Edge (pp)</dt><dd>Model probability minus the breakeven probability, in percentage points — e.g. +8.9 pp. A probability difference, <i>not</i> an expected return.</dd>' +
+    '<dt>Line</dt><dd>The number the player has to beat (or stay under), e.g. Over 5.5 strikeouts.</dd>' +
+    '<dt>Push</dt><dd>The result lands exactly on the line — the play is a tie, no win or loss.</dd>' +
+    '<dt>Void</dt><dd>The play doesn\u2019t count — e.g. the player didn\u2019t play, or the premise changed.</dd>' +
+    '<dt>Units</dt><dd>One unit = one standard stake. +2.27u means 2.27 units of profit at the published odds.</dd>' +
+    '<dt>Paper record</dt><dd>Published picks tracked in units. No real money is wagered by this board.</dd>' +
+    '</dl></div>';
+  /* how it works */
+  h += '<div class="setgroup"><h3>How it works</h3>' +
+    '<p class="lede">Each scan, the model projects player performance and compares it to the ' +
+    'FanDuel line captured at scan time. A pick is published only if the model\u2019s probability ' +
+    'beats the breakeven probability by the sport\u2019s edge bar — overs clear +5 percentage points; ' +
+    'unders face a higher bar (+10 on NFL), because unders have historically hit worse at equal edge. ' +
+    'After games finish, the nightly grading job settles every pick as win, loss, push, or void, ' +
+    'and the records update. Withdrawn picks stay visible in the Results audit trail. ' +
+    'This is a paper record: the board tracks published picks, not real wagers.</p></div>';
+  /* system status */
+  h += '<div class="setgroup"><h3>System status</h3>' + systemStatusHTML() + '</div>';
+  /* reset */
+  h += '<div class="setgroup"><h3>Defaults</h3>' +
+    '<button class="btn" type="button" id="btn-reset-defaults">Reset to defaults</button></div>';
+  el.innerHTML = h;
+  el.querySelectorAll('[data-tz]').forEach(function (b) {
+    b.addEventListener('click', function () { S.prefs.tz = b.getAttribute('data-tz'); savePrefs(); renderSettings(); renderActive(); });
+  });
+  el.querySelectorAll('[data-asport]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var s = b.getAttribute('data-asport');
+      S.prefs.sports[s] = !S.prefs.sports[s]; savePrefs(); renderSettings();
+    });
+  });
+  var at = document.getElementById('alert-toggle');
+  at.addEventListener('change', function () {
+    if (at.checked && 'Notification' in window && Notification.permission === 'default') {
+      Notification.requestPermission().then(function (perm) {
+        S.prefs.alerts = (perm === 'granted');
+        savePrefs(); renderSettings();
+        toast(perm === 'granted' ? 'Alerts enabled' : 'Permission denied — alerts stay off');
+      });
+    } else {
+      S.prefs.alerts = at.checked && (!('Notification' in window) || Notification.permission !== 'denied');
+      savePrefs(); renderSettings();
+    }
+  });
+  var qs = document.getElementById('quiet-start'), qe = document.getElementById('quiet-end');
+  qs.addEventListener('change', function () { S.prefs.quietStart = qs.value || '23:00'; savePrefs(); });
+  qe.addEventListener('change', function () { S.prefs.quietEnd = qe.value || '07:00'; savePrefs(); });
+  var rd = document.getElementById('btn-reset-defaults');
+  rd.addEventListener('click', function () {
+    S.prefs = { tz: 'eastern', alerts: false, quietStart: '23:00', quietEnd: '07:00', sports: { mlb: true, nfl: true, wnba: true } };
+    S.results.tz = 'eastern';
+    savePrefs(); renderSettings(); renderActive(); toast('Settings reset');
+  });
+}
+function systemStatusHTML() {
+  var m = S.manifest, r = S.run;
+  var upd = S.lastFail ? 'Failed' : (S.dataUpdatedAt && (Date.now() - S.dataUpdatedAt > 6 * 3600 * 1000) ? 'Stale' : (r ? 'OK' : 'Unknown'));
+  var h = '<div class="setrow"><span class="lab">Update status</span><b>' + esc(upd) + '</b></div>';
+  h += '<dl class="kv">';
+  h += '<dt>Run</dt><dd class="hash">' + esc(r ? r.run_id : 'none loaded') + '</dd>';
+  h += '<dt>Sequence</dt><dd>' + esc(r && r.seq != null ? String(r.seq) : 'Unknown') + '</dd>';
+  h += '<dt>Content hash</dt><dd class="hash">' + esc(r && r.content_hash ? r.content_hash.slice(0, 12) + '…' : 'Unknown') +
+    (r && r.content_hash ? ' <details style="margin-top:4px"><summary style="cursor:pointer;color:var(--gold)">full hash</summary><span class="hash">' + esc(r.content_hash) + '</span></details>' : '') + '</dd>';
+  h += '<dt>Verified run</dt><dd class="hash">' + esc(m && m.verified_run_id ? m.verified_run_id : 'Not yet verified') + '</dd>';
+  h += '<dt>Verified at</dt><dd>' + esc(m && m.verified_at_utc ? fmtFull(m.verified_at_utc, prefsTZ()) : 'Unknown') + '</dd>';
+  if (m && m.per_cluster) {
+    Object.keys(m.per_cluster).forEach(function (s) {
+      var c = m.per_cluster[s];
+      h += '<dt>' + esc(s.toUpperCase()) + ' last checked</dt><dd>' +
+        esc(c.last_checked_et || fmtFull(c.last_checked_utc, prefsTZ())) +
+        ' <span class="ts">(' + esc(c.availability_status || 'unknown') + ' / ' + esc(c.validation_status || 'unknown') + ')</span></dd>';
+    });
+  }
+  h += '<dt>Publishing</dt><dd>Published via scheduled worker + browser upload. GitHub Actions isn\u2019t available (no token) — see the build notes.</dd>';
+  h += '<dt>Data files</dt><dd class="hash">manifest.json' + (r ? ', ' + r.run_id + '.json' : '') + ', runs.json</dd>';
+  h += '</dl>';
+  return h;
+}
+
+/* ---------- render dispatch ---------- */
+function renderActive() {
+  if (S.tab === 'picks') renderPicks();
+  else if (S.tab === 'results') { renderResults(); if (S.run && !S.results.loading && !Object.keys(S.results.days).length) loadResultsRange(); }
+  else if (S.tab === 'performance') renderPerformance();
+  else if (S.tab === 'settings') renderSettings();
+}
+function renderAll() { renderActive(); updateBadges(); }
+
+/* ---------- init ---------- */
+function init() {
+  loadPrefs();
+  S.results.tz = S.prefs.tz;
+  document.querySelectorAll('nav.tabbar [role="tab"]').forEach(function (b) {
+    b.addEventListener('click', function () { setTab(b.getAttribute('data-tab')); });
+  });
+  document.getElementById('btn-refresh').addEventListener('click', function () { refreshNow(); });
+  window.addEventListener('hashchange', routeFromHash);
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'visible') refreshNow();
+  });
+  routeFromHash();
+  renderActive();
+  refreshNow();
+  setInterval(function () {
+    if (document.visibilityState === 'visible') refreshNow();
+  }, 60000);
+  if ('serviceWorker' in navigator && !isFileProto()) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('./sw.js', { scope: './' }).catch(function () {});
+    });
+  }
+}
+if (typeof document !== 'undefined' && document.addEventListener) {
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+}
+</script>
+</body>
+</html>
