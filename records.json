@@ -4,7 +4,7 @@
     "market": "assists",
     "model_version": "1.0.0",
     "n": 1,
-    "wins": 0,
+    "wins": 1,
     "losses": 0,
     "pushes": 0,
     "voids": 0
@@ -14,8 +14,8 @@
     "market": "points",
     "model_version": "1.0.0",
     "n": 2,
-    "wins": 0,
-    "losses": 0,
+    "wins": 1,
+    "losses": 1,
     "pushes": 0,
     "voids": 0
   },
@@ -24,7 +24,7 @@
     "market": "pts_reb",
     "model_version": "1.0.0",
     "n": 1,
-    "wins": 0,
+    "wins": 1,
     "losses": 0,
     "pushes": 0,
     "voids": 0
@@ -35,7 +35,7 @@
     "model_version": "1.0.0",
     "n": 1,
     "wins": 0,
-    "losses": 0,
+    "losses": 1,
     "pushes": 0,
     "voids": 0
   },
@@ -44,7 +44,7 @@
     "market": "rebounds",
     "model_version": "1.0.0",
     "n": 1,
-    "wins": 0,
+    "wins": 1,
     "losses": 0,
     "pushes": 0,
     "voids": 0
@@ -54,7 +54,7 @@
     "market": "threes",
     "model_version": "1.0.0",
     "n": 1,
-    "wins": 0,
+    "wins": 1,
     "losses": 0,
     "pushes": 0,
     "voids": 0
@@ -73,7 +73,7 @@
     "sport": "nfl",
     "market": "rushing_yards",
     "model_version": "1.0.0",
-    "n": 1,
+    "n": 2,
     "wins": 0,
     "losses": 0,
     "pushes": 0,
@@ -84,8 +84,8 @@
     "market": "pitcher_strikeouts",
     "model_version": "2.3.0",
     "n": 12,
-    "wins": 0,
-    "losses": 0,
+    "wins": 5,
+    "losses": 4,
     "pushes": 0,
     "voids": 3
   }
