@@ -49,15 +49,20 @@
   .tagline{color:var(--dim);font-size:14px;margin:8px 0 0;letter-spacing:.4px}
   .tagline b{color:var(--gold);font-weight:600}
 
-  /* ---------- sticky nav ---------- */
-  .nav{position:sticky;top:0;z-index:50;display:flex;gap:8px;justify-content:center;
-    padding:12px 8px;margin:18px -8px 0;
-    background:rgba(10,14,20,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  /* ---------- sticky sport tabs ---------- */
+  .nav{position:sticky;top:0;z-index:50;display:flex;gap:8px;justify-content:center;align-items:center;
+    padding:12px 8px;margin:18px -8px 0;flex-wrap:wrap;
+    background:rgba(10,14,20,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
     border-bottom:1px solid var(--line)}
-  .nav a{color:var(--dim);text-decoration:none;font-size:13px;font-weight:600;
-    padding:8px 16px;border-radius:999px;border:1px solid transparent;transition:all .18s}
-  .nav a:hover{color:var(--txt);border-color:var(--line2);background:var(--panel)}
-  .nav a .dot{color:var(--gold);margin-right:6px}
+  .tab{font:inherit;cursor:pointer;color:var(--dim);font-size:13px;font-weight:800;letter-spacing:1px;
+    padding:9px 22px;border-radius:999px;border:1px solid var(--line2);background:var(--panel);
+    transition:all .18s}
+  .tab:hover{color:var(--txt);border-color:var(--gold)}
+  .tab.active{color:#1a1206;background:linear-gradient(180deg,#ffd97a,#f5b942);
+    border-color:var(--gold);box-shadow:0 0 18px var(--gold-glow)}
+  .tab .dot{margin-right:7px}
+  .nav-sub{color:var(--dim2);text-decoration:none;font-size:12px;font-weight:600;padding:8px 10px}
+  .nav-sub:hover{color:var(--txt)}
 
   /* ---------- status band ---------- */
   .status{margin:22px 0;background:linear-gradient(180deg,var(--panel2),var(--panel));
@@ -151,6 +156,20 @@
   .empty{background:var(--panel);border:1px dashed var(--line2);border-radius:var(--radius);
     padding:22px;color:var(--dim);font-size:14px;text-align:center;line-height:1.6}
   .empty b{color:var(--txt)}
+  .empty-warn{background:rgba(245,185,66,.07);border:1px solid rgba(245,185,66,.45);
+    border-radius:var(--radius);padding:22px;color:var(--gold);font-size:14px;
+    text-align:center;line-height:1.6;font-weight:600}
+  .empty-warn b{color:var(--txt)}
+  /* per-sport record line inside the tab view */
+  .rec-line{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px;color:var(--dim);
+    margin:6px 0 2px}
+  .rec-line b{color:var(--txt)}
+  .rec-line .mini{width:90px;height:5px;border-radius:3px;background:#1c2433;overflow:hidden}
+  .rec-line .mini i{display:block;height:100%;border-radius:3px;
+    background:linear-gradient(90deg,var(--gold-d),var(--gold))}
+  .odds{color:var(--txt)}
+  .odds b{color:var(--gold)}
+  .state .ok{color:var(--green);font-weight:600}
 
   /* ---------- methodology / footer ---------- */
   .method{font-size:13.5px;color:var(--dim);line-height:1.7;
@@ -176,7 +195,8 @@
   .perf-cap{font-size:11px;color:var(--dim2);margin:8px 0 0}
   @media (max-width:560px){
     .sport-head{align-items:flex-start;flex-direction:column}
-    .nav a{padding:7px 11px;font-size:12px}
+    .tab{padding:8px 16px;font-size:12px}
+    .nav-sub{font-size:11px}
     .plays{grid-template-columns:1fr}
   }
 </style>
@@ -192,12 +212,12 @@
     <p class="tagline">Model-driven player props &middot; <b>real sportsbook lines</b> &middot; honest public record</p>
   </header>
 
-  <nav class="nav" aria-label="Board sections">
-    <a href="#sport-mlb"><span class="dot">●</span>MLB</a>
-    <a href="#sport-nfl"><span class="dot">●</span>NFL</a>
-    <a href="#sport-wnba"><span class="dot">●</span>WNBA</a>
-    <a href="#records-sec"><span class="dot">●</span>Records</a>
-    <a href="#method-sec"><span class="dot">●</span>Method</a>
+  <nav class="nav" aria-label="Sport tabs">
+    <button class="tab" data-tab="mlb" aria-label="Show MLB plays"><span class="dot">⚾</span>MLB</button>
+    <button class="tab" data-tab="nfl" aria-label="Show NFL plays"><span class="dot">🏈</span>NFL</button>
+    <button class="tab" data-tab="wnba" aria-label="Show WNBA plays"><span class="dot">🏀</span>WNBA</button>
+    <a class="nav-sub" href="#records-sec">Records</a>
+    <a class="nav-sub" href="#method-sec">Method</a>
   </nav>
 
   <div class="status"><b>TEGA&rsquo;S EDGE — authoritative board.</b> Updates publish on a
@@ -220,6 +240,7 @@
         <select id="sort-mlb" data-sport="mlb" aria-label="Sort MLB plays"></select></div>
     </div>
     <div class="sub" style="color:var(--dim2);font-size:12px;margin:-2px 0 6px">Pitcher strikeouts — TEGA&rsquo;S EDGE</div>
+    <div class="rec-line" id="rec-mlb"></div>
     <div class="fresh" id="fresh-mlb"></div>
     <div class="state" id="state-mlb"></div>
     <div class="plays" id="plays-mlb"></div>
@@ -233,6 +254,7 @@
         <select id="sort-nfl" data-sport="nfl" aria-label="Sort NFL plays"></select></div>
     </div>
     <div class="sub" style="color:var(--dim2);font-size:12px;margin:-2px 0 6px">Player props — TEGA&rsquo;S EDGE</div>
+    <div class="rec-line" id="rec-nfl"></div>
     <div class="fresh" id="fresh-nfl"></div>
     <div class="state" id="state-nfl"></div>
     <div class="empty" id="plays-nfl"><b>Publishing not connected.</b> The NFL lane
@@ -249,6 +271,7 @@
         <select id="sort-wnba" data-sport="wnba" aria-label="Sort WNBA plays"></select></div>
     </div>
     <div class="sub" style="color:var(--dim2);font-size:12px;margin:-2px 0 6px">Player props — TEGA&rsquo;S EDGE</div>
+    <div class="rec-line" id="rec-wnba"></div>
     <div class="fresh" id="fresh-wnba"></div>
     <div class="state" id="state-wnba"></div>
     <div class="empty" id="plays-wnba"><b>Publishing not connected.</b> The WNBA lane
@@ -355,6 +378,20 @@ function srcLabel(p) {
   return name + cap;
 }
 
+function decToAmerican(d) {
+  d = parseFloat(d);
+  if (!(d > 1)) return null;
+  if (d >= 2) return '+' + Math.round((d - 1) * 100);
+  return '-' + Math.round(100 / (d - 1));
+}
+// price_note carries the FanDuel decimal price (e.g. "@1.78 fanduel").
+// The board displays American odds; the decimal stays untouched in the payload.
+function americanOdds(p) {
+  var m = String(p.price_note || '').match(/@\s*(\d+(?:\.\d+)?)/);
+  if (!m) return null;
+  return decToAmerican(m[1]);
+}
+
 function changeBadge(p) {
   if (p.change === 'new') return '<span class="badge b-new">NEW</span>';
   if (p.change === 'changed') return '<span class="badge b-chg">LINE MOVED</span>';
@@ -383,6 +420,10 @@ function playCard(p, startLabel) {
   var probPct = (p.prob != null) ? (p.prob*100) : 0;
   var edgePct = (p.edge != null) ? (p.edge*100) : null;
   var mv = p.model_version ? '<div class="mv">model v' + esc(p.model_version) + '</div>' : '';
+  var amOdds = americanOdds(p);
+  var oddsSpan = amOdds
+    ? '<span class="odds">FanDuel <b>' + amOdds + '</b></span>'
+    : (p.price_note ? '<span>' + esc(p.price_note) + '</span>' : '');
   return '<div class="play ' + cardCls + '"><div class="p">' + esc(p.player) + changeBadge(p) +
     '<span class="tm">' + esc(p.team) + ' vs ' + esc(p.opp) + '</span></div>' +
     '<div class="m">' + esc(p.market) + ' · ' + esc(srcLabel(p)) + '</div>' +
@@ -390,7 +431,7 @@ function playCard(p, startLabel) {
     '<div class="probbar"><i style="width:' + Math.max(0, Math.min(100, probPct)).toFixed(1) + '%"></i></div>' +
     '<div class="pr"><span>Model <b>' + probPct.toFixed(1) + '%</b></span>' +
     (edgePct != null ? '<span class="edge-pill">EDGE +' + edgePct.toFixed(1) + '%</span>' : '') +
-    (p.price_note ? '<span>' + esc(p.price_note) + '</span>' : '') + '</div>' +
+    oddsSpan + '</div>' +
     whyRisk(p) + mv +
     '<div class="gt">' + esc(startLabel || 'Start') + ': ' + fmtTime(p.game_start) + '</div></div>';
 }
@@ -415,6 +456,21 @@ function renderWithdrawn(run, sport) {
   el.innerHTML = '<b>Withdrawn since the last run:</b> ' + wd.map(function(w){
     return esc(w.player) + ' ' + esc(w.side) + ' ' + esc(w.line) + ' (' + esc(w.market) + ')';
   }).join('; ');
+}
+
+// Per-sport record line rendered inside the tab view — only the
+// selected sport's record shows here (the full strip stays below).
+var SPORT_RECORD_KEY = {mlb:'mlb_live', nfl:'nfl', wnba:'wnba'};
+function renderRecLine(run, sport) {
+  var el = document.getElementById('rec-' + sport);
+  if (!el) return;
+  var rec = (run.records || {})[SPORT_RECORD_KEY[sport]] || {};
+  if (!rec.label) { el.innerHTML = ''; return; }
+  var wp = (rec.win_pct != null) ? rec.win_pct * 100 : null;
+  el.innerHTML = 'Record <b>' + esc(rec.label) + '</b>' +
+    (wp != null ? ' · ' + wp.toFixed(1) + '%' +
+      '<span class="mini"><i style="width:' + Math.max(0, Math.min(100, wp)).toFixed(1) + '%"></i></span>' : '') +
+    (rec.units ? ' · <b>' + esc(rec.units) + '</b>' : '');
 }
 
 // Per-sport section. Every field is guarded: old payloads missing the new
@@ -445,13 +501,20 @@ function renderSport(run, manifest, cfg) {
   else if (vstat === 'unvalidated') fparts.push('<span class="warn" style="color:var(--gold);font-weight:700">model unvalidated</span>');
   fresh.innerHTML = fparts.join(' · ') || '—';
 
-  // --- state line: scan-failed / awaiting-lineup warnings ---
-  var st = [];
+  // --- coverage & data-status line: one honest signal per sport ---
+  var cov = [];
+  if (lane !== 'live')
+    cov.push('<span class="warn">Lane not connected.</span>');
   if (sstat === 'scan_failed')
-    st.push('<span class="warn">Last scan failed — showing carried-forward plays.</span>');
-  if (avail === 'degraded' || avail === 'stale')
-    st.push('<span class="warn">Awaiting lineup — scan data ' + esc(avail) + '.</span>');
-  state.innerHTML = st.join(' ');
+    cov.push('<span class="warn">Last scan failed — showing carried-forward plays.</span>');
+  else if (avail === 'degraded' || avail === 'stale')
+    cov.push('<span class="warn">Scan data ' + esc(avail) + ' — awaiting lineup.</span>');
+  else if (avail === 'ok')
+    cov.push('<span class="ok">Scan data OK.</span>');
+  else
+    cov.push('<span class="warn">Availability unconfirmed.</span>');
+  state.innerHTML = cov.join(' ');
+  renderRecLine(run, sport);
 
   // --- lane gate (NFL/WNBA keep their "not connected" notices) ---
   if (notice && lane !== 'live') {
@@ -465,8 +528,19 @@ function renderSport(run, manifest, cfg) {
 
   var plays = sortPlays(cl.plays, sortState[sport] || 'time-asc');
   if (!plays.length) {
-    cards.innerHTML = '<div class="empty"><b>No qualifying plays.</b> ' +
-      (notice ? 'This lane is connected — ' : '') + 'Nothing cleared the bar on this slate.</div>';
+    // Three visually distinct empty states: a clean scan with nothing
+    // qualifying is NOT the same as a failed scan or stale data.
+    if (sstat === 'scan_failed') {
+      cards.innerHTML = '<div class="empty-warn"><b>Last scan failed.</b> ' +
+        'No new plays published — the next scheduled run will refresh this slate.</div>';
+    } else if (avail === 'degraded' || avail === 'stale') {
+      cards.innerHTML = '<div class="empty-warn"><b>Awaiting lineup.</b> ' +
+        'Scan data is ' + esc(avail) + ' — plays will appear once lineups lock.</div>';
+    } else {
+      cards.innerHTML = '<div class="empty"><b>&#10003; No qualifying plays.</b> ' +
+        'Nothing cleared the bar on this slate — a quiet card beats a forced one. ' +
+        'This is a clean scan, not an error.</div>';
+    }
   } else {
     cards.innerHTML = plays.map(function(p){ return playCard(p, cfg.start); }).join('');
   }
@@ -615,7 +689,35 @@ function render(manifest, run) {
     '<br>Content hash <code>' + esc(run.content_hash) + '</code>';
 }
 
+/* ---------------- sport tabs ----------------
+   One sport visible at a time; other sections are hidden completely
+   (not scrolled to). The active tab persists across refreshes.
+   Switching tabs touches no network — every section renders once from
+   the same run payload, so there are zero extra scans or API calls. */
+var TAB_KEY = 'tegas-edge-sport-tab';
+var SPORT_KEYS = ['mlb', 'nfl', 'wnba'];
+function setTab(sport, save) {
+  if (SPORT_KEYS.indexOf(sport) < 0) sport = 'mlb';
+  document.querySelectorAll('.tab').forEach(function(t){
+    t.classList.toggle('active', t.getAttribute('data-tab') === sport);
+  });
+  SPORT_KEYS.forEach(function(s){
+    var sec = document.getElementById('sport-' + s);
+    if (sec) sec.style.display = (s === sport) ? '' : 'none';
+  });
+  if (save !== false) { try { localStorage.setItem(TAB_KEY, sport); } catch (e) {} }
+}
+function initTabs() {
+  var saved = null;
+  try { saved = localStorage.getItem(TAB_KEY); } catch (e) {}
+  document.querySelectorAll('.tab').forEach(function(t){
+    t.addEventListener('click', function(){ setTab(t.getAttribute('data-tab')); });
+  });
+  setTab(saved, false);
+}
+
 initSortControls();
+initTabs();
 
 fetch('manifest.json', {cache:'no-store'})
   .then(function(r){ if(!r.ok) throw new Error('manifest HTTP '+r.status); return r.json(); })
