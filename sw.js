@@ -2,7 +2,7 @@
  * Shell assets (HTML, icons, webmanifest) are cache-first so the app opens
  * offline. ALL *.json data files are network-only and never cached:
  * the dashboard must never show a cached run as if it were fresh. */
-var CACHE = 'edge-shell-v1';
+var CACHE = 'edge-shell-v2';
 var SHELL = [
   './',
   './index.html',
