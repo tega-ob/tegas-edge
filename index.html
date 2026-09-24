@@ -203,6 +203,9 @@ input[type="time"],input[type="date"],input[type="number"]{
 .kv dt{color:var(--dim)} .kv dd{margin:0;word-break:break-all}
 .hash{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px}
 /* ---------- misc ---------- */
+.eval-banner{background:color-mix(in srgb,var(--gold) 14%,var(--panel));border:1px solid var(--gold);
+  border-radius:var(--radius);padding:12px 14px;margin:12px 0;color:var(--txt);font-size:14.5px}
+.eval-banner b{color:var(--gold);letter-spacing:.4px}
 .empty{background:var(--panel);border:1px dashed var(--line2);border-radius:var(--radius);
   padding:26px 18px;margin:14px 0;text-align:center;color:var(--dim);font-size:15px}
 .empty b{color:var(--txt)}
@@ -819,6 +822,13 @@ function renderPicks() {
   h += '<div class="countline">' + picks.length + ' pick' + (picks.length === 1 ? '' : 's') +
     ' &middot; ' + counts.upcoming + ' upcoming &middot; ' + counts.inprogress + ' in progress</div>';
   if (filtersOn) h += '<div class="controls"><button class="btn small ghost" type="button" id="btn-reset-f">Reset filters</button></div>';
+  /* SHADOW/EXPERIMENTAL labeling (user order 2026-09-24): the NFL model is
+     under evaluation. Show the cluster banner once, above the NFL cards,
+     whenever NFL picks are visible. Presentation only. */
+  var nflBanner = (S.run && S.run.clusters && S.run.clusters.nfl || {}).banner;
+  if (nflBanner && shown.some(function (p) { return p.sport === 'nfl'; })) {
+    h += '<div class="eval-banner"><b>SHADOW / EXPERIMENTAL</b> &mdash; ' + esc(nflBanner) + '</div>';
+  }
   if (!picks.length) {
     h += '<div class="empty"><b>No qualifying plays right now</b> — the model found nothing above its bars. Check back after the next scan.</div>';
   } else if (f.status === 'live') {
