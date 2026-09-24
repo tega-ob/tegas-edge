@@ -1,6 +1,6 @@
 {
-  "latest_run_id": "20260924-unattended-020",
-  "latest_seq": 20,
+  "latest_run_id": "20260924-manual-021",
+  "latest_seq": 21,
   "per_cluster": {
     "mlb": {
       "availability_status": "ok",
@@ -11,8 +11,8 @@
         "nfl": "1.0.0",
         "wnba": "1.0.0"
       },
-      "run_id": "20260924-unattended-020",
-      "seq": 20,
+      "run_id": "20260924-manual-021",
+      "seq": 21,
       "validation_status": "approved"
     },
     "nfl": {
@@ -24,8 +24,8 @@
         "nfl": "1.0.0",
         "wnba": "1.0.0"
       },
-      "run_id": "20260924-unattended-020",
-      "seq": 20,
+      "run_id": "20260924-manual-021",
+      "seq": 21,
       "validation_status": "approved"
     },
     "wnba": {
@@ -37,13 +37,13 @@
         "nfl": "1.0.0",
         "wnba": "1.0.0"
       },
-      "run_id": "20260924-unattended-020",
-      "seq": 20,
+      "run_id": "20260924-manual-021",
+      "seq": 21,
       "validation_status": "approved"
     }
   },
-  "updated_at_et": "Sep 24, 2026 \u00b7 11:53 AM ET",
-  "updated_at_utc": "2026-09-24T15:53:50.970766+00:00",
+  "updated_at_et": "Sep 24, 2026 \u00b7 02:56 PM ET",
+  "updated_at_utc": "2026-09-24T18:56:07.145784+00:00",
   "verified_at_utc": null,
   "verified_run_id": null
 }
