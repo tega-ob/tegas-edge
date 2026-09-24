@@ -65,7 +65,7 @@
      "line_src": "fanduel",
      "model_version": "2.3.0",
      "line_captured_at": "2026-09-24T11:53:37.552928-04:00",
-     "why": "proj 5.64 vs line 3.5, P=81.4%, edge +34.3%pp (bar +5%)",
+     "why": "proj 5.64 vs line 3.5, P=81.4%, edge +34.3%pp (bar +5%) [Data-quality flag 2026-09-24: published with relief-inflated workload input (110.6 vs starts-only 75.2 pitches). Pick and grade stand as delivered.]",
      "risk": null,
      "change": "same"
     },
@@ -84,7 +84,7 @@
      "line_src": "fanduel",
      "model_version": "2.3.0",
      "line_captured_at": "2026-09-24T11:53:37.552928-04:00",
-     "why": "proj 4.95 vs line 3.5, P=72.7%, edge +24.6%pp (bar +5%)",
+     "why": "proj 4.95 vs line 3.5, P=72.7%, edge +24.6%pp (bar +5%) [Data-quality flag 2026-09-24: published with relief-inflated workload input (101.8 vs starts-only 89.1 pitches). Pick and grade stand as delivered.]",
      "risk": null,
      "change": "same"
     },
@@ -103,7 +103,7 @@
      "line_src": "fanduel",
      "model_version": "2.3.0",
      "line_captured_at": "2026-09-24T11:53:38.143606-04:00",
-     "why": "proj 5.46 vs line 3.5, P=79.4%, edge +30.5%pp (bar +5%)",
+     "why": "proj 5.46 vs line 3.5, P=79.4%, edge +30.5%pp (bar +5%) [Data-quality flag 2026-09-24: published with relief-inflated workload input (103.4 vs starts-only 70.9 pitches). Pick and grade stand as delivered.]",
      "risk": null,
      "change": "same"
     },
@@ -122,7 +122,7 @@
      "line_src": "fanduel",
      "model_version": "2.3.0",
      "line_captured_at": "2026-09-24T11:53:38.864937-04:00",
-     "why": "proj 5.26 vs line 4.5, P=60.4%, edge +18.4%pp (bar +5%)",
+     "why": "proj 5.26 vs line 4.5, P=60.4%, edge +18.4%pp (bar +5%) [Data-quality flag 2026-09-24: published with relief-inflated workload input (93.2 vs starts-only 82.6 pitches). Pick and grade stand as delivered.]",
      "risk": null,
      "change": "same"
     },
@@ -141,7 +141,7 @@
      "line_src": "fanduel",
      "model_version": "2.3.0",
      "line_captured_at": "2026-09-24T11:53:39.473702-04:00",
-     "why": "proj 5.89 vs line 3.5, P=83.9%, edge +35.4%pp (bar +5%)",
+     "why": "proj 5.89 vs line 3.5, P=83.9%, edge +35.4%pp (bar +5%) [Data-quality flag 2026-09-24: published with relief-inflated workload input (145.1 vs starts-only 80.9 pitches). Pick and grade stand as delivered.]",
      "risk": null,
      "change": "same"
     },
@@ -179,7 +179,7 @@
      "line_src": "fanduel",
      "model_version": "2.3.0",
      "line_captured_at": "2026-09-24T11:53:41.412331-04:00",
-     "why": "proj 8.6 vs line 6.5, P=75.4%, edge +32.0%pp (bar +5%)",
+     "why": "proj 8.6 vs line 6.5, P=75.4%, edge +32.0%pp (bar +5%) [Data-quality flag 2026-09-24: published with relief-inflated workload input (137.5 vs starts-only 83.9 pitches). Pick and grade stand as delivered.]",
      "risk": null,
      "change": "same"
     },
@@ -678,5 +678,5 @@
   ]
  },
  "note": "scan_to_run.py [mlb]: mlb: 14 plays (0 dropped by lane rules); mlb cluster changed (verified); untouched clusters carried forward unchanged. Data-quality flag (2026-09-24): 6 of these 14 plays were published with a workload input later found inflated by relief appearances (season pitches / gamesStarted instead of starts-only). Affected: David Sandlin, Randy Dobnak, Tyler Phillips, Kumar Rocker, Tanner Gordon, Ian Seymour. The plays and their grades stand exactly as delivered. The input is corrected for all future scans.",
- "content_hash": "fce1e446a885ceb3a65ea7a8087a44d936b64b9f3d27f0a6fbda34b689bc171f"
+ "content_hash": "8166e403927ea2f0cb15250d413d6b2025bf523c443207fd3fd4197f3ef7c48e"
 }
