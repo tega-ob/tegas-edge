@@ -4,78 +4,204 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TEGA'S EDGE — Model Picks Board</title>
+<meta name="description" content="TEGA'S EDGE: model-driven player prop picks with genuine sportsbook lines. Transparent record, updated on schedule.">
+<meta property="og:title" content="TEGA'S EDGE — Model Picks Board">
+<meta property="og:description" content="Model-driven player prop picks. Real lines. Honest record.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TEGA'S EDGE — Model Picks Board">
+<meta name="twitter:description" content="Model-driven player prop picks. Real lines. Honest record.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a0e14'/%3E%3Cpath d='M18 4 L9 18 h6 l-2 10 9-14 h-6 z' fill='%23f5b942'/%3E%3C/svg%3E">
 <style>
-  :root { --bg:#0d1117; --panel:#161b22; --line:#30363d; --txt:#e6edf3;
-          --dim:#8b949e; --green:#3fb950; --red:#f85149; --gold:#d29922; }
-  * { box-sizing:border-box; }
-  body { background:var(--bg); color:var(--txt); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
-         margin:0; padding:24px 16px 64px; }
-  .wrap { max-width:960px; margin:0 auto; }
-  h1 { font-size:28px; margin:0 0 4px; letter-spacing:.5px; }
-  .sub { color:var(--dim); font-size:13px; margin-bottom:20px; }
-  .status { background:#1a2332; border:1px solid var(--line); border-radius:8px;
-            padding:12px 14px; font-size:13px; margin-bottom:20px; line-height:1.5; }
-  .status b { color:var(--txt); }
-  .status .warn { color:var(--gold); font-weight:700; }
-  .status .bad { color:var(--red); font-weight:700; }
-  .records { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:24px; }
-  .rec { background:var(--panel); border:1px solid var(--line); border-radius:8px;
-         padding:10px 14px; min-width:130px; }
-  .rec .k { font-size:11px; color:var(--dim); text-transform:uppercase; letter-spacing:.6px; }
-  .rec .v { font-size:20px; font-weight:700; margin-top:2px; }
-  .rec .n { font-size:11px; color:var(--dim); margin-top:2px; }
-  table.perf { width:100%; border-collapse:collapse; font-size:12px; margin-bottom:24px;
-               background:var(--panel); border:1px solid var(--line); border-radius:8px; overflow:hidden; }
-  table.perf th, table.perf td { padding:8px 10px; text-align:left; border-bottom:1px solid var(--line); }
-  table.perf th { color:var(--dim); text-transform:uppercase; font-size:10px; letter-spacing:.6px; }
-  table.perf tr:last-child td { border-bottom:none; }
-  .perf-cap { font-size:11px; color:var(--dim); margin:-16px 0 24px; }
-  section { margin-bottom:28px; }
-  h2 { font-size:18px; border-bottom:1px solid var(--line); padding-bottom:8px; margin:0 0 4px; }
-  .fresh { font-size:12px; color:var(--dim); margin-bottom:8px; }
-  .fresh b { color:var(--txt); }
-  .state { font-size:12px; margin-bottom:8px; }
-  .state:empty { display:none; }
-  .plays { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:10px; }
-  .play { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:12px 14px; }
-  .play .p { font-weight:700; font-size:15px; }
-  .play .m { color:var(--dim); font-size:12px; margin:2px 0 6px; }
-  .play .ln { font-size:16px; font-weight:700; }
-  .over { color:var(--green); } .under { color:var(--gold); }
-  .play .pr { font-size:12px; color:var(--dim); margin-top:6px; }
-  .play .gt { font-size:12px; color:var(--dim); margin-top:2px; }
-  .play .why, .play .risk { font-size:12px; margin-top:6px; line-height:1.45; }
-  .play .why { color:var(--txt); }
-  .play .risk { color:var(--gold); }
-  .play .mv { font-size:11px; color:var(--dim); margin-top:6px; }
-  .badge { display:inline-block; font-size:10px; font-weight:700; padding:2px 6px;
-           border-radius:4px; margin-left:6px; vertical-align:middle; letter-spacing:.4px; }
-  .b-new { background:#1a3a24; color:var(--green); border:1px solid var(--green); }
-  .b-chg { background:#3a2f14; color:var(--gold); border:1px solid var(--gold); }
-  .withdrawn { font-size:12px; color:var(--dim); margin-top:10px;
-               background:var(--panel); border:1px dashed var(--line);
-               border-radius:8px; padding:10px 12px; }
-  .withdrawn b { color:var(--txt); }
-  .empty { background:var(--panel); border:1px dashed var(--line); border-radius:8px;
-           padding:18px; color:var(--dim); font-size:14px; }
-  .method { font-size:13px; color:var(--dim); line-height:1.6;
-            background:var(--panel); border:1px solid var(--line);
-            border-radius:8px; padding:14px 16px; }
-  .method b { color:var(--txt); }
-  footer { margin-top:36px; padding-top:16px; border-top:1px solid var(--line);
-           font-size:12px; color:var(--dim); word-break:break-all; }
-  footer code { color:var(--txt); }
-  #err { display:none; background:#3d1115; border:1px solid var(--red); border-radius:8px;
-         padding:16px; margin-bottom:20px; font-size:14px; }
-  .disclaimer { font-size:12px; color:var(--dim); margin-top:24px; font-style:italic; }
+  :root{
+    --bg:#0a0e14; --bg2:#0d1219; --panel:#11161f; --panel2:#151c28;
+    --line:#232c3d; --line2:#2e3a52;
+    --txt:#f1f5f9; --dim:#8b98a9; --dim2:#5d6b82;
+    --gold:#f5b942; --gold-d:#b57e12; --gold-glow:rgba(245,185,66,.16);
+    --green:#22c55e; --green-d:#15803d; --green-glow:rgba(34,197,94,.14);
+    --red:#ef4444; --red-glow:rgba(239,68,68,.12);
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--txt);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Inter,Helvetica,Arial,sans-serif;
+    margin:0;padding:0;-webkit-font-smoothing:antialiased}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:
+      radial-gradient(900px 420px at 12% -8%, rgba(245,185,66,.07), transparent 60%),
+      radial-gradient(800px 380px at 88% -6%, rgba(34,197,94,.05), transparent 60%);}
+  .wrap{max-width:1020px;margin:0 auto;padding:0 18px 80px;position:relative;z-index:1}
+
+  /* ---------- brand hero ---------- */
+  .hero{padding:34px 0 6px;text-align:center;position:relative}
+  .hero::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
+    width:min(680px,92%);height:3px;border-radius:3px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+  .bolt{display:inline-flex;align-items:center;justify-content:center;width:54px;height:54px;
+    border-radius:16px;background:linear-gradient(135deg,#1a2230,#0e1420);
+    border:1px solid var(--line2);box-shadow:0 0 28px var(--gold-glow);margin-bottom:10px}
+  .bolt svg{width:30px;height:30px}
+  .wordmark{font-size:clamp(30px,6vw,44px);font-weight:800;letter-spacing:2.5px;margin:0;
+    background:linear-gradient(180deg,#fff 30%,var(--gold) 130%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .wordmark .ap{font-weight:800}
+  .tagline{color:var(--dim);font-size:14px;margin:8px 0 0;letter-spacing:.4px}
+  .tagline b{color:var(--gold);font-weight:600}
+
+  /* ---------- sticky nav ---------- */
+  .nav{position:sticky;top:0;z-index:50;display:flex;gap:8px;justify-content:center;
+    padding:12px 8px;margin:18px -8px 0;
+    background:rgba(10,14,20,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line)}
+  .nav a{color:var(--dim);text-decoration:none;font-size:13px;font-weight:600;
+    padding:8px 16px;border-radius:999px;border:1px solid transparent;transition:all .18s}
+  .nav a:hover{color:var(--txt);border-color:var(--line2);background:var(--panel)}
+  .nav a .dot{color:var(--gold);margin-right:6px}
+
+  /* ---------- status band ---------- */
+  .status{margin:22px 0;background:linear-gradient(180deg,var(--panel2),var(--panel));
+    border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;
+    font-size:13px;line-height:1.65;color:var(--dim)}
+  .status b{color:var(--txt)}
+  .status .warn{color:var(--gold);font-weight:700}
+  .status .bad{color:var(--red);font-weight:700}
+  .status .ok{color:var(--green);font-weight:700}
+
+  /* ---------- records ---------- */
+  .sec-label{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--dim2);
+    text-transform:uppercase;margin:26px 0 12px;display:flex;align-items:center;gap:10px}
+  .sec-label::after{content:"";flex:1;height:1px;background:var(--line)}
+  .records{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+  .rec{background:linear-gradient(180deg,var(--panel2),var(--panel));
+    border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;
+    position:relative;overflow:hidden;transition:transform .18s,border-color .18s}
+  .rec:hover{transform:translateY(-2px);border-color:var(--line2)}
+  .rec::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;
+    background:linear-gradient(90deg,var(--gold),transparent)}
+  .rec .k{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:1.2px;font-weight:700}
+  .rec .v{font-size:26px;font-weight:800;margin:4px 0 2px;letter-spacing:.5px}
+  .rec .bar{height:5px;border-radius:3px;background:#1c2433;margin-top:8px;overflow:hidden}
+  .rec .bar i{display:block;height:100%;border-radius:3px;
+    background:linear-gradient(90deg,var(--gold-d),var(--gold))}
+  .rec .n{font-size:11px;color:var(--dim);margin-top:6px}
+
+  /* ---------- sport sections ---------- */
+  section.sport{margin:30px 0 8px;scroll-margin-top:70px}
+  .sport-head{display:flex;align-items:center;justify-content:space-between;gap:12px;
+    flex-wrap:wrap;margin-bottom:4px}
+  .sport-title{font-size:21px;font-weight:800;margin:0;display:flex;align-items:center;gap:10px;
+    letter-spacing:.3px}
+  .sport-title .ico{font-size:20px}
+  .live-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);
+    box-shadow:0 0 10px var(--green);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+  .fresh{font-size:12px;color:var(--dim);margin:6px 0 10px;line-height:1.6}
+  .fresh b{color:var(--txt)}
+  .state{font-size:12px;margin-bottom:10px;line-height:1.5}
+  .state:empty{display:none}
+  .state .warn{color:var(--gold);font-weight:600}
+
+  /* ---------- sort control ---------- */
+  .sortbar{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--dim)}
+  .sortbar label{font-weight:600;letter-spacing:.6px;text-transform:uppercase;font-size:10px;color:var(--dim2)}
+  .sortbar select{background:var(--panel2);color:var(--txt);border:1px solid var(--line2);
+    border-radius:9px;padding:7px 10px;font-size:12.5px;font-weight:600;cursor:pointer;
+    outline:none;transition:border-color .18s}
+  .sortbar select:hover,.sortbar select:focus{border-color:var(--gold)}
+
+  /* ---------- play cards ---------- */
+  .plays{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+  .play{background:linear-gradient(180deg,var(--panel2),var(--panel));
+    border:1px solid var(--line);border-radius:var(--radius);padding:15px 16px;
+    position:relative;overflow:hidden;transition:transform .18s,border-color .18s,box-shadow .18s}
+  .play:hover{transform:translateY(-3px);border-color:var(--line2);box-shadow:0 12px 32px rgba(0,0,0,.35)}
+  .play::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px}
+  .play.is-over::before{background:linear-gradient(180deg,var(--green),var(--green-d))}
+  .play.is-under::before{background:linear-gradient(180deg,var(--gold),var(--gold-d))}
+  .play .p{font-weight:800;font-size:16px;letter-spacing:.2px}
+  .play .tm{color:var(--dim);font-weight:500;font-size:12px;margin-left:6px}
+  .play .m{color:var(--dim);font-size:12px;margin:3px 0 8px}
+  .play .ln{font-size:19px;font-weight:800;display:flex;align-items:center;gap:8px}
+  .side{font-size:11px;font-weight:800;letter-spacing:1px;padding:3px 9px;border-radius:6px}
+  .side.over{color:#052e16;background:linear-gradient(180deg,#4ade80,#22c55e)}
+  .side.under{color:#3a2a05;background:linear-gradient(180deg,#fcd34d,#f5b942)}
+  .probbar{height:6px;border-radius:4px;background:#1c2433;margin:10px 0 4px;overflow:hidden}
+  .probbar i{display:block;height:100%;border-radius:4px;transition:width .5s ease}
+  .is-over .probbar i{background:linear-gradient(90deg,var(--green-d),var(--green))}
+  .is-under .probbar i{background:linear-gradient(90deg,var(--gold-d),var(--gold))}
+  .play .pr{font-size:12px;color:var(--dim);display:flex;justify-content:space-between;gap:8px}
+  .play .pr b{color:var(--txt)}
+  .edge-pill{font-size:11px;font-weight:800;color:var(--gold);background:var(--gold-glow);
+    border:1px solid rgba(245,185,66,.35);padding:2px 8px;border-radius:999px;white-space:nowrap}
+  .play .gt{font-size:11.5px;color:var(--dim2);margin-top:8px}
+  .play .why,.play .risk{font-size:12.5px;margin-top:8px;line-height:1.5}
+  .play .why{color:#cbd5e1}
+  .play .risk{color:var(--gold)}
+  .play .mv{font-size:10.5px;color:var(--dim2);margin-top:8px;letter-spacing:.4px}
+  .badge{display:inline-block;font-size:10px;font-weight:800;padding:2px 7px;border-radius:5px;
+    margin-left:7px;vertical-align:middle;letter-spacing:.6px}
+  .b-new{background:var(--green-glow);color:var(--green);border:1px solid rgba(34,197,94,.4)}
+  .b-chg{background:var(--gold-glow);color:var(--gold);border:1px solid rgba(245,185,66,.4)}
+
+  .withdrawn{font-size:12.5px;color:var(--dim);margin-top:12px;
+    background:var(--panel);border:1px dashed var(--line2);
+    border-radius:var(--radius);padding:12px 14px;line-height:1.6}
+  .withdrawn b{color:var(--txt)}
+  .empty{background:var(--panel);border:1px dashed var(--line2);border-radius:var(--radius);
+    padding:22px;color:var(--dim);font-size:14px;text-align:center;line-height:1.6}
+  .empty b{color:var(--txt)}
+
+  /* ---------- methodology / footer ---------- */
+  .method{font-size:13.5px;color:var(--dim);line-height:1.7;
+    background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);
+    border-radius:var(--radius);padding:18px 20px}
+  .method b{color:var(--txt)}
+  .method .brandline{color:var(--gold);font-weight:700}
+  footer{margin-top:44px;padding:22px 0 8px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--dim2);line-height:1.8;word-break:break-all;text-align:center}
+  footer code{color:var(--dim)}
+  footer .fbrand{font-weight:800;letter-spacing:2px;color:var(--gold);font-size:13px}
+  footer .fsub{color:var(--dim);font-size:11.5px}
+  #err{display:none;background:var(--red-glow);border:1px solid var(--red);
+    border-radius:var(--radius);padding:16px 18px;margin:20px 0;font-size:14px}
+  .disclaimer{font-size:12px;color:var(--dim2);margin-top:26px;font-style:italic;text-align:center}
+  .perf-wrap{overflow-x:auto}
+  table.perf{width:100%;border-collapse:collapse;font-size:12.5px;min-width:480px;
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  table.perf th,table.perf td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line)}
+  table.perf th{color:var(--dim);text-transform:uppercase;font-size:10px;letter-spacing:1px}
+  table.perf tr:last-child td{border-bottom:none}
+  table.perf tr:hover td{background:rgba(245,185,66,.04)}
+  .perf-cap{font-size:11px;color:var(--dim2);margin:8px 0 0}
+  @media (max-width:560px){
+    .sport-head{align-items:flex-start;flex-direction:column}
+    .nav a{padding:7px 11px;font-size:12px}
+    .plays{grid-template-columns:1fr}
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>TEGA'S EDGE</h1>
-  <div class="sub">Model picks board — player props only. Lines via FanDuel.</div>
-  <div class="status"><b>Authoritative board.</b> Updates publish on a schedule through a
-  browser signed in as <b>@tega-ob</b> — if that login lapses, publishing fails.
+
+  <header class="hero">
+    <div class="bolt" aria-hidden="true">
+      <svg viewBox="0 0 32 32"><path d="M18 4 L9 18 h6 l-2 10 9-14 h-6 z" fill="#f5b942"/></svg>
+    </div>
+    <h1 class="wordmark">TEGA&rsquo;S EDGE</h1>
+    <p class="tagline">Model-driven player props &middot; <b>real sportsbook lines</b> &middot; honest public record</p>
+  </header>
+
+  <nav class="nav" aria-label="Board sections">
+    <a href="#sport-mlb"><span class="dot">●</span>MLB</a>
+    <a href="#sport-nfl"><span class="dot">●</span>NFL</a>
+    <a href="#sport-wnba"><span class="dot">●</span>WNBA</a>
+    <a href="#records-sec"><span class="dot">●</span>Records</a>
+    <a href="#method-sec"><span class="dot">●</span>Method</a>
+  </nav>
+
+  <div class="status"><b>TEGA&rsquo;S EDGE — authoritative board.</b> Updates publish on a
+  schedule through a browser signed in as <b>@tega-ob</b> — if that login lapses, publishing fails.
   <div id="login-line">GitHub session: checking…</div>
   <div>Last verified public update: <b id="last-pub">—</b>.</div>
   <div id="stale-line" style="display:none"></div>
@@ -83,41 +209,59 @@
   </div>
   <div id="err"></div>
 
+  <div class="sec-label" id="records-sec">Track record — TEGA&rsquo;S EDGE</div>
   <div class="records" id="records"></div>
+  <div class="perf-wrap" id="perf-wrap" style="margin-top:12px"></div>
 
-  <section>
-    <h2>⚾ MLB — Pitcher Strikeouts</h2>
+  <section class="sport" id="sport-mlb">
+    <div class="sport-head">
+      <h2 class="sport-title"><span class="ico">⚾</span>MLB <span class="live-dot" title="Lane live"></span></h2>
+      <div class="sortbar"><label for="sort-mlb">Sort</label>
+        <select id="sort-mlb" data-sport="mlb" aria-label="Sort MLB plays"></select></div>
+    </div>
+    <div class="sub" style="color:var(--dim2);font-size:12px;margin:-2px 0 6px">Pitcher strikeouts — TEGA&rsquo;S EDGE</div>
     <div class="fresh" id="fresh-mlb"></div>
     <div class="state" id="state-mlb"></div>
     <div class="plays" id="plays-mlb"></div>
     <div class="withdrawn" id="wd-mlb" style="display:none"></div>
   </section>
 
-  <section>
-    <h2>🏈 NFL Props</h2>
+  <section class="sport" id="sport-nfl">
+    <div class="sport-head">
+      <h2 class="sport-title"><span class="ico">🏈</span>NFL</h2>
+      <div class="sortbar"><label for="sort-nfl">Sort</label>
+        <select id="sort-nfl" data-sport="nfl" aria-label="Sort NFL plays"></select></div>
+    </div>
+    <div class="sub" style="color:var(--dim2);font-size:12px;margin:-2px 0 6px">Player props — TEGA&rsquo;S EDGE</div>
     <div class="fresh" id="fresh-nfl"></div>
     <div class="state" id="state-nfl"></div>
     <div class="empty" id="plays-nfl"><b>Publishing not connected.</b> The NFL lane
-    isn't live on this board yet — plays will appear here once it's connected. An empty
+    isn&rsquo;t live on this board yet — plays will appear here once it&rsquo;s connected. An empty
     section does not mean no plays qualified.</div>
     <div class="plays" id="plays-nfl-cards" style="display:none"></div>
     <div class="withdrawn" id="wd-nfl" style="display:none"></div>
   </section>
 
-  <section>
-    <h2>🏀 WNBA Props</h2>
+  <section class="sport" id="sport-wnba">
+    <div class="sport-head">
+      <h2 class="sport-title"><span class="ico">🏀</span>WNBA</h2>
+      <div class="sortbar"><label for="sort-wnba">Sort</label>
+        <select id="sort-wnba" data-sport="wnba" aria-label="Sort WNBA plays"></select></div>
+    </div>
+    <div class="sub" style="color:var(--dim2);font-size:12px;margin:-2px 0 6px">Player props — TEGA&rsquo;S EDGE</div>
     <div class="fresh" id="fresh-wnba"></div>
     <div class="state" id="state-wnba"></div>
     <div class="empty" id="plays-wnba"><b>Publishing not connected.</b> The WNBA lane
-    isn't live on this board yet — plays will appear here once it's connected. An empty
+    isn&rsquo;t live on this board yet — plays will appear here once it&rsquo;s connected. An empty
     section does not mean no plays qualified.</div>
     <div class="plays" id="plays-wnba-cards" style="display:none"></div>
     <div class="withdrawn" id="wd-wnba" style="display:none"></div>
   </section>
 
+  <div class="sec-label" id="method-sec">Methodology — TEGA&rsquo;S EDGE</div>
   <section>
-    <h2>Methodology</h2>
     <div class="method">
+    <span class="brandline">TEGA&rsquo;S EDGE</span> is player props only.
     <b>Lines:</b> FanDuel is the primary line source — every published play carries a
     genuine FanDuel line captured at scan time. <b>Edge</b> is model probability minus
     breakeven probability: a probability difference, not an expected return.
@@ -128,16 +272,20 @@
     </div>
   </section>
 
-  <div class="disclaimer">Picks are informational only — not betting advice.</div>
+  <div class="disclaimer">TEGA&rsquo;S EDGE — picks are informational only, not betting advice.</div>
 
-  <footer id="footer">Loading…</footer>
+  <footer id="footer">
+    <div class="fbrand">⚡ TEGA&rsquo;S EDGE</div>
+    <div class="fsub">Model picks board · player props only · updated on schedule</div>
+    <div id="footer-run" style="margin-top:8px">Loading…</div>
+  </footer>
 </div>
 
 <script>
 function showErr(msg) {
   var e = document.getElementById('err');
   e.style.display = 'block';
-  e.textContent = 'Could not load board data: ' + msg;
+  e.textContent = 'Could not load TEGA\u2019S EDGE board data: ' + msg;
 }
 
 function fmtTime(iso) {
@@ -154,6 +302,47 @@ function fmtShort(iso) {
     return d.toLocaleString('en-US', { hour:'numeric', minute:'2-digit',
       hour12:true }) + ' ET';
   } catch (e) { return ''; }
+}
+
+/* ---------------- sort controls (restored 2026-09-23) ----------------
+   Default is always earliest-game-first (standing board rule); the
+   dropdown lets the reader re-order temporarily. */
+var SORT_MODES = [
+  {v:'time-asc',  label:'Earliest game first'},
+  {v:'time-desc', label:'Latest game first'},
+  {v:'prob-desc', label:'Highest probability'},
+  {v:'prob-asc',  label:'Lowest probability'},
+  {v:'edge-desc', label:'Highest edge'}
+];
+var sortState = {mlb:'time-asc', nfl:'time-asc', wnba:'time-asc'};
+
+function initSortControls() {
+  document.querySelectorAll('.sortbar select').forEach(function(sel){
+    SORT_MODES.forEach(function(m){
+      var o = document.createElement('option');
+      o.value = m.v; o.textContent = m.label;
+      sel.appendChild(o);
+    });
+    sel.value = sortState[sel.getAttribute('data-sport')] || 'time-asc';
+    sel.addEventListener('change', function(){
+      sortState[sel.getAttribute('data-sport')] = sel.value;
+      if (window.__lastRun) renderSports(window.__lastRun, window.__lastManifest);
+    });
+  });
+}
+
+function sortPlays(plays, mode) {
+  var arr = (plays || []).slice();
+  function t(p){ var d = new Date(p.game_start); return isNaN(d) ? 0 : d.getTime(); }
+  function pr(p){ return (p.prob != null) ? p.prob : -1; }
+  function ed(p){ return (p.edge != null) ? p.edge : -1; }
+  switch (mode) {
+    case 'time-desc': return arr.sort(function(a,b){ return t(b)-t(a); });
+    case 'prob-desc': return arr.sort(function(a,b){ return pr(b)-pr(a) || t(a)-t(b); });
+    case 'prob-asc':  return arr.sort(function(a,b){ return pr(a)-pr(b) || t(a)-t(b); });
+    case 'edge-desc': return arr.sort(function(a,b){ return ed(b)-ed(a) || t(a)-t(b); });
+    default:          return arr.sort(function(a,b){ return t(a)-t(b); }); // time-asc
+  }
 }
 
 // Line-source label, driven by the payload. The converter only publishes
@@ -181,21 +370,29 @@ function whyRisk(p) {
   return h;
 }
 
-function playCard(p, startLabel) {
-  var sideCls = p.side === 'OVER' ? 'over' : 'under';
-  var mv = p.model_version ? '<div class="mv">model v' + p.model_version + '</div>' : '';
-  return '<div class="play"><div class="p">'+p.player+changeBadge(p)+
-    ' <span style="color:var(--dim);font-weight:400;font-size:12px">'+p.team+' vs '+p.opp+'</span></div>'+
-    '<div class="m">'+p.market+' · '+srcLabel(p)+'</div>'+
-    '<div class="ln"><span class="'+sideCls+'">'+p.side+'</span> '+p.line+'</div>'+
-    '<div class="pr">Model P: '+(p.prob*100).toFixed(1)+'% · Edge: +'+(p.edge*100).toFixed(1)+'%'+
-    (p.price_note ? ' · '+p.price_note : '')+'</div>'+
-    whyRisk(p)+mv+
-    '<div class="gt">'+(startLabel || 'Start')+': '+fmtTime(p.game_start)+'</div></div>';
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+  });
 }
 
-function byStart(a, b) {
-  return new Date(a.game_start) - new Date(b.game_start);
+function playCard(p, startLabel) {
+  var side = (p.side || '').toUpperCase();
+  var sideCls = side === 'OVER' ? 'over' : 'under';
+  var cardCls = side === 'OVER' ? 'is-over' : 'is-under';
+  var probPct = (p.prob != null) ? (p.prob*100) : 0;
+  var edgePct = (p.edge != null) ? (p.edge*100) : null;
+  var mv = p.model_version ? '<div class="mv">model v' + esc(p.model_version) + '</div>' : '';
+  return '<div class="play ' + cardCls + '"><div class="p">' + esc(p.player) + changeBadge(p) +
+    '<span class="tm">' + esc(p.team) + ' vs ' + esc(p.opp) + '</span></div>' +
+    '<div class="m">' + esc(p.market) + ' · ' + esc(srcLabel(p)) + '</div>' +
+    '<div class="ln"><span class="side ' + sideCls + '">' + esc(side) + '</span> ' + esc(p.line) + '</div>' +
+    '<div class="probbar"><i style="width:' + Math.max(0, Math.min(100, probPct)).toFixed(1) + '%"></i></div>' +
+    '<div class="pr"><span>Model <b>' + probPct.toFixed(1) + '%</b></span>' +
+    (edgePct != null ? '<span class="edge-pill">EDGE +' + edgePct.toFixed(1) + '%</span>' : '') +
+    (p.price_note ? '<span>' + esc(p.price_note) + '</span>' : '') + '</div>' +
+    whyRisk(p) + mv +
+    '<div class="gt">' + esc(startLabel || 'Start') + ': ' + fmtTime(p.game_start) + '</div></div>';
 }
 
 function latestLineCapture(plays) {
@@ -216,7 +413,7 @@ function renderWithdrawn(run, sport) {
   if (!wd.length) { el.innerHTML = ''; el.style.display = 'none'; return; }
   el.style.display = '';
   el.innerHTML = '<b>Withdrawn since the last run:</b> ' + wd.map(function(w){
-    return w.player + ' ' + w.side + ' ' + w.line + ' (' + w.market + ')';
+    return esc(w.player) + ' ' + esc(w.side) + ' ' + esc(w.line) + ' (' + esc(w.market) + ')';
   }).join('; ');
 }
 
@@ -239,13 +436,13 @@ function renderSport(run, manifest, cfg) {
 
   // --- freshness line: last scan, line freshness, model version ---
   var fparts = [];
-  if (cl.last_checked_et) fparts.push('Last scan <b>' + cl.last_checked_et + '</b>');
+  if (cl.last_checked_et) fparts.push('Last scan <b>' + esc(cl.last_checked_et) + '</b>');
   var lc = latestLineCapture(cl.plays);
   if (lc) fparts.push('lines captured <b>' + fmtShort(lc) + '</b>');
   if (mc.verified_at_utc) fparts.push('verified <b>' + fmtTime(mc.verified_at_utc) + '</b>');
-  if (mver && mver !== 'unknown') fparts.push('model v' + mver);
-  if (vstat === 'approved') fparts.push('model validated');
-  else if (vstat === 'unvalidated') fparts.push('<span class="warn">model unvalidated</span>');
+  if (mver && mver !== 'unknown') fparts.push('model v' + esc(mver));
+  if (vstat === 'approved') fparts.push('<span class="ok" style="color:var(--green);font-weight:700">model validated</span>');
+  else if (vstat === 'unvalidated') fparts.push('<span class="warn" style="color:var(--gold);font-weight:700">model unvalidated</span>');
   fresh.innerHTML = fparts.join(' · ') || '—';
 
   // --- state line: scan-failed / awaiting-lineup warnings ---
@@ -253,7 +450,7 @@ function renderSport(run, manifest, cfg) {
   if (sstat === 'scan_failed')
     st.push('<span class="warn">Last scan failed — showing carried-forward plays.</span>');
   if (avail === 'degraded' || avail === 'stale')
-    st.push('<span class="warn">Awaiting lineup — scan data ' + avail + '.</span>');
+    st.push('<span class="warn">Awaiting lineup — scan data ' + esc(avail) + '.</span>');
   state.innerHTML = st.join(' ');
 
   // --- lane gate (NFL/WNBA keep their "not connected" notices) ---
@@ -266,7 +463,7 @@ function renderSport(run, manifest, cfg) {
   }
   if (notice) { notice.style.display = 'none'; cards.style.display = ''; }
 
-  var plays = (cl.plays || []).slice().sort(byStart);
+  var plays = sortPlays(cl.plays, sortState[sport] || 'time-asc');
   if (!plays.length) {
     cards.innerHTML = '<div class="empty"><b>No qualifying plays.</b> ' +
       (notice ? 'This lane is connected — ' : '') + 'Nothing cleared the bar on this slate.</div>';
@@ -339,16 +536,18 @@ function renderLogin() {
   });
 }
 
-// Records strip (legacy fallback): the pre-existing hardcoded cards,
-// rendered from the run payload exactly as before.
+// Records strip: branded stat cards with win-rate bars, from run.records.
 function renderRecordsStrip(run) {
   var R = run.records || {};
   function card(k, rec) {
     rec = rec || {};
-    return '<div class="rec"><div class="k">' + k + '</div><div class="v">' +
-      (rec.label || '—') + '</div><div class="n">' +
-      (rec.win_pct != null ? (rec.win_pct*100).toFixed(1)+'%' : (rec.units || '')) +
-      '</div></div>';
+    var wp = (rec.win_pct != null) ? rec.win_pct : null;
+    var bar = (wp != null)
+      ? '<div class="bar"><i style="width:' + Math.max(0, Math.min(100, wp*100)).toFixed(1) + '%"></i></div>'
+      : '';
+    var sub = (wp != null) ? (wp*100).toFixed(1) + '%' : (rec.units || '');
+    return '<div class="rec"><div class="k">' + esc(k) + '</div><div class="v">' +
+      esc(rec.label || '—') + '</div>' + bar + '<div class="n">' + esc(sub) + '</div></div>';
   }
   document.getElementById('records').innerHTML =
     card('Combined', R.combined) + card('NFL', R.nfl) + card('WNBA', R.wnba) +
@@ -365,11 +564,9 @@ function renderPerf(run) {
   }).then(function(rec){
     var html = perfTable(rec);
     if (html) {
-      document.getElementById('records').innerHTML = html;
-    } else {
-      renderRecordsStrip(run);
+      document.getElementById('perf-wrap').innerHTML = html;
     }
-  }).catch(function(){ renderRecordsStrip(run); });
+  }).catch(function(){ /* records strip already rendered; nothing to add */ });
 }
 
 function perfTable(rec) {
@@ -381,9 +578,10 @@ function perfTable(rec) {
     });
     if (!rows.length) return '';
     var tr = rows.map(function(r){
-      return '<tr><td>'+r.sport+'</td><td>'+(r.market||'')+'</td><td>'+(r.model_version||'')+
-        '</td><td>'+(r.n != null ? r.n : ((r.wins||0)+(r.losses||0)+(r.pushes||0)))+
-        '</td><td>'+r.wins+'-'+r.losses+'-'+(r.pushes||0)+'</td></tr>';
+      return '<tr><td>' + esc(r.sport) + '</td><td>' + esc(r.market || '') + '</td><td>' +
+        esc(r.model_version || '') + '</td><td>' +
+        (r.n != null ? r.n : ((r.wins||0)+(r.losses||0)+(r.pushes||0))) +
+        '</td><td>' + r.wins + '-' + r.losses + '-' + (r.pushes||0) + '</td></tr>';
     }).join('');
     var cap = rec.generated_at_utc
       ? '<div class="perf-cap">Published plays only · updated ' + fmtTime(rec.generated_at_utc) + '.</div>'
@@ -399,18 +597,25 @@ var SPORT_CFGS = [
   {key:'wnba', start:'Tipoff',      noticeId:'plays-wnba', cardsId:'plays-wnba-cards',freshId:'fresh-wnba', stateId:'state-wnba'}
 ];
 
-function render(manifest, run) {
-  renderStatus(run, manifest);
+function renderSports(run, manifest) {
   SPORT_CFGS.forEach(function(cfg){ renderSport(run, manifest, cfg); });
-  document.getElementById('footer').innerHTML =
-    'Run <code>'+run.run_id+'</code> (seq '+run.seq+') · generated '+run.generated_at_et+
-    (run.model_versions ? '<br>Models: ' + ['mlb','nfl','wnba'].map(function(s){
-      return s.toUpperCase()+' v'+run.model_versions[s];
-    }).join(' · ') : '')+
-    '<br>Content hash <code>'+run.content_hash+'</code>'+
-    '<br>Verify: recompute sha256 over the canonical JSON of '+run.run_id+
-    '.json (sorted keys, compact separators, excluding content_hash).';
 }
+
+function render(manifest, run) {
+  window.__lastRun = run;
+  window.__lastManifest = manifest;
+  renderStatus(run, manifest);
+  renderRecordsStrip(run);
+  renderSports(run, manifest);
+  document.getElementById('footer-run').innerHTML =
+    'Run <code>' + esc(run.run_id) + '</code> (seq ' + esc(run.seq) + ') · generated ' + esc(run.generated_at_et) +
+    (run.model_versions ? '<br>Models: ' + ['mlb','nfl','wnba'].map(function(s){
+      return s.toUpperCase() + ' v' + esc(run.model_versions[s]);
+    }).join(' · ') : '') +
+    '<br>Content hash <code>' + esc(run.content_hash) + '</code>';
+}
+
+initSortControls();
 
 fetch('manifest.json', {cache:'no-store'})
   .then(function(r){ if(!r.ok) throw new Error('manifest HTTP '+r.status); return r.json(); })
@@ -424,7 +629,7 @@ fetch('manifest.json', {cache:'no-store'})
     renderLogin();
     renderPerf(both.run);
   })
-  .catch(function(e){ showErr(e.message); document.getElementById('footer').textContent='Load failed.'; });
+  .catch(function(e){ showErr(e.message); document.getElementById('footer-run').textContent='Load failed.'; });
 </script>
 </body>
 </html>
