@@ -78,5 +78,15 @@
     "losses": 0,
     "pushes": 0,
     "voids": 0
+  },
+  {
+    "sport": "mlb",
+    "market": "pitcher_strikeouts",
+    "model_version": "2.3.0",
+    "n": 12,
+    "wins": 0,
+    "losses": 0,
+    "pushes": 0,
+    "voids": 3
   }
 ]
