@@ -495,7 +495,7 @@ var S = {
   lastChecked: 0, dataUpdatedAt: 0,
   inflight: false, lastFail: null,
   tab: 'picks',
-  filters: { sport: 'all', status: 'all' },
+  filters: { sport: 'all', status: 'all', sort: 'start' },
   results: { range: 'today', custom: '', tz: 'eastern', lane: 'all', days: {}, loading: false, loadedRuns: 0 },
   perfRange: '30',
   runsIdx: null, runCache: {},
@@ -799,11 +799,18 @@ function renderPicks() {
     el.innerHTML = '<h2 class="stitle">Picks</h2><div class="skel"></div><div class="skel"></div>';
     return;
   }
+  /* Sort mode (user order 2026-09-24): 'start' = earliest game first (default,
+     standing rule), 'prob' = highest model probability first, ties by start. */
+  var sortMode = (S.filters && S.filters.sort) || 'start';
   var picks = collectPicks(S.run).sort(function (a, b) {
+    if (sortMode === 'prob') {
+      return ((b.prob || 0) - (a.prob || 0)) ||
+        ((Date.parse(a.game_start) || 0) - (Date.parse(b.game_start) || 0));
+    }
     return (Date.parse(a.game_start) || 0) - (Date.parse(b.game_start) || 0);
   });
   var f = S.filters;
-  var filtersOn = f.sport !== 'all' || f.status !== 'all';
+  var filtersOn = f.sport !== 'all' || f.status !== 'all' || f.sort !== 'start';
   var shown = picks.filter(function (p) {
     if (f.sport !== 'all' && p.sport !== f.sport) return false;
     var st = deriveStatus(p, nowMs).key;
@@ -819,6 +826,8 @@ function renderPicks() {
   h += '<div class="controls" role="group" aria-label="Status filter">' +
     statusChip('all', 'All') + statusChip('upcoming', 'Upcoming') + statusChip('inprogress', 'In progress') +
     statusChip('finished', 'Finished') + statusChip('live', 'Live') + '</div>';
+  h += '<div class="controls" role="group" aria-label="Sort order">' +
+    sortChip('start', 'Earliest first') + sortChip('prob', 'Highest probability') + '</div>';
   h += '<div class="countline">' + picks.length + ' pick' + (picks.length === 1 ? '' : 's') +
     ' &middot; ' + counts.upcoming + ' upcoming &middot; ' + counts.inprogress + ' in progress</div>';
   if (filtersOn) h += '<div class="controls"><button class="btn small ghost" type="button" id="btn-reset-f">Reset filters</button></div>';
@@ -845,9 +854,12 @@ function renderPicks() {
   el.querySelectorAll('[data-status]').forEach(function (b) {
     b.addEventListener('click', function () { S.filters.status = b.getAttribute('data-status'); renderPicks(); });
   });
+  el.querySelectorAll('[data-sort]').forEach(function (b) {
+    b.addEventListener('click', function () { S.filters.sort = b.getAttribute('data-sort'); renderPicks(); });
+  });
   ['btn-reset-f', 'btn-reset-f2'].forEach(function (id) {
     var b = document.getElementById(id);
-    if (b) b.addEventListener('click', function () { S.filters = { sport: 'all', status: 'all' }; renderPicks(); });
+    if (b) b.addEventListener('click', function () { S.filters = { sport: 'all', status: 'all', sort: 'start' }; renderPicks(); });
   });
   el.querySelectorAll('.details-btn').forEach(function (b) {
     b.addEventListener('click', function () {
@@ -873,6 +885,10 @@ function sportChip(v, label) {
 function statusChip(v, label) {
   return '<button class="fchip" type="button" data-status="' + v + '" aria-pressed="' +
     (S.filters.status === v ? 'true' : 'false') + '">' + label + '</button>';
+}
+function sortChip(v, label) {
+  return '<button class="fchip" type="button" data-sort="' + v + '" aria-pressed="' +
+    (S.filters.sort === v ? 'true' : 'false') + '">' + label + '</button>';
 }
 
 /* ============================================================
