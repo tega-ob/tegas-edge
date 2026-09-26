@@ -295,5 +295,27 @@
     "generated_at_utc": "2026-09-26T19:48:39.153740+00:00",
     "run_id": "20260926-pull-029",
     "seq": 29
+  },
+  {
+    "clusters": [
+      "mlb",
+      "nfl",
+      "wnba"
+    ],
+    "file": "20260926-nfl-paper-030.json",
+    "generated_at_utc": "2026-09-26T20:24:37.348104+00:00",
+    "run_id": "20260926-nfl-paper-030",
+    "seq": 30
+  },
+  {
+    "clusters": [
+      "mlb",
+      "nfl",
+      "wnba"
+    ],
+    "file": "20260926-card-031.json",
+    "generated_at_utc": "2026-09-26T22:39:12.289373+00:00",
+    "run_id": "20260926-card-031",
+    "seq": 31
   }
 ]
