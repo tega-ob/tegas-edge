@@ -1,6 +1,6 @@
 {
-  "latest_run_id": "20260926-pull-029",
-  "latest_seq": 29,
+  "latest_run_id": "20260926-nfl-paper-030",
+  "latest_seq": 30,
   "per_cluster": {
     "mlb": {
       "availability_status": "ok",
