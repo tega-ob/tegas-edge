@@ -424,7 +424,9 @@ function selectionText(p) {
   return market + ' — ' + sideWord + ' ' + line;
 }
 /* Current picks: clusters are the superset (carry sport + label).
-   Old runs predate clusters -> fall back to top-level plays. */
+   Old runs predate clusters -> fall back to top-level plays.
+   Paper plays (2026-09-26): MLB K-model is paper-only during investigation;
+   paper_plays is {sport: [plays]} and merges here with the cluster label. */
 function collectPicks(run) {
   var out = [], seen = {};
   function add(p, sport, label) {
@@ -446,6 +448,13 @@ function collectPicks(run) {
     var ps = c.plays || [];
     if (ps.length) anyCluster = true;
     ps.forEach(function (p) { add(p, s, c.label); });
+  });
+  var pp = (run && run.paper_plays) || {};
+  order.forEach(function (s) {
+    var ps = pp[s] || [];
+    if (ps.length) anyCluster = true;
+    var label = (cl[s] && cl[s].label) || s.toUpperCase();
+    ps.forEach(function (p) { add(p, s, label); });
   });
   if (!anyCluster) ((run && run.plays) || []).forEach(function (p) { add(p, null, null); });
   return out;
@@ -833,13 +842,21 @@ function renderPicks() {
   h += '<div class="countline">' + picks.length + ' pick' + (picks.length === 1 ? '' : 's') +
     ' &middot; ' + counts.upcoming + ' upcoming &middot; ' + counts.inprogress + ' in progress</div>';
   if (filtersOn) h += '<div class="controls"><button class="btn small ghost" type="button" id="btn-reset-f">Reset filters</button></div>';
-  /* SHADOW/EXPERIMENTAL labeling (user order 2026-09-24): the NFL model is
-     under evaluation. Show the cluster banner once, above the NFL cards,
-     whenever NFL picks are visible. Presentation only. */
-  var nflBanner = (S.run && S.run.clusters && S.run.clusters.nfl || {}).banner;
-  if (nflBanner && shown.some(function (p) { return p.sport === 'nfl'; })) {
-    h += '<div class="eval-banner"><b>SHADOW / EXPERIMENTAL</b> &mdash; ' + esc(nflBanner) + '</div>';
-  }
+  /* SHADOW/EXPERIMENTAL/PAPER labeling (user orders 2026-09-24, 2026-09-26):
+     cluster banners render once, above the cards, whenever that sport's
+     section is visible. A banner shows if any shown pick is that sport, or
+     if the sport filter selects it (covers empty paper clusters).
+     Presentation only. */
+  var clusters = (S.run && S.run.clusters) || {};
+  ['nfl', 'mlb', 'wnba'].forEach(function (sp) {
+    var b = (clusters[sp] || {}).banner;
+    if (!b) return;
+    var visible = shown.some(function (p) { return p.sport === sp; }) ||
+                  f.sport === sp || f.sport === 'all';
+    if (!visible) return;
+    var tag = sp === 'nfl' ? 'SHADOW / EXPERIMENTAL' : 'PAPER-ONLY';
+    h += '<div class="eval-banner"><b>' + tag + '</b> &mdash; ' + esc(b) + '</div>';
+  });
   if (!picks.length) {
     h += '<div class="empty"><b>No qualifying plays right now</b> — the model found nothing above its bars. Check back after the next scan.</div>';
   } else if (f.status === 'live') {
@@ -951,7 +968,8 @@ function renderResults() {
   h += '<div class="controls" role="group" aria-label="Lane filter">' +
     '<button class="fchip" type="button" data-lane="all" aria-pressed="' + (r.lane === 'all' ? 'true' : 'false') + '">All lanes</button>' +
     '<button class="fchip" type="button" data-lane="live" aria-pressed="' + (r.lane === 'live' ? 'true' : 'false') + '">Live (official)</button>' +
-    '<button class="fchip" type="button" data-lane="validation" aria-pressed="' + (r.lane === 'validation' ? 'true' : 'false') + '">Validation</button></div>';
+    '<button class="fchip" type="button" data-lane="validation" aria-pressed="' + (r.lane === 'validation' ? 'true' : 'false') + '">Validation</button>' +
+    '<button class="fchip" type="button" data-lane="paper" aria-pressed="' + (r.lane === 'paper' ? 'true' : 'false') + '">Paper</button></div>';
   h += '<div id="results-body">';
   if (!S.run) { h += '<div class="skel"></div>'; }
   else if (r.loading) { h += '<div class="skel"></div><p class="lede">Loading published runs…</p>'; }
@@ -1009,7 +1027,11 @@ function loadResultsRange() {
       order.forEach(function (sport) {
         (g[sport] || []).forEach(function (p) {
           var lane = 'live';
-          if (run.lanes && run.lanes[sport]) lane = /validation/i.test(run.lanes[sport]) ? 'validation' : 'live';
+          if (run.lanes && run.lanes[sport]) {
+            var lv = run.lanes[sport];
+            lane = /paper/i.test(lv) ? 'paper'
+                 : (/validation/i.test(lv) ? 'validation' : 'live');
+          }
           var key = pickIdentity(p) + '|' + p.status;
           var prev = seen[key];
           var gt = Date.parse(p.graded_at_utc) || 0;
@@ -1056,7 +1078,9 @@ function gradedRowHTML(e, tz) {
   var resWord = st === 'win' ? 'Won' : st === 'loss' ? 'Lost' : st === 'push' ? 'Push' : st === 'void' ? 'Void' : (p.status || 'Unknown');
   var laneChip = e.lane === 'validation'
     ? '<span class="sport">Validation · not the official record</span>'
-    : '<span class="sport">Live · official</span>';
+    : (e.lane === 'paper'
+       ? '<span class="sport">Paper · not the official record</span>'
+       : '<span class="sport">Live · official</span>');
   var h = '<div class="rrow"><div class="rh">' +
     '<span class="res ' + cls + '">' + esc(resWord) + '</span>' +
     '<span class="who">' + esc(p.player || 'Unknown player') + '</span>' +
