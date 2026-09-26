@@ -1,0 +1,977 @@
+{
+  "published_at": "2026-09-26T19:37:14.053884+00:00",
+  "generated_at": "2026-09-26T19:37:14.053884+00:00",
+  "generated_at_et": "Sep 26, 2026 \u00b7 3:37 PM ET",
+  "sports": {
+    "nfl": {
+      "status": "paper",
+      "label": "NFL Props",
+      "card_date": "2026-09-24",
+      "card_status": "official",
+      "card_note": null,
+      "banner": "Paper-only during the NFL repair program (2026-09-26) \u2014 tracked for research, not official plays. Model math frozen at checkpoint B; overs-only selection policy in effect.",
+      "amendments": [
+        {
+          "at_et": "Sep 24, 2026 \u00b7 10:18 PM ET",
+          "date": "2026-09-24",
+          "sport": "nfl",
+          "type": "pick_update",
+          "trigger": "grading_run",
+          "player": "Bijan Robinson",
+          "market": "Rushing Yards",
+          "side": "UNDER",
+          "action": "withdrawn",
+          "old_version": 1,
+          "new_version": 2,
+          "changes": {},
+          "triggered_by": [
+            "withdrawn"
+          ],
+          "text": "pick Bijan Robinson v1 \u2192 v2 (withdrawn): officially withheld pre-game \u2014 Sept 24 NFL card closed empty per standing order; never graded, never counted, never resurrected"
+        },
+        {
+          "at_et": "Sep 24, 2026 \u00b7 10:18 PM ET",
+          "date": "2026-09-24",
+          "sport": "nfl",
+          "type": "pick_update",
+          "trigger": "grading_run",
+          "player": "Olamide Zaccheaus",
+          "market": "Receiving Yards",
+          "side": "OVER",
+          "action": "withdrawn",
+          "old_version": 1,
+          "new_version": 2,
+          "changes": {},
+          "triggered_by": [
+            "withdrawn"
+          ],
+          "text": "pick Olamide Zaccheaus v1 \u2192 v2 (withdrawn): officially withdrawn pre-game under audit hold \u2014 Sept 24 NFL card closed empty per standing order; never graded, never counted, never resurrected"
+        }
+      ],
+      "plays": [
+        {
+          "player": "Bijan Robinson",
+          "team": "ATL",
+          "pos": "RB",
+          "opp": "GB",
+          "market": "Rushing Yards",
+          "line": 77.5,
+          "line_note": null,
+          "side": "UNDER",
+          "prob": 0.684,
+          "edge": 0.154,
+          "edge_capped": false,
+          "price": -113,
+          "rationale": "tough matchup \u2014 GB allows 9% less than avg; role shrinking \u2014 snap share dropped",
+          "risk": "Model-flagged play.",
+          "result": "pending",
+          "actual": null,
+          "game_start": "2026-09-24T20:15:00-04:00",
+          "version": 2,
+          "updated_et": "Sep 24, 2026 \u00b7 10:18 PM ET",
+          "update_reason": "pick Bijan Robinson v1 \u2192 v2 (withdrawn): officially withheld pre-game \u2014 Sept 24 NFL card closed empty per standing order; never graded, never counted, never resurrected",
+          "update_history": [
+            {
+              "version": 1,
+              "updated_et": null,
+              "reason": "official card"
+            }
+          ],
+          "withdrawn": true,
+          "withdrawn_et": "Sep 24, 2026 \u00b7 10:18 PM ET"
+        },
+        {
+          "player": "Olamide Zaccheaus",
+          "team": "ATL",
+          "pos": "WR",
+          "opp": "GB",
+          "market": "Receiving Yards",
+          "line": 10.5,
+          "line_note": null,
+          "side": "OVER",
+          "prob": 0.62,
+          "edge": 0.089,
+          "edge_capped": false,
+          "price": -113,
+          "rationale": "role trend: snap share +13% week-over-week -> usage x1.06",
+          "risk": "Model-flagged play.",
+          "result": "pending",
+          "actual": null,
+          "game_start": "2026-09-24T20:15:00-04:00",
+          "version": 2,
+          "updated_et": "Sep 24, 2026 \u00b7 10:18 PM ET",
+          "update_reason": "pick Olamide Zaccheaus v1 \u2192 v2 (withdrawn): officially withdrawn pre-game under audit hold \u2014 Sept 24 NFL card closed empty per standing order; never graded, never counted, never resurrected",
+          "update_history": [
+            {
+              "version": 1,
+              "updated_et": null,
+              "reason": "official card"
+            }
+          ],
+          "withdrawn": true,
+          "withdrawn_et": "Sep 24, 2026 \u00b7 10:18 PM ET"
+        }
+      ],
+      "record": {
+        "label": "10\u201310",
+        "losses": 10,
+        "pending": 0,
+        "pushes": 0,
+        "win_pct": 0.5,
+        "wins": 10
+      },
+      "footnotes": [
+        "Includes Patrick Mahomes OVER 221.5 passing yards (W, 382) \u2014 scope-disputed: a 23:23 UTC log shows it was removed from the card pre-game.",
+        "Includes Josh Downs OVER 41.5 receiving yards (W, 72) \u2014 a retroactive what-if, never a delivered play; counted only on explicit instruction.",
+        "2026-09-21 MNF (NYG@LAR, final 28\u20136): 4\u20139 on the official 13-leg card. Wins: Dart UNDER 213.5 pass yds (20), Skattebo UNDER 67.5 rush+rec (55), Skattebo UNDER 51.5 rush (36), Parkinson UNDER 28.5 rec (15). Losses: Corum UNDER 54.5 rush+rec (92), Corum UNDER 47.5 rush (79), Stafford UNDER 1.5 pass TD (4), Stafford UNDER 238.5 pass yds (327), Singletary OVER 14.5 rush (9), Singletary OVER 25.5 rush+rec (9), Kyren Williams UNDER 63.5 rush (85), Kyren Williams UNDER 84.5 rush+rec (97), Fields UNDER 26.5 rec (30).",
+        "Record-scope note: the 12:15 AM postgame job scoped only 3 MNF legs (2\u20131) and set the record to 8\u20132; the nightly close-out graded the remaining 10 official legs (2\u20138), bringing the official record to 10\u201310. Corum's rush line was delivered at 43.5 (screenshot-confirmed PrizePicks) vs 47.5 logged (FanDuel proxy) \u2014 LOSS under both."
+      ],
+      "sub_records": [
+        {
+          "label": "Delivered-only undisputed",
+          "losses": 10,
+          "note": "The true model-evaluation line: only plays actually delivered in chat with no scope dispute. Pre-MNF 1\u20131 (Johnson L, Walker W); MNF 4\u20139 on all 13 delivered legs.",
+          "pushes": 0,
+          "wins": 5
+        }
+      ],
+      "grading": {
+        "win": 0,
+        "loss": 0,
+        "push": 0,
+        "pending": 2,
+        "decided": 0,
+        "win_pct": null
+      },
+      "last_checked_et": "Sep 26, 2026 \u00b7 3:37 PM ET",
+      "last_changed_et": "Sep 24, 2026 \u00b7 10:13 PM ET",
+      "data_captured_at": "",
+      "model_ran_at": "",
+      "board_updated_at": "2026-09-26T19:37:14.053884+00:00"
+    },
+    "wnba": {
+      "status": "live",
+      "label": "WNBA Props",
+      "card_date": "2026-09-24",
+      "card_status": "official",
+      "card_note": "no plays cleared the +5% edge bar on FanDuel lines (overs and unders); nothing forced",
+      "banner": null,
+      "amendments": [],
+      "plays": [],
+      "record": {
+        "label": "6\u20136",
+        "losses": 6,
+        "pending": 0,
+        "pushes": 0,
+        "win_pct": 0.5,
+        "wins": 6
+      },
+      "footnotes": [
+        "First live WNBA card (2026-09-21, 12 plays): 6\u20136. Wins: Bonner OVER 3.5 reb (6), Howard OVER 21.5 pts+reb (22), Hillmon OVER 7.5 pts (8), Bueckers OVER 1.5 threes (4), Bueckers OVER 25.5 pts+ast (37), Fiebich UNDER 11.5 pts+ast (7). Losses: Howard OVER 20.5 pts+ast (17), Gray OVER 1.5 threes (0), Ogunbowale OVER 5.5 reb+ast (3), Shepard UNDER 14.5 reb+ast (25), Thomas UNDER 8.5 ast (12), Hillmon UNDER 1.5 threes (2). Model provisionally calibrated \u2014 first graded WNBA history. The 14-play manifest also carries 2 validation-lane plays (Kuier, Copper: 1\u20131), shown below but excluded from the official record."
+      ],
+      "sub_records": [
+        {
+          "label": "Copper/Kuier validation lane",
+          "wins": 1,
+          "losses": 1,
+          "pushes": 0,
+          "note": "Separate lane, excluded from the official 6\u20136: Awak Kuier UNDER 8.5 points W (8), Kahleah Copper UNDER 3.5 rebounds L (5). Tracked for model evaluation only."
+        }
+      ],
+      "grading": {
+        "win": 0,
+        "loss": 0,
+        "push": 0,
+        "pending": 0,
+        "decided": 0,
+        "win_pct": null
+      },
+      "last_checked_et": "Sep 26, 2026 \u00b7 3:37 PM ET",
+      "last_changed_et": "Sep 24, 2026 \u00b7 4:03 PM ET",
+      "data_captured_at": "",
+      "model_ran_at": "",
+      "board_updated_at": "2026-09-26T19:37:14.053884+00:00"
+    },
+    "mlb": {
+      "status": "paper",
+      "label": "MLB Props",
+      "card_date": "2026-09-26",
+      "card_status": "paper",
+      "card_note": null,
+      "banner": "Paper-only during the K-model investigation (2026-09-26) \u2014 tracked for research, not official plays. The official record is frozen.",
+      "amendments": [
+        {
+          "at_et": "Sep 26, 2026 \u00b7 10:10 AM ET",
+          "date": "2026-09-26",
+          "sport": "mlb",
+          "type": "pick_update",
+          "trigger": "manual_refresh",
+          "window": "late",
+          "player": "Dustin May",
+          "market": "Strikeouts",
+          "side": "OVER",
+          "action": "updated",
+          "old_version": 1,
+          "new_version": 2,
+          "changes": {
+            "prob": [
+              0.542,
+              0.743
+            ],
+            "line": [
+              3.5,
+              2.5
+            ]
+          },
+          "triggered_by": [
+            "prob_shift",
+            "line_move"
+          ],
+          "text": "pick Dustin May v1 \u2192 v2 (updated): P(OVER) 0.54 \u2192 0.74 (+20.1pp \u2265 3pp late bar); line 3.5 \u2192 2.5 (moved \u2265 0.5)"
+        },
+        {
+          "at_et": "Sep 26, 2026 \u00b7 10:45 AM ET",
+          "date": "2026-09-26",
+          "sport": "mlb",
+          "type": "classification-correction",
+          "text": "Card built 2026-09-26 09:38:07 ET, 3s after lanes.json flipped mlb to paper (09:38:04 ET), by pre-fix build_manifest.py which hardcoded card_status=official. Correct classification is paper. The 10 plays are unchanged: they are the paper plays in the paper log and dashboard feed. Original manifest preserved unmodified.",
+          "field": "card_status",
+          "from": "official",
+          "to": "paper"
+        },
+        {
+          "at_et": "Sep 26, 2026 \u00b7 11:08 AM ET",
+          "date": "2026-09-26",
+          "sport": "mlb",
+          "type": "pick_update",
+          "trigger": "manual_refresh",
+          "window": "late",
+          "player": "Matt Wilkinson",
+          "market": "Strikeouts",
+          "side": "UNDER",
+          "action": "updated",
+          "old_version": 1,
+          "new_version": 2,
+          "changes": {
+            "prob": [
+              0.629,
+              0.698
+            ]
+          },
+          "triggered_by": [
+            "prob_shift"
+          ],
+          "text": "pick Matt Wilkinson v1 \u2192 v2 (updated): P(UNDER) 0.63 \u2192 0.70 (+6.9pp \u2265 3pp late bar)"
+        },
+        {
+          "at_et": "Sep 26, 2026 \u00b7 11:08 AM ET",
+          "date": "2026-09-26",
+          "sport": "mlb",
+          "type": "pick_update",
+          "trigger": "manual_refresh",
+          "window": "late",
+          "player": "Bailey Ober",
+          "market": "Strikeouts",
+          "side": "UNDER",
+          "action": "withdrawn",
+          "old_version": 1,
+          "new_version": 2,
+          "changes": {},
+          "triggered_by": [
+            "withdrawn"
+          ],
+          "text": "pick Bailey Ober v1 \u2192 v2 (withdrawn): withdrawn on re-score: the pick no longer clears the card on fresh inputs"
+        },
+        {
+          "at_et": "Sep 26, 2026 \u00b7 11:08 AM ET",
+          "date": "2026-09-26",
+          "sport": "mlb",
+          "type": "pick_update",
+          "trigger": "manual_refresh",
+          "window": "late",
+          "player": "Quinn Mathews",
+          "market": "Strikeouts",
+          "side": "OVER",
+          "action": "updated",
+          "old_version": 1,
+          "new_version": 2,
+          "changes": {
+            "prob": [
+              0.603,
+              0.674
+            ]
+          },
+          "triggered_by": [
+            "prob_shift"
+          ],
+          "text": "pick Quinn Mathews v1 \u2192 v2 (updated): P(OVER) 0.60 \u2192 0.67 (+7.1pp \u2265 3pp late bar)"
+        },
+        {
+          "at_et": "Sep 26, 2026 \u00b7 11:08 AM ET",
+          "date": "2026-09-26",
+          "sport": "mlb",
+          "type": "pick_update",
+          "trigger": "manual_refresh",
+          "window": "late",
+          "player": "Michael Wacha",
+          "market": "Strikeouts",
+          "side": "OVER",
+          "action": "updated",
+          "old_version": 1,
+          "new_version": 2,
+          "changes": {
+            "prob": [
+              0.636,
+              0.692
+            ]
+          },
+          "triggered_by": [
+            "prob_shift"
+          ],
+          "text": "pick Michael Wacha v1 \u2192 v2 (updated): P(OVER) 0.64 \u2192 0.69 (+5.6pp \u2265 3pp late bar)"
+        },
+        {
+          "at_et": "Sep 26, 2026 \u00b7 11:08 AM ET",
+          "date": "2026-09-26",
+          "sport": "mlb",
+          "type": "pick_update",
+          "trigger": "manual_refresh",
+          "window": "late",
+          "player": "Kade Anderson",
+          "market": "Strikeouts",
+          "side": "UNDER",
+          "action": "updated",
+          "old_version": 1,
+          "new_version": 2,
+          "changes": {
+            "prob": [
+              0.544,
+              0.592
+            ]
+          },
+          "triggered_by": [
+            "prob_shift"
+          ],
+          "text": "pick Kade Anderson v1 \u2192 v2 (updated): P(UNDER) 0.54 \u2192 0.59 (+4.8pp \u2265 3pp late bar)"
+        },
+        {
+          "at_et": "Sep 26, 2026 \u00b7 11:08 AM ET",
+          "date": "2026-09-26",
+          "sport": "mlb",
+          "type": "pick_update",
+          "trigger": "manual_refresh",
+          "window": "late",
+          "player": "Hayden Wesneski",
+          "market": "Strikeouts",
+          "side": "OVER",
+          "action": "withdrawn",
+          "old_version": 1,
+          "new_version": 2,
+          "changes": {},
+          "triggered_by": [
+            "withdrawn"
+          ],
+          "text": "pick Hayden Wesneski v1 \u2192 v2 (withdrawn): withdrawn on re-score: the pick no longer clears the card on fresh inputs"
+        },
+        {
+          "at_et": "Sep 26, 2026 \u00b7 11:08 AM ET",
+          "date": "2026-09-26",
+          "sport": "mlb",
+          "type": "pick_update",
+          "trigger": "manual_refresh",
+          "window": "late",
+          "player": "Ryan Johnson",
+          "market": "Strikeouts",
+          "side": "OVER",
+          "action": "updated",
+          "old_version": 1,
+          "new_version": 2,
+          "changes": {
+            "prob": [
+              0.501,
+              0.553
+            ]
+          },
+          "triggered_by": [
+            "prob_shift"
+          ],
+          "text": "pick Ryan Johnson v1 \u2192 v2 (updated): P(OVER) 0.50 \u2192 0.55 (+5.2pp \u2265 3pp late bar)"
+        },
+        {
+          "at_et": "Sep 26, 2026 \u00b7 12:07 PM ET",
+          "date": "2026-09-26",
+          "sport": "mlb",
+          "type": "pick_update",
+          "trigger": "manual_refresh",
+          "window": "late",
+          "player": "Bailey Ober",
+          "market": "Strikeouts",
+          "side": "UNDER",
+          "action": "withdrawn",
+          "old_version": 2,
+          "new_version": 3,
+          "changes": {},
+          "triggered_by": [
+            "withdrawn"
+          ],
+          "text": "pick Bailey Ober v2 \u2192 v3 (withdrawn): withdrawn on re-score: the pick no longer clears the card on fresh inputs"
+        },
+        {
+          "at_et": "Sep 26, 2026 \u00b7 12:07 PM ET",
+          "date": "2026-09-26",
+          "sport": "mlb",
+          "type": "pick_update",
+          "trigger": "manual_refresh",
+          "window": "late",
+          "player": "Hayden Wesneski",
+          "market": "Strikeouts",
+          "side": "OVER",
+          "action": "withdrawn",
+          "old_version": 2,
+          "new_version": 3,
+          "changes": {},
+          "triggered_by": [
+            "withdrawn"
+          ],
+          "text": "pick Hayden Wesneski v2 \u2192 v3 (withdrawn): withdrawn on re-score: the pick no longer clears the card on fresh inputs"
+        },
+        {
+          "at_et": "Sep 26, 2026 \u00b7 1:39 PM ET",
+          "date": "2026-09-26",
+          "sport": "mlb",
+          "type": "pick_update",
+          "trigger": "manual_refresh",
+          "window": "late",
+          "player": "Bailey Ober",
+          "market": "Strikeouts",
+          "side": "UNDER",
+          "action": "withdrawn",
+          "old_version": 3,
+          "new_version": 4,
+          "changes": {},
+          "triggered_by": [
+            "withdrawn"
+          ],
+          "text": "pick Bailey Ober v3 \u2192 v4 (withdrawn): withdrawn on re-score: the pick no longer clears the card on fresh inputs"
+        },
+        {
+          "at_et": "Sep 26, 2026 \u00b7 1:39 PM ET",
+          "date": "2026-09-26",
+          "sport": "mlb",
+          "type": "pick_update",
+          "trigger": "manual_refresh",
+          "window": "late",
+          "player": "Hayden Wesneski",
+          "market": "Strikeouts",
+          "side": "OVER",
+          "action": "withdrawn",
+          "old_version": 3,
+          "new_version": 4,
+          "changes": {},
+          "triggered_by": [
+            "withdrawn"
+          ],
+          "text": "pick Hayden Wesneski v3 \u2192 v4 (withdrawn): withdrawn on re-score: the pick no longer clears the card on fresh inputs"
+        },
+        {
+          "at_et": "Sep 26, 2026 \u00b7 2:39 PM ET",
+          "date": "2026-09-26",
+          "sport": "mlb",
+          "type": "pick_update",
+          "trigger": "manual_refresh",
+          "window": "late",
+          "player": "Blake Snell",
+          "market": "Strikeouts",
+          "side": "UNDER",
+          "action": "updated",
+          "old_version": 1,
+          "new_version": 2,
+          "changes": {
+            "prob": [
+              0.909,
+              0.818
+            ],
+            "line": [
+              7.5,
+              6.5
+            ]
+          },
+          "triggered_by": [
+            "prob_shift",
+            "line_move"
+          ],
+          "text": "pick Blake Snell v1 \u2192 v2 (updated): P(UNDER) 0.91 \u2192 0.82 (-9.1pp \u2265 3pp late bar); line 7.5 \u2192 6.5 (moved \u2265 0.5)"
+        },
+        {
+          "at_et": "Sep 26, 2026 \u00b7 2:39 PM ET",
+          "date": "2026-09-26",
+          "sport": "mlb",
+          "type": "pick_update",
+          "trigger": "manual_refresh",
+          "window": "late",
+          "player": "Bailey Ober",
+          "market": "Strikeouts",
+          "side": "UNDER",
+          "action": "withdrawn",
+          "old_version": 4,
+          "new_version": 5,
+          "changes": {},
+          "triggered_by": [
+            "withdrawn"
+          ],
+          "text": "pick Bailey Ober v4 \u2192 v5 (withdrawn): withdrawn on re-score: the pick no longer clears the card on fresh inputs"
+        },
+        {
+          "at_et": "Sep 26, 2026 \u00b7 2:39 PM ET",
+          "date": "2026-09-26",
+          "sport": "mlb",
+          "type": "pick_update",
+          "trigger": "manual_refresh",
+          "window": "late",
+          "player": "Hayden Wesneski",
+          "market": "Strikeouts",
+          "side": "OVER",
+          "action": "withdrawn",
+          "old_version": 4,
+          "new_version": 5,
+          "changes": {},
+          "triggered_by": [
+            "withdrawn"
+          ],
+          "text": "pick Hayden Wesneski v4 \u2192 v5 (withdrawn): withdrawn on re-score: the pick no longer clears the card on fresh inputs"
+        },
+        {
+          "at_et": "Sep 26, 2026 \u00b7 2:39 PM ET",
+          "date": "2026-09-26",
+          "sport": "mlb",
+          "type": "pick_update",
+          "trigger": "manual_refresh",
+          "window": "late",
+          "player": "Davis Martin",
+          "market": "Strikeouts",
+          "side": "UNDER",
+          "action": "updated",
+          "old_version": 1,
+          "new_version": 2,
+          "changes": {
+            "prob": [
+              0.774,
+              0.805
+            ]
+          },
+          "triggered_by": [
+            "prob_shift"
+          ],
+          "text": "pick Davis Martin v1 \u2192 v2 (updated): P(UNDER) 0.77 \u2192 0.81 (+3.1pp \u2265 3pp late bar)"
+        },
+        {
+          "at_et": "Sep 26, 2026 \u00b7 3:37 PM ET",
+          "date": "2026-09-26",
+          "sport": "mlb",
+          "type": "pick_update",
+          "trigger": "manual_refresh",
+          "window": "late",
+          "player": "Bailey Ober",
+          "market": "Strikeouts",
+          "side": "UNDER",
+          "action": "withdrawn",
+          "old_version": 5,
+          "new_version": 6,
+          "changes": {},
+          "triggered_by": [
+            "withdrawn"
+          ],
+          "text": "pick Bailey Ober v5 \u2192 v6 (withdrawn): withdrawn on re-score: the pick no longer clears the card on fresh inputs"
+        },
+        {
+          "at_et": "Sep 26, 2026 \u00b7 3:37 PM ET",
+          "date": "2026-09-26",
+          "sport": "mlb",
+          "type": "pick_update",
+          "trigger": "manual_refresh",
+          "window": "late",
+          "player": "Hayden Wesneski",
+          "market": "Strikeouts",
+          "side": "OVER",
+          "action": "withdrawn",
+          "old_version": 5,
+          "new_version": 6,
+          "changes": {},
+          "triggered_by": [
+            "withdrawn"
+          ],
+          "text": "pick Hayden Wesneski v5 \u2192 v6 (withdrawn): withdrawn on re-score: the pick no longer clears the card on fresh inputs"
+        }
+      ],
+      "plays": [
+        {
+          "player": "Blake Snell",
+          "team": "LAD",
+          "pos": "",
+          "opp": "SF",
+          "market": "Strikeouts",
+          "line": 6.5,
+          "line_note": "@1.74 betmgm",
+          "side": "UNDER",
+          "prob": 0.818,
+          "edge": 0.375,
+          "edge_capped": false,
+          "price": null,
+          "rationale": "Model projects 4.55. Model-flagged play.",
+          "risk": "the model has no live graded MLB history yet, so treat the edge as uncalibrated; weather and park factors are applied where available (domes skip weather)",
+          "result": "pending",
+          "actual": "",
+          "game_start": "2026-09-26T16:05:00-04:00",
+          "version": 2,
+          "updated_et": "Sep 26, 2026 \u00b7 2:39 PM ET",
+          "update_reason": "pick Blake Snell v1 \u2192 v2 (updated): P(UNDER) 0.91 \u2192 0.82 (-9.1pp \u2265 3pp late bar); line 7.5 \u2192 6.5 (moved \u2265 0.5)",
+          "update_history": [
+            {
+              "version": 1,
+              "updated_et": null,
+              "reason": "official card",
+              "prob": 0.909,
+              "line": 7.5
+            }
+          ]
+        },
+        {
+          "player": "Matt Wilkinson",
+          "team": "SF",
+          "pos": "",
+          "opp": "LAD",
+          "market": "Strikeouts",
+          "line": 3.5,
+          "line_note": "@1.79 mybookieag",
+          "side": "UNDER",
+          "prob": 0.698,
+          "edge": 0.111,
+          "edge_capped": false,
+          "price": null,
+          "rationale": "Model projects 3.08. Model-flagged play.",
+          "risk": "the model has no live graded MLB history yet, so treat the edge as uncalibrated; weather and park factors are applied where available (domes skip weather)",
+          "result": "pending",
+          "actual": "",
+          "game_start": "2026-09-26T16:05:00-04:00",
+          "version": 2,
+          "updated_et": "Sep 26, 2026 \u00b7 11:08 AM ET",
+          "update_reason": "pick Matt Wilkinson v1 \u2192 v2 (updated): P(UNDER) 0.63 \u2192 0.70 (+6.9pp \u2265 3pp late bar)",
+          "update_history": [
+            {
+              "version": 1,
+              "updated_et": null,
+              "reason": "official card",
+              "prob": 0.629
+            }
+          ]
+        },
+        {
+          "player": "Bailey Ober",
+          "team": "MIN",
+          "pos": "",
+          "opp": "TEX",
+          "market": "Strikeouts",
+          "line": 4.5,
+          "line_note": "@1.87 bovada",
+          "side": "UNDER",
+          "prob": 0.64,
+          "edge": 0.14,
+          "edge_capped": false,
+          "price": null,
+          "rationale": "Model projects 3.94. Model-flagged play.",
+          "risk": "the model has no live graded MLB history yet, so treat the edge as uncalibrated; weather and park factors are applied where available (domes skip weather)",
+          "result": "pending",
+          "actual": "",
+          "game_start": "2026-09-26T16:10:00-04:00",
+          "version": 6,
+          "updated_et": "Sep 26, 2026 \u00b7 3:37 PM ET",
+          "update_reason": "pick Bailey Ober v5 \u2192 v6 (withdrawn): withdrawn on re-score: the pick no longer clears the card on fresh inputs",
+          "update_history": [
+            {
+              "version": 5,
+              "updated_et": "Sep 26, 2026 \u00b7 2:39 PM ET",
+              "reason": "pick Bailey Ober v4 \u2192 v5 (withdrawn): withdrawn on re-score: the pick no longer clears the card on fresh inputs"
+            },
+            {
+              "version": 4,
+              "updated_et": "Sep 26, 2026 \u00b7 1:39 PM ET",
+              "reason": "pick Bailey Ober v3 \u2192 v4 (withdrawn): withdrawn on re-score: the pick no longer clears the card on fresh inputs"
+            },
+            {
+              "version": 3,
+              "updated_et": "Sep 26, 2026 \u00b7 12:07 PM ET",
+              "reason": "pick Bailey Ober v2 \u2192 v3 (withdrawn): withdrawn on re-score: the pick no longer clears the card on fresh inputs"
+            }
+          ],
+          "withdrawn": true,
+          "withdrawn_et": "Sep 26, 2026 \u00b7 3:37 PM ET"
+        },
+        {
+          "player": "Quinn Mathews",
+          "team": "STL",
+          "pos": "",
+          "opp": "MIL",
+          "market": "Strikeouts",
+          "line": 4.5,
+          "line_note": "@2.1 draftkings",
+          "side": "OVER",
+          "prob": 0.674,
+          "edge": 0.154,
+          "edge_capped": false,
+          "price": null,
+          "rationale": "Model projects 5.26. Model-flagged play.",
+          "risk": "the model has no live graded MLB history yet, so treat the edge as uncalibrated; weather and park factors are applied where available (domes skip weather)",
+          "result": "pending",
+          "actual": "",
+          "game_start": "2026-09-26T19:10:00-04:00",
+          "version": 2,
+          "updated_et": "Sep 26, 2026 \u00b7 11:08 AM ET",
+          "update_reason": "pick Quinn Mathews v1 \u2192 v2 (updated): P(OVER) 0.60 \u2192 0.67 (+7.1pp \u2265 3pp late bar)",
+          "update_history": [
+            {
+              "version": 1,
+              "updated_et": null,
+              "reason": "official card",
+              "prob": 0.603
+            }
+          ]
+        },
+        {
+          "player": "Dustin May",
+          "team": "MIL",
+          "pos": "",
+          "opp": "STL",
+          "market": "Strikeouts",
+          "line": 2.5,
+          "line_note": "@2.34 betonlineag",
+          "side": "OVER",
+          "prob": 0.743,
+          "edge": 0.141,
+          "edge_capped": false,
+          "price": null,
+          "rationale": "Model projects 3.88. Model-flagged play.",
+          "risk": "the model has no live graded MLB history yet, so treat the edge as uncalibrated; weather and park factors are applied where available (domes skip weather)",
+          "result": "pending",
+          "actual": "",
+          "game_start": "2026-09-26T19:10:00-04:00",
+          "version": 2,
+          "updated_et": "Sep 26, 2026 \u00b7 10:10 AM ET",
+          "update_reason": "pick Dustin May v1 \u2192 v2 (updated): P(OVER) 0.54 \u2192 0.74 (+20.1pp \u2265 3pp late bar); line 3.5 \u2192 2.5 (moved \u2265 0.5)",
+          "update_history": [
+            {
+              "version": 1,
+              "updated_et": null,
+              "reason": "official card",
+              "prob": 0.542,
+              "line": 3.5
+            }
+          ]
+        },
+        {
+          "player": "Michael Wacha",
+          "team": "KC",
+          "pos": "",
+          "opp": "CLE",
+          "market": "Strikeouts",
+          "line": 3.5,
+          "line_note": "@1.58 mybookieag",
+          "side": "OVER",
+          "prob": 0.692,
+          "edge": 0.051,
+          "edge_capped": false,
+          "price": null,
+          "rationale": "Model projects 4.38. Model-flagged play.",
+          "risk": "the model has no live graded MLB history yet, so treat the edge as uncalibrated; weather and park factors are applied where available (domes skip weather)",
+          "result": "pending",
+          "actual": "",
+          "game_start": "2026-09-26T19:10:00-04:00",
+          "version": 2,
+          "updated_et": "Sep 26, 2026 \u00b7 11:08 AM ET",
+          "update_reason": "pick Michael Wacha v1 \u2192 v2 (updated): P(OVER) 0.64 \u2192 0.69 (+5.6pp \u2265 3pp late bar)",
+          "update_history": [
+            {
+              "version": 1,
+              "updated_et": null,
+              "reason": "official card",
+              "prob": 0.636
+            }
+          ]
+        },
+        {
+          "player": "Kade Anderson",
+          "team": "SEA",
+          "pos": "",
+          "opp": "LAA",
+          "market": "Strikeouts",
+          "line": 5.5,
+          "line_note": "@2.2 betonlineag",
+          "side": "UNDER",
+          "prob": 0.592,
+          "edge": 0.118,
+          "edge_capped": false,
+          "price": null,
+          "rationale": "Model projects 5.41. Model-flagged play.",
+          "risk": "the model has no live graded MLB history yet, so treat the edge as uncalibrated; weather and park factors are applied where available (domes skip weather)",
+          "result": "pending",
+          "actual": "",
+          "game_start": "2026-09-26T21:40:00-04:00",
+          "version": 2,
+          "updated_et": "Sep 26, 2026 \u00b7 11:08 AM ET",
+          "update_reason": "pick Kade Anderson v1 \u2192 v2 (updated): P(UNDER) 0.54 \u2192 0.59 (+4.8pp \u2265 3pp late bar)",
+          "update_history": [
+            {
+              "version": 1,
+              "updated_et": null,
+              "reason": "official card",
+              "prob": 0.544
+            }
+          ]
+        },
+        {
+          "player": "Hayden Wesneski",
+          "team": "HOU",
+          "pos": "",
+          "opp": "ATH",
+          "market": "Strikeouts",
+          "line": 3.5,
+          "line_note": "@1.65 betmgm",
+          "side": "OVER",
+          "prob": 0.639,
+          "edge": 0.073,
+          "edge_capped": false,
+          "price": null,
+          "rationale": "Model projects 4.39. Model-flagged play.",
+          "risk": "the model has no live graded MLB history yet, so treat the edge as uncalibrated; weather and park factors are applied where available (domes skip weather)",
+          "result": "pending",
+          "actual": "",
+          "game_start": "2026-09-26T21:40:00-04:00",
+          "version": 6,
+          "updated_et": "Sep 26, 2026 \u00b7 3:37 PM ET",
+          "update_reason": "pick Hayden Wesneski v5 \u2192 v6 (withdrawn): withdrawn on re-score: the pick no longer clears the card on fresh inputs",
+          "update_history": [
+            {
+              "version": 5,
+              "updated_et": "Sep 26, 2026 \u00b7 2:39 PM ET",
+              "reason": "pick Hayden Wesneski v4 \u2192 v5 (withdrawn): withdrawn on re-score: the pick no longer clears the card on fresh inputs"
+            },
+            {
+              "version": 4,
+              "updated_et": "Sep 26, 2026 \u00b7 1:39 PM ET",
+              "reason": "pick Hayden Wesneski v3 \u2192 v4 (withdrawn): withdrawn on re-score: the pick no longer clears the card on fresh inputs"
+            },
+            {
+              "version": 3,
+              "updated_et": "Sep 26, 2026 \u00b7 12:07 PM ET",
+              "reason": "pick Hayden Wesneski v2 \u2192 v3 (withdrawn): withdrawn on re-score: the pick no longer clears the card on fresh inputs"
+            }
+          ],
+          "withdrawn": true,
+          "withdrawn_et": "Sep 26, 2026 \u00b7 3:37 PM ET"
+        },
+        {
+          "player": "Ryan Johnson",
+          "team": "LAA",
+          "pos": "",
+          "opp": "SEA",
+          "market": "Strikeouts",
+          "line": 4.5,
+          "line_note": "@2.12 fanduel",
+          "side": "OVER",
+          "prob": 0.553,
+          "edge": 0.057,
+          "edge_capped": false,
+          "price": null,
+          "rationale": "Model projects 4.68. Model-flagged play.",
+          "risk": "the model has no live graded MLB history yet, so treat the edge as uncalibrated; weather and park factors are applied where available (domes skip weather)",
+          "result": "pending",
+          "actual": "",
+          "game_start": "2026-09-26T21:40:00-04:00",
+          "version": 2,
+          "updated_et": "Sep 26, 2026 \u00b7 11:08 AM ET",
+          "update_reason": "pick Ryan Johnson v1 \u2192 v2 (updated): P(OVER) 0.50 \u2192 0.55 (+5.2pp \u2265 3pp late bar)",
+          "update_history": [
+            {
+              "version": 1,
+              "updated_et": null,
+              "reason": "official card",
+              "prob": 0.501
+            }
+          ]
+        },
+        {
+          "player": "Davis Martin",
+          "team": "CWS",
+          "pos": "",
+          "opp": "COL",
+          "market": "Strikeouts",
+          "line": 4.5,
+          "line_note": "@1.72 draftkings",
+          "side": "UNDER",
+          "prob": 0.805,
+          "edge": 0.226,
+          "edge_capped": false,
+          "price": null,
+          "rationale": "Model projects 3.24. Model-flagged play.",
+          "risk": "the model has no live graded MLB history yet, so treat the edge as uncalibrated; weather and park factors are applied where available (domes skip weather)",
+          "result": "pending",
+          "actual": "",
+          "game_start": null,
+          "version": 2,
+          "updated_et": "Sep 26, 2026 \u00b7 2:39 PM ET",
+          "update_reason": "pick Davis Martin v1 \u2192 v2 (updated): P(UNDER) 0.77 \u2192 0.81 (+3.1pp \u2265 3pp late bar)",
+          "update_history": [
+            {
+              "version": 1,
+              "updated_et": null,
+              "reason": "official card",
+              "prob": 0.774
+            }
+          ]
+        }
+      ],
+      "record": {
+        "label": "23\u201333",
+        "wins": 23,
+        "losses": 33,
+        "pushes": 0,
+        "pending": 0,
+        "win_pct": 0.41,
+        "units": -12.68,
+        "frozen": true
+      },
+      "footnotes": [
+        "LIVE since 2026-09-22 (user order) \u2014 the planned 2\u20134 week paper window was cut short after 1 graded validation day. 2026-09-21 one-shot (Tidwell OVER 3.5 Ks W; Yesavage OVER 3.5 Ks voided on the post-surgery workload restriction) stays as validation evidence, not counted in the live record. 2026-09-22 live card: 11\u20139 (+0.79u). Bassitt OVER 3.5 Ks and Scherzer UNDER 4.5 Ks were postponed (TOR\u2013BAL) \u2014 off-card, excluded from the record, still pending.",
+        "2026-09-26: moved to paper-only by user order during the K-model investigation. Existing published picks and their original grades are preserved; only new cards are paper. Official record frozen pending return-to-live criteria."
+      ],
+      "sub_records": [],
+      "grading": {
+        "win": 0,
+        "loss": 0,
+        "push": 0,
+        "pending": 10,
+        "decided": 0,
+        "win_pct": null
+      },
+      "last_checked_et": "Sep 26, 2026 \u00b7 3:37 PM ET",
+      "last_changed_et": "Sep 26, 2026 \u00b7 3:37 PM ET",
+      "data_captured_at": "",
+      "model_ran_at": "",
+      "board_updated_at": "2026-09-26T19:37:14.053884+00:00"
+    },
+    "nba": {
+      "status": "development",
+      "label": "NBA Props",
+      "banner": "IN DEVELOPMENT \u2014 model gates are not green. Nothing is shown until every gate passes.",
+      "plays": []
+    }
+  },
+  "disclaimer": "Picks are informational only \u2014 not betting advice. Place your own bets.",
+  "combined_record": {
+    "wins": 16,
+    "losses": 16,
+    "pushes": 0,
+    "pending": 0,
+    "label": "16\u201316",
+    "win_pct": 0.5
+  }
+}
