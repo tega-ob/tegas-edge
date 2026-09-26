@@ -1,0 +1,282 @@
+{
+  "run_id": "20260926-pull-029",
+  "seq": 29,
+  "generated_at_et": "Sep 26, 2026 \u00b7 03:48 PM ET",
+  "generated_at_utc": "2026-09-26T19:48:39.153740+00:00",
+  "lanes": {
+    "mlb": "paper",
+    "wnba": "live",
+    "nfl": "live"
+  },
+  "clusters": {
+    "mlb": {
+      "label": "MLB Props",
+      "plays": [],
+      "last_checked_et": "Sep 26, 2026 \u00b7 3:37 PM ET",
+      "last_checked_utc": "2026-09-26T19:37:14.053884+00:00",
+      "changed_basis": "verified",
+      "last_changed_et": "Sep 26, 2026 \u00b7 3:37 PM ET",
+      "last_changed_utc": "2026-09-26T19:37:14.053884+00:00",
+      "banner": "PAPER-ONLY during the K-model investigation (2026-09-26): tracked for research, not official plays. The official record is frozen until the model returns to live."
+    },
+    "wnba": {
+      "changed_basis": "verified",
+      "label": "WNBA Props",
+      "last_changed_et": "Sep 24, 2026 \u00b7 02:47 AM ET",
+      "last_changed_utc": "2026-09-24T02:47:02.879285+00:00",
+      "last_checked_et": "Sep 24, 2026 \u00b7 09:36 AM ET",
+      "last_checked_utc": "2026-09-24T13:36:47.441894+00:00",
+      "plays": []
+    },
+    "nfl": {
+      "banner": "NFL picks are under evaluation; shown for tracking, not as validated plays.",
+      "changed_basis": "verified",
+      "label": "NFL Props",
+      "last_changed_et": "Sep 24, 2026 \u00b7 07:01 PM ET",
+      "last_changed_utc": "2026-09-24T23:01:48.247013+00:00",
+      "last_checked_et": "Sep 24, 2026 \u00b7 07:01 PM ET",
+      "last_checked_utc": "2026-09-24T23:01:48.247013+00:00",
+      "plays": []
+    }
+  },
+  "plays": [],
+  "paper_plays": {
+    "mlb": [
+      {
+        "player": "Davis Martin",
+        "team": "CWS",
+        "opp": "COL",
+        "market": "Strikeouts",
+        "line": 4.5,
+        "side": "UNDER",
+        "game_start": null,
+        "prob": 0.805,
+        "edge": 0.226,
+        "status": "pending",
+        "line_src": "fanduel",
+        "model_version": "2.3.2",
+        "line_captured_at": "2026-09-26T19:37:14.053884+00:00",
+        "why": null,
+        "risk": null
+      },
+      {
+        "player": "Blake Snell",
+        "team": "LAD",
+        "opp": "SF",
+        "market": "Strikeouts",
+        "line": 6.5,
+        "side": "UNDER",
+        "game_start": "2026-09-26T16:05:00-04:00",
+        "prob": 0.818,
+        "edge": 0.375,
+        "status": "pending",
+        "line_src": "fanduel",
+        "model_version": "2.3.2",
+        "line_captured_at": "2026-09-26T19:37:14.053884+00:00",
+        "why": null,
+        "risk": null
+      },
+      {
+        "player": "Matt Wilkinson",
+        "team": "SF",
+        "opp": "LAD",
+        "market": "Strikeouts",
+        "line": 3.5,
+        "side": "UNDER",
+        "game_start": "2026-09-26T16:05:00-04:00",
+        "prob": 0.698,
+        "edge": 0.111,
+        "status": "pending",
+        "line_src": "fanduel",
+        "model_version": "2.3.2",
+        "line_captured_at": "2026-09-26T19:37:14.053884+00:00",
+        "why": null,
+        "risk": null
+      },
+      {
+        "player": "Bailey Ober",
+        "team": "MIN",
+        "opp": "TEX",
+        "market": "Strikeouts",
+        "line": 4.5,
+        "side": "UNDER",
+        "game_start": "2026-09-26T16:10:00-04:00",
+        "prob": 0.64,
+        "edge": 0.14,
+        "status": "pending",
+        "line_src": "fanduel",
+        "model_version": "2.3.2",
+        "line_captured_at": "2026-09-26T19:37:14.053884+00:00",
+        "why": null,
+        "risk": null
+      },
+      {
+        "player": "Dustin May",
+        "team": "MIL",
+        "opp": "STL",
+        "market": "Strikeouts",
+        "line": 2.5,
+        "side": "OVER",
+        "game_start": "2026-09-26T19:10:00-04:00",
+        "prob": 0.743,
+        "edge": 0.141,
+        "status": "pending",
+        "line_src": "fanduel",
+        "model_version": "2.3.2",
+        "line_captured_at": "2026-09-26T19:37:14.053884+00:00",
+        "why": null,
+        "risk": null
+      },
+      {
+        "player": "Michael Wacha",
+        "team": "KC",
+        "opp": "CLE",
+        "market": "Strikeouts",
+        "line": 3.5,
+        "side": "OVER",
+        "game_start": "2026-09-26T19:10:00-04:00",
+        "prob": 0.692,
+        "edge": 0.051,
+        "status": "pending",
+        "line_src": "fanduel",
+        "model_version": "2.3.2",
+        "line_captured_at": "2026-09-26T19:37:14.053884+00:00",
+        "why": null,
+        "risk": null
+      },
+      {
+        "player": "Quinn Mathews",
+        "team": "STL",
+        "opp": "MIL",
+        "market": "Strikeouts",
+        "line": 4.5,
+        "side": "OVER",
+        "game_start": "2026-09-26T19:10:00-04:00",
+        "prob": 0.674,
+        "edge": 0.154,
+        "status": "pending",
+        "line_src": "fanduel",
+        "model_version": "2.3.2",
+        "line_captured_at": "2026-09-26T19:37:14.053884+00:00",
+        "why": null,
+        "risk": null
+      },
+      {
+        "player": "Hayden Wesneski",
+        "team": "HOU",
+        "opp": "ATH",
+        "market": "Strikeouts",
+        "line": 3.5,
+        "side": "OVER",
+        "game_start": "2026-09-26T21:40:00-04:00",
+        "prob": 0.639,
+        "edge": 0.073,
+        "status": "pending",
+        "line_src": "fanduel",
+        "model_version": "2.3.2",
+        "line_captured_at": "2026-09-26T19:37:14.053884+00:00",
+        "why": null,
+        "risk": null
+      },
+      {
+        "player": "Kade Anderson",
+        "team": "SEA",
+        "opp": "LAA",
+        "market": "Strikeouts",
+        "line": 5.5,
+        "side": "UNDER",
+        "game_start": "2026-09-26T21:40:00-04:00",
+        "prob": 0.592,
+        "edge": 0.118,
+        "status": "pending",
+        "line_src": "fanduel",
+        "model_version": "2.3.2",
+        "line_captured_at": "2026-09-26T19:37:14.053884+00:00",
+        "why": null,
+        "risk": null
+      },
+      {
+        "player": "Ryan Johnson",
+        "team": "LAA",
+        "opp": "SEA",
+        "market": "Strikeouts",
+        "line": 4.5,
+        "side": "OVER",
+        "game_start": "2026-09-26T21:40:00-04:00",
+        "prob": 0.553,
+        "edge": 0.057,
+        "status": "pending",
+        "line_src": "fanduel",
+        "model_version": "2.3.2",
+        "line_captured_at": "2026-09-26T19:37:14.053884+00:00",
+        "why": null,
+        "risk": null
+      }
+    ]
+  },
+  "records": {
+    "combined": {
+      "label": "44\u201351",
+      "losses": 51,
+      "pushes": 0,
+      "win_pct": 0.463,
+      "wins": 44,
+      "note": "CORRECTIVE seq 28 (2026-09-26): combined label corrected from stale '39\u201340' to '44\u201351' (NFL 10\u201310 + WNBA 11\u20138 + MLB 23\u201333; the 1\u20130 validation lane stays separate)."
+    },
+    "mlb_live": {
+      "label": "23\u201333",
+      "losses": 33,
+      "note": "CORRECTIVE seq 28 (2026-09-26): seq 27 displayed a stale label '18\u201322' against wins 23 / losses 33 \u2014 label corrected to '23\u201333'. MLB moved to paper-only on 2026-09-26 for the K-model investigation; the official record is FROZEN at 23\u201333 (\u221212.68u) and no paper results enter it. Live since 2026-09-22. 2026-09-23 card: Abbott OVER 3.5 W (6 Ks), Gray UNDER 4.5 W (3 Ks), Cole UNDER 5.5 L (8 Ks), Gusto OVER 3.5 W (5 Ks), McLean OVER 5.5 L (5 Ks), Adams OVER 3.5 W (8 Ks), Kelly OVER 3.5 L (2 Ks), Urena OVER 4.5 L (2 Ks), Ray OVER 3.5 L (2 Ks), Yamamoto UNDER 6.5 W (4 Ks) -> 5-5 (-0.64u). 2026-09-24 early games (7 of 14 graded): Leahy OVER 3.5 L (3 Ks), Skenes UNDER 5.5 L (8 Ks), Sandlin OVER 3.5 W (7 Ks), Dobnak OVER 3.5 L (1 K), Phillips OVER 3.5 L (2 Ks), Rocker OVER 4.5 L (4 Ks), Gordon OVER 3.5 L (1 K) -> 1-6 (-4.90u). 7 evening-game plays still pending. 2026-09-24 late games (3 of 7 graded): Seymour OVER 6.5 L (3 Ks), Schlittler UNDER 6.5 W (5 Ks), Singer OVER 3.5 L (1 K) -> 1-2 (-1.32u). 4 games graded. 2026-09-24 late games (7 of 7 graded): Seymour OVER 6.5 L (3 Ks), Schlittler UNDER 6.5 W (5 Ks), Singer OVER 3.5 L (1 K), Lambert OVER 4.5 W (6 Ks), Woo UNDER 6.5 L (8 Ks), Pivetta UNDER 4.5 L (7 Ks), Glasnow UNDER 6.5 L (11 Ks) -> 2-5 (-3.14u). 2026-09-25 card (12 of 12 graded): Rogers UNDER 6.5 W (4 Ks), Williams UNDER 6.5 W (4 Ks), deGrom UNDER 6.5 W (5 Ks), Pfaadt OVER 3.5 W (7 Ks), Sanchez UNDER 5.5 L (10 Ks), Jobe UNDER 5.5 L (8 Ks), Burke UNDER 5.5 L (7 Ks), Cameron OVER 4.5 L (3 Ks), McGreevy OVER 3.5 L (2 Ks), Ryan UNDER 6.5 L (8 Ks), Miller UNDER 6.5 L (7 Ks), Skubal UNDER 7.5 L (10 Ks) -> 4-8 (-4.69u). Official MLB record now 23-33 (-12.68u); combined 44-51.",
+      "pushes": 0,
+      "units": "-12.68u",
+      "win_pct": 0.411,
+      "wins": 23
+    },
+    "mlb_validation": {
+      "label": "1\u20130",
+      "losses": 0,
+      "note": "2026-09-21 one-shot: Tidwell OVER 3.5 Ks W; Yesavage OVER 3.5 Ks VOIDED (post-surgery workload restriction). Separate lane, not in the live record.",
+      "voids": 1,
+      "wins": 1
+    },
+    "nfl": {
+      "label": "10\u201310",
+      "losses": 10,
+      "note": "No active plays on this board. Includes the graded 2026-09-21 card (4\u20139 on the 13-leg NYG@LAR card) plus the 2026-09-21 locked plays.",
+      "pushes": 0,
+      "win_pct": 0.5,
+      "wins": 10
+    },
+    "wnba": {
+      "label": "11\u20138",
+      "losses": 8,
+      "note": "First live card (2026-09-21): 6-6. 2026-09-23 card: 5-2 on the 7 published legs (2 unpublished staging legs excluded).",
+      "pushes": 0,
+      "win_pct": 0.579,
+      "wins": 11
+    }
+  },
+  "model_versions": {
+    "mlb": "2.3.2",
+    "wnba": "1.0.0",
+    "nfl": "1.0.0"
+  },
+  "availability_status": {
+    "mlb": "ok",
+    "wnba": "ok",
+    "nfl": "ok"
+  },
+  "validation_status": {
+    "mlb": "approved",
+    "wnba": "approved",
+    "nfl": "approved"
+  },
+  "verified_at_utc": null,
+  "withdrawn": {
+    "mlb": [],
+    "wnba": [],
+    "nfl": []
+  },
+  "note": "scan_to_run.py [mlb]: mlb: paper-only during K-model investigation \u2014 10 plays tracked, none official; mlb: refreshed from pipeline latest.json; mlb cluster changed (verified); untouched clusters carried forward unchanged.",
+  "content_hash": "0bad39ec2c6c17c2fbd6c564b98ee9a6602634b1eecbb4a4a9e7270f1285eb64"
+}
