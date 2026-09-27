@@ -1,6 +1,6 @@
 {
-  "latest_run_id": "20260927-pull-041",
-  "latest_seq": 41,
+  "latest_run_id": "20260927-pull-042",
+  "latest_seq": 42,
   "per_cluster": {
     "mlb": {
       "availability_status": "ok",
@@ -11,21 +11,21 @@
         "nfl": "1.1.1",
         "wnba": "1.0.0"
       },
-      "run_id": "20260927-pull-041",
-      "seq": 41,
+      "run_id": "20260927-pull-042",
+      "seq": 42,
       "validation_status": "approved"
     },
     "nfl": {
       "availability_status": "ok",
-      "last_checked_et": "Sep 27, 2026 \u00b7 12:56 PM ET",
-      "last_checked_utc": "2026-09-27T16:56:45.276813+00:00",
+      "last_checked_et": "Sep 27, 2026 \u00b7 01:31 PM ET",
+      "last_checked_utc": "2026-09-27T17:31:58.051286+00:00",
       "model_versions": {
         "mlb": "2.3.2",
         "nfl": "1.1.1",
         "wnba": "1.0.0"
       },
-      "run_id": "20260927-pull-041",
-      "seq": 41,
+      "run_id": "20260927-pull-042",
+      "seq": 42,
       "validation_status": "approved"
     },
     "wnba": {
@@ -37,13 +37,13 @@
         "nfl": "1.1.1",
         "wnba": "1.0.0"
       },
-      "run_id": "20260927-pull-041",
-      "seq": 41,
+      "run_id": "20260927-pull-042",
+      "seq": 42,
       "validation_status": "approved"
     }
   },
-  "updated_at_et": "Sep 27, 2026 \u00b7 12:56 PM ET",
-  "updated_at_utc": "2026-09-27T16:56:45.278645+00:00",
+  "updated_at_et": "Sep 27, 2026 \u00b7 01:31 PM ET",
+  "updated_at_utc": "2026-09-27T17:31:58.052311+00:00",
   "verified_at_utc": null,
   "verified_run_id": null
 }
