@@ -1,6 +1,6 @@
 {
-  "latest_run_id": "20260929-pull-069",
-  "latest_seq": 69,
+  "latest_run_id": "20260930-grading-070",
+  "latest_seq": 70,
   "per_cluster": {
     "mlb": {
       "availability_status": "ok",
@@ -11,8 +11,8 @@
         "nfl": "1.1.1",
         "wnba": "1.0.0"
       },
-      "run_id": "20260929-pull-069",
-      "seq": 69,
+      "run_id": "20260930-grading-070",
+      "seq": 70,
       "validation_status": "approved"
     },
     "nfl": {
@@ -24,8 +24,8 @@
         "nfl": "1.1.1",
         "wnba": "1.0.0"
       },
-      "run_id": "20260929-pull-069",
-      "seq": 69,
+      "run_id": "20260930-grading-070",
+      "seq": 70,
       "validation_status": "approved"
     },
     "wnba": {
@@ -37,13 +37,13 @@
         "nfl": "1.1.1",
         "wnba": "1.0.0"
       },
-      "run_id": "20260929-pull-069",
-      "seq": 69,
+      "run_id": "20260930-grading-070",
+      "seq": 70,
       "validation_status": "approved"
     }
   },
-  "updated_at_et": "Sep 29, 2026 \u00b7 09:34 PM ET",
-  "updated_at_utc": "2026-09-30T01:34:02.988818+00:00",
-  "verified_at_utc": "2026-09-30T01:39:53.085509+00:00",
-  "verified_run_id": "20260929-pull-069"
+  "updated_at_et": "Sep 30, 2026 \u00b7 05:35 AM ET",
+  "updated_at_utc": "2026-09-30T05:35:43.196895+00:00",
+  "verified_at_utc": null,
+  "verified_run_id": null
 }
