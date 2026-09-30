@@ -1,49 +1,49 @@
 {
-  "latest_run_id": "20260930-grading-070",
-  "latest_seq": 70,
+  "latest_run_id": "20260930-grading-071",
+  "latest_seq": 71,
   "per_cluster": {
     "mlb": {
       "availability_status": "ok",
-      "last_checked_et": "Sep 29, 2026 · 9:33 PM ET",
+      "last_checked_et": "Sep 29, 2026 \u00b7 9:33 PM ET",
       "last_checked_utc": "2026-09-30T01:33:33.351543+00:00",
       "model_versions": {
         "mlb": "2.3.2",
         "nfl": "1.1.1",
         "wnba": "1.0.0"
       },
-      "run_id": "20260930-grading-070",
-      "seq": 70,
+      "run_id": "20260930-grading-071",
+      "seq": 71,
       "validation_status": "approved"
     },
     "nfl": {
       "availability_status": "ok",
-      "last_checked_et": "Sep 28, 2026 · 05:18 PM ET",
+      "last_checked_et": "Sep 28, 2026 \u00b7 05:18 PM ET",
       "last_checked_utc": "2026-09-28T21:18:47.681178+00:00",
       "model_versions": {
         "mlb": "2.3.2",
         "nfl": "1.1.1",
         "wnba": "1.0.0"
       },
-      "run_id": "20260930-grading-070",
-      "seq": 70,
+      "run_id": "20260930-grading-071",
+      "seq": 71,
       "validation_status": "approved"
     },
     "wnba": {
       "availability_status": "ok",
-      "last_checked_et": "Sep 29, 2026 · 08:03 PM ET",
+      "last_checked_et": "Sep 29, 2026 \u00b7 08:03 PM ET",
       "last_checked_utc": "2026-09-30T00:03:36.648355+00:00",
       "model_versions": {
         "mlb": "2.3.2",
         "nfl": "1.1.1",
         "wnba": "1.0.0"
       },
-      "run_id": "20260930-grading-070",
-      "seq": 70,
+      "run_id": "20260930-grading-071",
+      "seq": 71,
       "validation_status": "approved"
     }
   },
-  "updated_at_et": "Sep 30, 2026 · 05:35 AM ET",
-  "updated_at_utc": "2026-09-30T05:35:43.196895+00:00",
-  "verified_at_utc": "2026-09-30T05:40:01.214612+00:00",
-  "verified_run_id": "20260930-grading-070"
+  "updated_at_et": "Sep 30, 2026 \u00b7 07:18 AM ET",
+  "updated_at_utc": "2026-09-30T07:18:07.820149+00:00",
+  "verified_at_utc": null,
+  "verified_run_id": null
 }
