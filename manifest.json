@@ -4,7 +4,7 @@
   "per_cluster": {
     "mlb": {
       "availability_status": "ok",
-      "last_checked_et": "Sep 29, 2026 \u00b7 9:33 PM ET",
+      "last_checked_et": "Sep 29, 2026 · 9:33 PM ET",
       "last_checked_utc": "2026-09-30T01:33:33.351543+00:00",
       "model_versions": {
         "mlb": "2.3.2",
@@ -17,7 +17,7 @@
     },
     "nfl": {
       "availability_status": "ok",
-      "last_checked_et": "Sep 28, 2026 \u00b7 05:18 PM ET",
+      "last_checked_et": "Sep 28, 2026 · 05:18 PM ET",
       "last_checked_utc": "2026-09-28T21:18:47.681178+00:00",
       "model_versions": {
         "mlb": "2.3.2",
@@ -30,7 +30,7 @@
     },
     "wnba": {
       "availability_status": "ok",
-      "last_checked_et": "Sep 29, 2026 \u00b7 08:03 PM ET",
+      "last_checked_et": "Sep 29, 2026 · 08:03 PM ET",
       "last_checked_utc": "2026-09-30T00:03:36.648355+00:00",
       "model_versions": {
         "mlb": "2.3.2",
@@ -42,8 +42,8 @@
       "validation_status": "approved"
     }
   },
-  "updated_at_et": "Sep 30, 2026 \u00b7 05:35 AM ET",
+  "updated_at_et": "Sep 30, 2026 · 05:35 AM ET",
   "updated_at_utc": "2026-09-30T05:35:43.196895+00:00",
-  "verified_at_utc": null,
-  "verified_run_id": null
+  "verified_at_utc": "2026-09-30T05:40:01.214612+00:00",
+  "verified_run_id": "20260930-grading-070"
 }
