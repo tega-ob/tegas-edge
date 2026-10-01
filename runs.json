@@ -933,5 +933,27 @@
     "generated_at_utc": "2026-10-01T01:33:31.571173+00:00",
     "run_id": "20260930-pull-087",
     "seq": 87
+  },
+  {
+    "clusters": [
+      "mlb",
+      "nfl",
+      "wnba"
+    ],
+    "file": "20261001-grading-088.json",
+    "generated_at_utc": "2026-10-01T05:35:47.820288+00:00",
+    "run_id": "20261001-grading-088",
+    "seq": 88
+  },
+  {
+    "clusters": [
+      "mlb",
+      "nfl",
+      "wnba"
+    ],
+    "file": "20261001-grading-089.json",
+    "generated_at_utc": "2026-10-01T07:27:15.667598+00:00",
+    "run_id": "20261001-grading-089",
+    "seq": 89
   }
 ]
