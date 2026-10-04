@@ -1,8 +1,8 @@
 {
   "run_id": "20261004-pull-116",
   "seq": 116,
-  "generated_at_et": "Oct 04, 2026 \u00b7 08:13 AM ET",
-  "generated_at_utc": "2026-10-04T12:13:39.628651+00:00",
+  "generated_at_et": "Oct 04, 2026 \u00b7 08:15 AM ET",
+  "generated_at_utc": "2026-10-04T12:15:13.396592+00:00",
   "lanes": {
     "mlb": "paper",
     "wnba": "live",
@@ -609,11 +609,11 @@
           "change": "same"
         }
       ],
-      "last_checked_et": "Oct 04, 2026 \u00b7 08:13 AM ET",
-      "last_checked_utc": "2026-10-04T12:13:39.626623+00:00",
+      "last_checked_et": "Oct 04, 2026 \u00b7 08:15 AM ET",
+      "last_checked_utc": "2026-10-04T12:15:13.394788+00:00",
       "changed_basis": "verified",
-      "last_changed_et": "Oct 04, 2026 \u00b7 08:13 AM ET",
-      "last_changed_utc": "2026-10-04T12:13:39.626623+00:00",
+      "last_changed_et": "Oct 04, 2026 \u00b7 08:15 AM ET",
+      "last_changed_utc": "2026-10-04T12:15:13.394788+00:00",
       "banner": "NFL picks are under evaluation; shown for tracking, not as validated plays."
     }
   },
@@ -1872,5 +1872,5 @@
     "nfl": []
   },
   "note": "scan_to_run.py [nfl]: nfl: 17 plays (0 dropped by lane rules); nfl cluster changed (verified); mlb: paper_plays carried forward (66 plays); untouched clusters carried forward unchanged.",
-  "content_hash": "8b52a220c3ca631575fb84651fdfd85b9c4b61b320fb3e5c00ba69b8f50cacac"
+  "content_hash": "3cd5b66bc1e54176f5326eb19daad2474f390f6d7aa134e1131359726b98b0b3"
 }

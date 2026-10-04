@@ -17,8 +17,8 @@
     },
     "nfl": {
       "availability_status": "ok",
-      "last_checked_et": "Oct 04, 2026 \u00b7 08:13 AM ET",
-      "last_checked_utc": "2026-10-04T12:13:39.626623+00:00",
+      "last_checked_et": "Oct 04, 2026 \u00b7 08:15 AM ET",
+      "last_checked_utc": "2026-10-04T12:15:13.394788+00:00",
       "model_versions": {
         "mlb": "2.3.2",
         "nfl": "1.1.1",
@@ -42,8 +42,8 @@
       "validation_status": "approved"
     }
   },
-  "updated_at_et": "Oct 04, 2026 \u00b7 08:13 AM ET",
-  "updated_at_utc": "2026-10-04T12:13:39.628651+00:00",
+  "updated_at_et": "Oct 04, 2026 \u00b7 08:15 AM ET",
+  "updated_at_utc": "2026-10-04T12:15:13.396592+00:00",
   "verified_at_utc": null,
   "verified_run_id": null
 }
