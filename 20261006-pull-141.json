@@ -1,8 +1,8 @@
 {
-  "run_id": "20261006-pull-140",
-  "seq": 140,
-  "generated_at_et": "Oct 06, 2026 \u00b7 03:02 PM ET",
-  "generated_at_utc": "2026-10-06T19:02:03.531263+00:00",
+  "run_id": "20261006-pull-141",
+  "seq": 141,
+  "generated_at_et": "Oct 06, 2026 \u00b7 04:37 PM ET",
+  "generated_at_utc": "2026-10-06T20:37:37.581026+00:00",
   "lanes": {
     "mlb": "paper",
     "wnba": "live",
@@ -12,8 +12,8 @@
     "mlb": {
       "label": "MLB Props",
       "plays": [],
-      "last_checked_et": "Oct 6, 2026 \u00b7 3:01 PM ET",
-      "last_checked_utc": "2026-10-06T19:01:38.723837+00:00",
+      "last_checked_et": "Oct 6, 2026 \u00b7 4:32 PM ET",
+      "last_checked_utc": "2026-10-06T20:32:47.041216+00:00",
       "changed_basis": "verified",
       "last_changed_et": "Sep 26, 2026 \u00b7 3:37 PM ET",
       "last_changed_utc": "2026-09-26T19:37:14.053884+00:00",
@@ -395,7 +395,7 @@
         "status": "pending",
         "line_src": "draftkings",
         "model_version": "2.3.2",
-        "line_captured_at": "2026-10-06T19:01:38.723837+00:00",
+        "line_captured_at": "2026-10-06T20:32:47.041216+00:00",
         "why": null,
         "risk": null
       },
@@ -412,7 +412,7 @@
         "status": "pending",
         "line_src": "betmgm",
         "model_version": "2.3.2",
-        "line_captured_at": "2026-10-06T19:01:38.723837+00:00",
+        "line_captured_at": "2026-10-06T20:32:47.041216+00:00",
         "why": null,
         "risk": null
       },
@@ -429,7 +429,7 @@
         "status": "pending",
         "line_src": "betonlineag",
         "model_version": "2.3.2",
-        "line_captured_at": "2026-10-06T19:01:38.723837+00:00",
+        "line_captured_at": "2026-10-06T20:32:47.041216+00:00",
         "why": null,
         "risk": null
       },
@@ -446,7 +446,7 @@
         "status": "pending",
         "line_src": "draftkings",
         "model_version": "2.3.2",
-        "line_captured_at": "2026-10-06T19:01:38.723837+00:00",
+        "line_captured_at": "2026-10-06T20:32:47.041216+00:00",
         "why": null,
         "risk": null
       },
@@ -463,7 +463,24 @@
         "status": "pending",
         "line_src": "betonlineag",
         "model_version": "2.3.2",
-        "line_captured_at": "2026-10-06T19:01:38.723837+00:00",
+        "line_captured_at": "2026-10-06T20:32:47.041216+00:00",
+        "why": null,
+        "risk": null
+      },
+      {
+        "player": "Freddie Freeman",
+        "team": "LAD",
+        "opp": "ATL",
+        "market": "Hits",
+        "line": 0.5,
+        "side": "OVER",
+        "game_start": "2026-10-06T18:00:00-04:00",
+        "prob": 0.649,
+        "edge": 0.054,
+        "status": "pending",
+        "line_src": "betmgm",
+        "model_version": "2.3.2",
+        "line_captured_at": "2026-10-06T20:32:47.041216+00:00",
         "why": null,
         "risk": null
       },
@@ -480,7 +497,7 @@
         "status": "pending",
         "line_src": "draftkings",
         "model_version": "2.3.2",
-        "line_captured_at": "2026-10-06T19:01:38.723837+00:00",
+        "line_captured_at": "2026-10-06T20:32:47.041216+00:00",
         "why": null,
         "risk": null
       },
@@ -497,7 +514,24 @@
         "status": "pending",
         "line_src": "betmgm",
         "model_version": "2.3.2",
-        "line_captured_at": "2026-10-06T19:01:38.723837+00:00",
+        "line_captured_at": "2026-10-06T20:32:47.041216+00:00",
+        "why": null,
+        "risk": null
+      },
+      {
+        "player": "Lane Thomas",
+        "team": "ATL",
+        "opp": "LAD",
+        "market": "Hits",
+        "line": 0.5,
+        "side": "OVER",
+        "game_start": "2026-10-06T18:00:00-04:00",
+        "prob": 0.569,
+        "edge": 0.087,
+        "status": "pending",
+        "line_src": "draftkings",
+        "model_version": "2.3.2",
+        "line_captured_at": "2026-10-06T20:32:47.041216+00:00",
         "why": null,
         "risk": null
       },
@@ -514,7 +548,7 @@
         "status": "pending",
         "line_src": "betmgm",
         "model_version": "2.3.2",
-        "line_captured_at": "2026-10-06T19:01:38.723837+00:00",
+        "line_captured_at": "2026-10-06T20:32:47.041216+00:00",
         "why": null,
         "risk": null
       },
@@ -531,7 +565,7 @@
         "status": "pending",
         "line_src": "williamhill_us",
         "model_version": "2.3.2",
-        "line_captured_at": "2026-10-06T19:01:38.723837+00:00",
+        "line_captured_at": "2026-10-06T20:32:47.041216+00:00",
         "why": null,
         "risk": null
       },
@@ -548,7 +582,7 @@
         "status": "pending",
         "line_src": "draftkings",
         "model_version": "2.3.2",
-        "line_captured_at": "2026-10-06T19:01:38.723837+00:00",
+        "line_captured_at": "2026-10-06T20:32:47.041216+00:00",
         "why": null,
         "risk": null
       },
@@ -565,7 +599,7 @@
         "status": "pending",
         "line_src": "draftkings",
         "model_version": "2.3.2",
-        "line_captured_at": "2026-10-06T19:01:38.723837+00:00",
+        "line_captured_at": "2026-10-06T20:32:47.041216+00:00",
         "why": null,
         "risk": null
       },
@@ -582,7 +616,7 @@
         "status": "pending",
         "line_src": "draftkings",
         "model_version": "2.3.2",
-        "line_captured_at": "2026-10-06T19:01:38.723837+00:00",
+        "line_captured_at": "2026-10-06T20:32:47.041216+00:00",
         "why": null,
         "risk": null
       },
@@ -599,7 +633,7 @@
         "status": "pending",
         "line_src": "draftkings",
         "model_version": "2.3.2",
-        "line_captured_at": "2026-10-06T19:01:38.723837+00:00",
+        "line_captured_at": "2026-10-06T20:32:47.041216+00:00",
         "why": null,
         "risk": null
       },
@@ -616,7 +650,7 @@
         "status": "pending",
         "line_src": "betonlineag",
         "model_version": "2.3.2",
-        "line_captured_at": "2026-10-06T19:01:38.723837+00:00",
+        "line_captured_at": "2026-10-06T20:32:47.041216+00:00",
         "why": null,
         "risk": null
       },
@@ -633,7 +667,7 @@
         "status": "pending",
         "line_src": "betmgm",
         "model_version": "2.3.2",
-        "line_captured_at": "2026-10-06T19:01:38.723837+00:00",
+        "line_captured_at": "2026-10-06T20:32:47.041216+00:00",
         "why": null,
         "risk": null
       },
@@ -650,7 +684,7 @@
         "status": "pending",
         "line_src": "betmgm",
         "model_version": "2.3.2",
-        "line_captured_at": "2026-10-06T19:01:38.723837+00:00",
+        "line_captured_at": "2026-10-06T20:32:47.041216+00:00",
         "why": null,
         "risk": null
       },
@@ -667,7 +701,7 @@
         "status": "pending",
         "line_src": "betmgm",
         "model_version": "2.3.2",
-        "line_captured_at": "2026-10-06T19:01:38.723837+00:00",
+        "line_captured_at": "2026-10-06T20:32:47.041216+00:00",
         "why": null,
         "risk": null
       },
@@ -684,7 +718,7 @@
         "status": "pending",
         "line_src": "betonlineag",
         "model_version": "2.3.2",
-        "line_captured_at": "2026-10-06T19:01:38.723837+00:00",
+        "line_captured_at": "2026-10-06T20:32:47.041216+00:00",
         "why": null,
         "risk": null
       },
@@ -701,7 +735,7 @@
         "status": "pending",
         "line_src": "bovada",
         "model_version": "2.3.2",
-        "line_captured_at": "2026-10-06T19:01:38.723837+00:00",
+        "line_captured_at": "2026-10-06T20:32:47.041216+00:00",
         "why": null,
         "risk": null
       }
@@ -779,6 +813,6 @@
     "wnba": [],
     "nfl": []
   },
-  "note": "scan_to_run.py [mlb]: mlb: paper-only during K-model investigation \u2014 19 plays tracked, none official; mlb: refreshed from pipeline latest.json; mlb cluster unchanged; untouched clusters carried forward unchanged.",
-  "content_hash": "d04f38a0ee21f5fc5e4bdbba78c22fc3e1f248aa53facb07a9d734495750f11a"
+  "note": "scan_to_run.py [mlb]: mlb: paper-only during K-model investigation \u2014 21 plays tracked, none official; mlb: refreshed from pipeline latest.json; mlb cluster unchanged; untouched clusters carried forward unchanged.",
+  "content_hash": "9e37e178a8c05518843005774ddc4f1ff8f83cf404f6e40c620b578c88ee1559"
 }
