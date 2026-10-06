@@ -1494,5 +1494,27 @@
     "generated_at_utc": "2026-10-05T22:39:39.097121+00:00",
     "run_id": "20261005-card-138",
     "seq": 138
+  },
+  {
+    "clusters": [
+      "mlb",
+      "nfl",
+      "wnba"
+    ],
+    "file": "20261005-grading-139.json",
+    "generated_at_utc": "2026-10-06T03:45:00+00:00",
+    "run_id": "20261005-grading-139",
+    "seq": 139
+  },
+  {
+    "clusters": [
+      "mlb",
+      "nfl",
+      "wnba"
+    ],
+    "file": "20261006-pull-140.json",
+    "generated_at_utc": "2026-10-06T19:02:03.531263+00:00",
+    "run_id": "20261006-pull-140",
+    "seq": 140
   }
 ]
