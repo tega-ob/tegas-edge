@@ -431,6 +431,10 @@ function collectPicks(run) {
   var out = [], seen = {};
   function add(p, sport, label) {
     if (!p) return;
+    /* Graded plays never belong on the Picks tab — they live on Results.
+       This guards against stale graded plays carried forward in clusters. */
+    var st = String(p.status || '').toLowerCase();
+    if (st === 'win' || st === 'loss' || st === 'push' || st === 'void' || st === 'withdrawn') return;
     var id = pickIdentity(p);
     if (seen[id]) return;
     seen[id] = 1;
