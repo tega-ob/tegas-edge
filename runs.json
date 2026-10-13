@@ -2110,5 +2110,16 @@
     "generated_at_utc": "2026-10-13T07:07:00+00:00",
     "run_id": "20261013-grading-194",
     "seq": 194
+  },
+  {
+    "clusters": [
+      "mlb",
+      "nfl",
+      "wnba"
+    ],
+    "file": "20261013-pull-195.json",
+    "generated_at_utc": "2026-10-13T21:02:48.829490+00:00",
+    "run_id": "20261013-pull-195",
+    "seq": 195
   }
 ]
