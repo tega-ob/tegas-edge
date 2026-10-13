@@ -1168,8 +1168,7 @@ function renderPerformance() {
         '<div class="sub">Win rate: <b>' + esc(fmtRate(r.wins, r.losses)) + '</b> · ' + n + ' graded</div>' +
         '<div class="sub">Units: <b>' + units + '</b></div>' +
         '<div class="sub" style="font-size:12.5px;color:' + (rec.ok === false ? 'var(--red)' : 'var(--dim2)') + '">' +
-        (rec.ok == null ? 'Record check: ' + esc(rec.text) : (rec.ok ? '✓ ' : '✗ ') + esc(rec.text)) + '</div>' +
-        (r.note ? '<div class="note">' + esc(r.note) + '</div>' : '') + '</div>';
+        (rec.ok == null ? 'Record check: ' + esc(rec.text) : (rec.ok ? '✓ ' : '✗ ') + esc(rec.text)) + '</div></div>';
     });
     h += '</div>';
     h += '<div class="explain">Win rate: graded wins ÷ (wins + losses). Pushes and voids excluded. ' +
