@@ -1,49 +1,49 @@
 {
-  "latest_run_id": "20261018-pull-211",
-  "latest_seq": 211,
+  "latest_run_id": "20261018-nfl-publish-212",
+  "latest_seq": 212,
   "per_cluster": {
     "mlb": {
       "availability_status": "ok",
-      "last_checked_et": "Oct 18, 2026 \u00b7 2:01 PM ET",
-      "last_checked_utc": "2026-10-18T18:01:46.446027+00:00",
+      "last_checked_et": "Oct 18, 2026 \u00b7 2:16 PM ET",
+      "last_checked_utc": "2026-10-18T18:16:20.040027+00:00",
       "model_versions": {
         "mlb": "2.3.2",
         "nfl": "1.1.1",
         "wnba": "1.0.1"
       },
-      "run_id": "20261018-pull-211",
-      "seq": 211,
+      "run_id": "20261018-nfl-publish-212",
+      "seq": 212,
       "validation_status": "approved"
     },
     "nfl": {
       "availability_status": "ok",
-      "last_checked_et": "Oct 11, 2026 \u00b7 02:45 PM ET",
-      "last_checked_utc": "2026-10-11T18:45:19.000025+00:00",
+      "last_checked_et": "Oct 18, 2026 \u00b7 2:16 PM ET",
+      "last_checked_utc": "2026-10-18T18:16:20.040027+00:00",
       "model_versions": {
         "mlb": "2.3.2",
         "nfl": "1.1.1",
         "wnba": "1.0.1"
       },
-      "run_id": "20261018-pull-211",
-      "seq": 211,
+      "run_id": "20261018-nfl-publish-212",
+      "seq": 212,
       "validation_status": "approved"
     },
     "wnba": {
       "availability_status": "ok",
-      "last_checked_et": "Oct 17, 2026 \u00b7 03:02 PM ET",
-      "last_checked_utc": "2026-10-17T19:02:23.525950+00:00",
+      "last_checked_et": "Oct 18, 2026 \u00b7 2:16 PM ET",
+      "last_checked_utc": "2026-10-18T18:16:20.040027+00:00",
       "model_versions": {
         "mlb": "2.3.2",
         "nfl": "1.1.1",
         "wnba": "1.0.1"
       },
-      "run_id": "20261018-pull-211",
-      "seq": 211,
+      "run_id": "20261018-nfl-publish-212",
+      "seq": 212,
       "validation_status": "approved"
     }
   },
-  "updated_at_et": "Oct 18, 2026 \u00b7 02:02 PM ET",
-  "updated_at_utc": "2026-10-18T18:02:05.762085+00:00",
+  "updated_at_et": "Oct 18, 2026 \u00b7 2:16 PM ET",
+  "updated_at_utc": "2026-10-18T18:16:20.040027+00:00",
   "verified_at_utc": "2026-10-18T18:08:04.614820+00:00",
   "verified_run_id": "20261018-pull-211"
 }
