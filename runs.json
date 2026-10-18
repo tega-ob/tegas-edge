@@ -2299,10 +2299,25 @@
     "seq": 211
   },
   {
+    "clusters": [
+      "mlb",
+      "nfl",
+      "wnba"
+    ],
+    "file": "20261018-nfl-publish-212.json",
+    "generated_at_utc": "2026-10-18T18:16:13.014208+00:00",
     "run_id": "20261018-nfl-publish-212",
-    "seq": 212,
-    "generated_at_et": "Oct 18, 2026 \u00b7 2:16 PM ET",
-    "generated_at_utc": "2026-10-18T18:16:20.040027+00:00",
-    "note": "User-ordered NFL publish: 26 plays"
+    "seq": 212
+  },
+  {
+    "clusters": [
+      "mlb",
+      "nfl",
+      "wnba"
+    ],
+    "file": "20261018-pull-213.json",
+    "generated_at_utc": "2026-10-18T19:34:26.253755+00:00",
+    "run_id": "20261018-pull-213",
+    "seq": 213
   }
 ]
