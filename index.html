@@ -444,7 +444,7 @@ function collectPicks(run) {
     c.sport_label = label || (sport ? sport.toUpperCase() : 'Unknown');
     out.push(c);
   }
-  var anyCluster = false, order = ['mlb', 'nfl', 'wnba'];
+  var anyCluster = false, order = ['mlb', 'nfl', 'wnba', 'nba'];
   var cl = (run && run.clusters) || {};
   order.forEach(function (s) {
     var c = cl[s];
@@ -494,6 +494,7 @@ function recordLabel(key) {
   if (/mlb/i.test(k)) return 'MLB';
   if (/nfl/i.test(k)) return 'NFL';
   if (/wnba/i.test(k)) return 'WNBA';
+  if (/nba/i.test(k)) return 'NBA';
   if (/combined/i.test(k)) return 'Combined';
   return k.toUpperCase() || 'Unknown';
 }
@@ -504,7 +505,7 @@ function recordLabel(key) {
    ============================================================ */
 var S = {
   run: null, manifest: null,
-  prefs: { tz: 'eastern', alerts: false, quietStart: '23:00', quietEnd: '07:00', sports: { mlb: true, nfl: true, wnba: true } },
+  prefs: { tz: 'eastern', alerts: false, quietStart: '23:00', quietEnd: '07:00', sports: { mlb: true, nfl: true, wnba: true, nba: true } },
   lastSeen: null,
   lastChecked: 0, dataUpdatedAt: 0,
   inflight: false, lastFail: null,
@@ -531,7 +532,7 @@ function loadPrefs() {
         if (typeof p.quietStart === 'string') S.prefs.quietStart = p.quietStart;
         if (typeof p.quietEnd === 'string') S.prefs.quietEnd = p.quietEnd;
         if (p.sports && typeof p.sports === 'object') {
-          ['mlb', 'nfl', 'wnba'].forEach(function (s) { if (typeof p.sports[s] === 'boolean') S.prefs.sports[s] = p.sports[s]; });
+          ['mlb', 'nfl', 'wnba', 'nba'].forEach(function (s) { if (typeof p.sports[s] === 'boolean') S.prefs.sports[s] = p.sports[s]; });
         }
       }
     }
@@ -797,7 +798,7 @@ function hashStr(s) {
 function availNote() {
   if (!S.manifest || !S.manifest.per_cluster) return '';
   var bits = [];
-  ['mlb', 'nfl', 'wnba'].forEach(function (s) {
+  ['mlb', 'nfl', 'wnba', 'nba'].forEach(function (s) {
     var c = S.manifest.per_cluster[s];
     if (!c) return;
     var st = c.availability_status || 'unknown';
@@ -836,7 +837,7 @@ function renderPicks() {
   picks.forEach(function (p) { var k = deriveStatus(p, nowMs).key; if (counts[k] != null) counts[k]++; });
   var h = '<h2 class="stitle">Picks</h2>' + availNote();
   h += '<div class="controls" role="group" aria-label="Sport filter">' +
-    sportChip('all', 'All') + sportChip('mlb', 'MLB') + sportChip('nfl', 'NFL') + sportChip('wnba', 'WNBA') + '</div>';
+    sportChip('all', 'All') + sportChip('mlb', 'MLB') + sportChip('nfl', 'NFL') + sportChip('wnba', 'WNBA') + sportChip('nba', 'NBA') + '</div>';
   h += '<div class="controls" role="group" aria-label="Status filter">' +
     statusChip('all', 'All') + statusChip('upcoming', 'Upcoming') + statusChip('inprogress', 'In progress') +
     statusChip('finished', 'Finished') + statusChip('live', 'Live') + '</div>';
@@ -852,13 +853,13 @@ function renderPicks() {
      if the sport filter selects it (covers empty paper clusters).
      Presentation only. */
   var clusters = (S.run && S.run.clusters) || {};
-  ['nfl', 'mlb', 'wnba'].forEach(function (sp) {
+  ['nfl', 'mlb', 'wnba', 'nba'].forEach(function (sp) {
     var b = (clusters[sp] || {}).banner;
     if (!b) return;
     var visible = shown.some(function (p) { return p.sport === sp; }) ||
                   f.sport === sp || f.sport === 'all';
     if (!visible) return;
-    var tag = sp === 'nfl' ? 'SHADOW / EXPERIMENTAL' : 'PAPER-ONLY';
+    var tag = sp === 'nfl' ? 'SHADOW / EXPERIMENTAL' : (sp === 'nba' ? 'IN EVALUATION' : 'PAPER-ONLY');
     h += '<div class="eval-banner"><b>' + tag + '</b> &mdash; ' + esc(b) + '</div>';
   });
   if (!picks.length) {
@@ -1025,7 +1026,7 @@ function loadResultsRange() {
     return Promise.all(wanted.map(loadRunFile)).catch(function () { return []; });
   }).then(function (runs) {
     var days = {}, seen = {};
-    var order = ['mlb', 'nfl', 'wnba'];
+    var order = ['mlb', 'nfl', 'wnba', 'nba'];
     runs.forEach(function (run) {
       var g = run.graded || {};
       order.forEach(function (sport) {
@@ -1403,7 +1404,7 @@ function renderSettings() {
     '<input type="time" id="quiet-end" value="' + esc(p.quietEnd) + '" aria-label="Quiet hours end"></span>' +
     '<span class="hint">No system notifications during quiet hours. The in-app badge still updates.</span></div>' +
     '<div class="setrow"><span class="lab">Sports</span><span class="seg" role="group" aria-label="Alert sports">' +
-    ['mlb', 'nfl', 'wnba'].map(function (s) {
+    ['mlb', 'nfl', 'wnba', 'nba'].map(function (s) {
       return '<button type="button" data-asport="' + s + '" aria-pressed="' + (p.sports[s] ? 'true' : 'false') + '">' + s.toUpperCase() + '</button>';
     }).join('') + '</span></div>' +
     '<div class="setrow"><span class="lab">Notification permission</span><span class="ts">' + esc(notifState) + '</span></div>' +
@@ -1460,7 +1461,7 @@ function renderSettings() {
   qe.addEventListener('change', function () { S.prefs.quietEnd = qe.value || '07:00'; savePrefs(); });
   var rd = document.getElementById('btn-reset-defaults');
   rd.addEventListener('click', function () {
-    S.prefs = { tz: 'eastern', alerts: false, quietStart: '23:00', quietEnd: '07:00', sports: { mlb: true, nfl: true, wnba: true } };
+    S.prefs = { tz: 'eastern', alerts: false, quietStart: '23:00', quietEnd: '07:00', sports: { mlb: true, nfl: true, wnba: true, nba: true } };
     S.results.tz = 'eastern';
     savePrefs(); renderSettings(); renderActive(); toast('Settings reset');
   });
