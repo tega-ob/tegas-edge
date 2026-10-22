@@ -2524,5 +2524,17 @@
     "generated_at_utc": "2026-10-22T07:10:00+00:00",
     "run_id": "20261021-grading-231",
     "seq": 231
+  },
+  {
+    "clusters": [
+      "mlb",
+      "nba",
+      "nfl",
+      "wnba"
+    ],
+    "file": "20261022-pull-232.json",
+    "generated_at_utc": "2026-10-22T21:18:27.139948+00:00",
+    "run_id": "20261022-pull-232",
+    "seq": 232
   }
 ]
