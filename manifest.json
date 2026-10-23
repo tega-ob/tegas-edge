@@ -1,6 +1,6 @@
 {
-  "latest_run_id": "20261022-pull-235",
-  "latest_seq": 235,
+  "latest_run_id": "20261022-grading-236",
+  "latest_seq": 236,
   "per_cluster": {
     "mlb": {
       "availability_status": "ok",
@@ -12,8 +12,8 @@
         "nfl": "1.1.1",
         "wnba": "1.0.1"
       },
-      "run_id": "20261022-pull-235",
-      "seq": 235,
+      "run_id": "20261022-grading-236",
+      "seq": 236,
       "validation_status": "approved"
     },
     "nba": {
@@ -26,8 +26,8 @@
         "nfl": "1.1.1",
         "wnba": "1.0.1"
       },
-      "run_id": "20261022-pull-235",
-      "seq": 235,
+      "run_id": "20261022-grading-236",
+      "seq": 236,
       "validation_status": "unknown"
     },
     "nfl": {
@@ -40,8 +40,8 @@
         "nfl": "1.1.1",
         "wnba": "1.0.1"
       },
-      "run_id": "20261022-pull-235",
-      "seq": 235,
+      "run_id": "20261022-grading-236",
+      "seq": 236,
       "validation_status": "approved"
     },
     "wnba": {
@@ -54,13 +54,13 @@
         "nfl": "1.1.1",
         "wnba": "1.0.1"
       },
-      "run_id": "20261022-pull-235",
-      "seq": 235,
+      "run_id": "20261022-grading-236",
+      "seq": 236,
       "validation_status": "approved"
     }
   },
-  "updated_at_et": "Oct 22, 2026 \u00b7 07:48 PM ET",
-  "updated_at_utc": "2026-10-22T23:48:25.801342+00:00",
-  "verified_at_utc": "2026-10-22T23:50:49.065186+00:00",
-  "verified_run_id": "20261022-pull-235"
+  "updated_at_et": "Oct 23, 2026 \u00b7 03:10 AM ET",
+  "updated_at_utc": "2026-10-23T07:10:00+00:00",
+  "verified_at_utc": null,
+  "verified_run_id": null
 }
