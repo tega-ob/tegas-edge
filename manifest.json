@@ -1,19 +1,19 @@
 {
-  "latest_run_id": "20261102-pull-242",
-  "latest_seq": 242,
+  "latest_run_id": "20261103-card-243",
+  "latest_seq": 243,
   "per_cluster": {
     "mlb": {
       "availability_status": "ok",
-      "last_checked_et": "Nov 2, 2026 \u00b7 5:15 PM ET",
-      "last_checked_utc": "2026-11-02T22:15:30.844195+00:00",
+      "last_checked_et": "Nov 3, 2026 \u00b7 2:40 AM ET",
+      "last_checked_utc": "2026-11-03T07:40:24.169434+00:00",
       "model_versions": {
         "mlb": "2.3.2",
         "nba": "1.0.0",
         "nfl": "1.1.1",
         "wnba": "1.0.1"
       },
-      "run_id": "20261102-pull-242",
-      "seq": 242,
+      "run_id": "20261103-card-243",
+      "seq": 243,
       "validation_status": "approved"
     },
     "nba": {
@@ -26,8 +26,8 @@
         "nfl": "1.1.1",
         "wnba": "1.0.1"
       },
-      "run_id": "20261102-pull-242",
-      "seq": 242,
+      "run_id": "20261103-card-243",
+      "seq": 243,
       "validation_status": "unknown"
     },
     "nfl": {
@@ -40,8 +40,8 @@
         "nfl": "1.1.1",
         "wnba": "1.0.1"
       },
-      "run_id": "20261102-pull-242",
-      "seq": 242,
+      "run_id": "20261103-card-243",
+      "seq": 243,
       "validation_status": "approved"
     },
     "wnba": {
@@ -54,13 +54,13 @@
         "nfl": "1.1.1",
         "wnba": "1.0.1"
       },
-      "run_id": "20261102-pull-242",
-      "seq": 242,
+      "run_id": "20261103-card-243",
+      "seq": 243,
       "validation_status": "approved"
     }
   },
-  "updated_at_et": "Nov 02, 2026 \u00b7 07:48 PM ET",
-  "updated_at_utc": "2026-11-03T00:48:04.499111+00:00",
-  "verified_at_utc": "2026-11-03T00:50:42.267184+00:00",
-  "verified_run_id": "20261102-pull-242"
+  "updated_at_et": "Nov 03, 2026 \u00b7 06:39 PM ET",
+  "updated_at_utc": "2026-11-03T23:39:44.121937+00:00",
+  "verified_at_utc": null,
+  "verified_run_id": null
 }
